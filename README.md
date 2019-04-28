@@ -4,7 +4,7 @@ Il progetto e' organizzato nelle seguenti cartelle:
 * indicizzazione -> contiene i programmi per l'indicizzazione di un singolo documento e l'indicizzazione di tutti i documenti
 * ricerca -> contiene i programmi per la ricerca interattiva
 
-#Indicizzazione
+# Indicizzazione
 
 Nella repository attuale e' caricata una indicizzazione che e' stata fatta secondo questo schema:
 
