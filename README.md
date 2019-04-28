@@ -6,7 +6,7 @@ Il progetto e' organizzato nelle seguenti cartelle:
 
 # Indicizzazione
 
-Nella repository attuale e' caricata una indicizzazione che e' stata fatta secondo questo schema:
+Nella repository attuale e' caricata un indice che e' stato fatto secondo questo schema:
 
 ```python
 schema = Schema(I 	= ID(stored=True),
@@ -19,3 +19,13 @@ schema = Schema(I 	= ID(stored=True),
                 A      	= TEXT)
 
 ```
+
+Nel caso in cui questo schema non vada bene, semplicemente bisogna andare nel
+file ```/indicizzatore/indicizzatore_batch.py``` modificarlo e lanciarlo.
+
+Attenzione: Il file indicizzatore_batch si aspetta un file oshumed.87.xml, che
+bisogna estrarre dallo zip contenuto nella cartella indicizzatore
+
+I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minuti.
+
+
