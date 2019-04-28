@@ -5,6 +5,7 @@ Il progetto e' organizzato nelle seguenti cartelle:
 * ricerca -> contiene i programmi per la ricerca interattiva
 
 #Indicizzazione
+
 Nella repository attuale e' caricata una indicizzazione che e' stata fatta secondo questo schema:
 
 ```python
