@@ -57,18 +57,18 @@ def res(results, query = "1", n = 10, tag = "tag"):#risultati in formato trec ev
 def getquery(prompt):                         				# 
     return raw_input(prompt)                  				# 
                                               				# 
-schema = Schema(docid      = ID(stored=True), 
-                title      = TEXT(stored=True),
-                references = TEXT(stored=True),
-                codes      = TEXT,
-                keywords   = NGRAM(stored=True),
-                authors    = NGRAM(stored=True),
-                abstract   = TEXT(stored=True),
-                where      = TEXT(stored=True),
-                citations  = TEXT(stored=True))
+schema = Schema(docid      	= ID(stored=True),
+            title      	= TEXT(stored=True),
+            identifier	= ID(stored=True),
+            terms 		= NGRAM(stored=True),
+            authors     = NGRAM(stored=True),
+            abstract 	= TEXT(stored=True),
+            publication	= TEXT(stored=True),
+            source = TEXT(stored=True))
 
-un_campo = 'title'                            				# 
+un_campo = "title"                            				# 
 due_campi = ["title", "abstract"]             				# 
+tre_campi = ["title", "abstract", "terms"]
 runtag = "RUNTAG"                             				# 
                                                             #
 MAXDOCS = 10                                  				# max num doc reperiti
@@ -90,43 +90,50 @@ else:                                         				# altrimenti procedi
     title = gettagdata(dom,'title')
     num   = gettagdata(dom,'num')
     if sys.argv[4]=='e':                         # se il quarto argomento e' e, per leggere il file di rilevanza
-        relfile = open("qrels-treceval.txt",'r')
+        relfile = open("qrels-treceval.txt",'r') # apro il file di rilevanza dei documenti per query
+        #questa parte e' un po' campata per aria usando un dizionario, sono ben accetti suggerimenti per migliorarla
         reldocs = {}
         for r in relfile.readlines():
-            a=r.split(" ")[::2]
-            if a[0] in reldocs:
-                reldocs[a[0]].add(a[1])
-            else:    
-                reldocs[a[0]] = set(a[1])
+            a=r.split(" ")[::2]                  # prendo il primo e il terzo elemento di ogni riga (numero query, identificativo documento rilevante)
+            if a[0] in reldocs:                  # se e' il primo documento rilevante della query a[0]
+                reldocs[a[0]].add(a[1])          # aggiungo all'insieme relativo alla query a[0] il documento
+            else:                                # altrimenti  
+                reldocs[a[0]] = set(a[1])        # aggiungo numero query come chiave nel dizionario ed il relativo documento
         relfile.close()
     #--- scansione delle query e reperimento
     for qid in num:
-        title[int(qid)-1].encode('utf-8')                                    # prepara il testo della query
+        title[int(qid)-1].encode('utf-8')                                   # prepara il testo della query
         if sys.argv[3]=='1':                                                # se il secondo argomento e' 1
             query = qp(un_campo,                                            # cerca l'indice usando un solo campo
                        schema,                                              # usando lo schema dato
-                       group = qparser.OrGroup).parse(title[int(qid)-1])     # e l'operatore OR
-        else:                                                               # altrimenti 
+                       group = qparser.OrGroup).parse(title[int(qid)-1])    # e l'operatore OR
+        elif sys.argv[3]=='2':                                              # altrimenti 
             query = mp(due_campi,                                           # cerca l'indice usando due campi
                        schema,                                              # usando lo schema dato e
-                       group = qparser.OrGroup).parse(title[int(qid)-1])     # l'operatore OR
+                       group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+        else:                                                               # altrimenti 
+            query = mp(tre_campi,                                           # cerca l'indice usando tre campi
+                       schema,                                              # usando lo schema dato e
+                       group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+        #NOTA:stiamo usando TF_IDF 
         results = ix.searcher(weighting=scoring.TF_IDF()).search(query,limit=MAXDOCS)
-        if len(sys.argv) < 5:
+        if len(sys.argv) < 5:                                               # caso base
             #--- res(results,query,MAXDOCS,runtag)                          #
             res(results,qid,MAXDOCS,runtag)						            #
-        #--- query expansion                                                # 
+        #--- query expansion                                                #
         elif sys.argv[4]=='m':                                              # se il quarto arg e' m
             hit = randint(0,min([10,len(results)])-1)                       # cerca i documeni simili
             more_results = results[hit].more_like_this("title")             #
             res(more_results,qid,MAXDOCS,runtag)                            # stampa i nuovi risultati
             results = more_results
         elif sys.argv[4]=='e':                                              # se il quarto arg e' e
-            resdocs = set([results[h]['docid'] for h in range(min([10,len(results)]))])
+            #creo un insieme contenente gli identificatori dei documenti trovati piu' rilevanti
+            resdocs = set([results[h]['identifier'] for h in range(min([10,len(results)]))]) 
             with ix.searcher() as s:# prepara un alias
                 if qid in reldocs:
-                    reldocids = resdocs & reldocs[qid]
-                    reldocnums = [int(s.document_number(docid=i)) for i in reldocids]  # e una lista di documenti rilevanti
-            #nota il 'docid' e' il numero (id) che caratterizza il documento nella collezione cacm
+                    reldocids = resdocs & reldocs[qid] # insieme intersezione dei documenti rilevanti e di quelli trovati
+                    reldocnums = [int(s.document_number(identifier=i)) for i in reldocids]  # e una lista di documenti rilevanti
+            #nota 'identifier' e' il numero (id) che caratterizza il documento nella collezione cacm
             #mentre il document_number (docnum) e' un numero assegnato al documento nell'indice 
                 with ix.searcher() as s:				
                     expansion_terms = s.key_terms(reldocnums,"title",MAXRFTERMS)
@@ -136,15 +143,18 @@ else:                                         				# altrimenti procedi
                     expanded_query_text = term + ' ' + expanded_query_text
                 if sys.argv[3]=='1':
                     expanded_query = qp(un_campo,schema,group = qparser.OrGroup).parse(expanded_query_text)
-                else:
+                elif sys.argv[3]=='2':
                     expanded_query = mp(due_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
+                else:
+                    expanded_query = mp(tre_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
                 more_results = ix.searcher(weighting=scoring.TF_IDF()).search(expanded_query,limit=MAXDOCS)
                 res(more_results,qid,MAXDOCS,runtag)
                 results = more_results
-            
+        
+        # ANCORA DA PROVARE QUESTA PARTE
         elif sys.argv[4]=='i':                                              # se il quarto arg e' i
             with ix.searcher() as s:                                        # prepara un alias
-                reldocids = [int(s.document_number(docid=results[i]['docid'])) for i in xrange(min([3,len(results)]))] # e una lista di documenti rilevanti		
+                reldocids = [int(s.document_number(docid=results[i]['identifier'])) for i in xrange(min([3,len(results)]))] # e una lista di documenti rilevanti		
                 expansion_terms = s.key_terms(reldocids,"title",MAXRFTERMS)
                 #usa TFIDF per trovare termini utili(TFIDF medio alto) nei documenti detti rilevanti
             expanded_query_text = ""
@@ -152,12 +162,14 @@ else:                                         				# altrimenti procedi
                 expanded_query_text = term + ' ' + expanded_query_text
             if sys.argv[3]=='1':
                 expanded_query = qp(un_campo,schema,group = qparser.OrGroup).parse(expanded_query_text)
-            else:
+            elif sys.argv[3]=='2':
                 expanded_query = mp(due_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
+            else:
+                expanded_query = mp(tre_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
             more_results = ix.searcher(weighting=scoring.TF_IDF()).search(expanded_query,limit=MAXDOCS)
             res(more_results,qid,MAXDOCS,runtag)
             results = more_results
     infile.close()
     ix.searcher().close()
     
-#cacm_query_expansion.py, cartella indice, file query, numero di campi (1 o 2), metodo di espansione delle query ("m" o "e")
+#query_expansion_feedback_batch.py, cartella indice, file query, numero di campi (1, 2 o 3), metodo di espansione delle query ("m", "e" o "i")
