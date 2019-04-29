@@ -37,7 +37,7 @@ Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True)
 
 In questo paragrafo metteremo i risultati temporanei ottenuti con le varie RUN che poi dovranno essere formattate per bene e inserite nel documento finale.
 
-####Baseline RUN
+#### Baseline RUN
 A un campo: 
 ``` python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 1 > BASELINE_UN_CAMPO.RUN ```
 
