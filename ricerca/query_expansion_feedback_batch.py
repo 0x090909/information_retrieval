@@ -50,7 +50,7 @@ def res(results, query = "1", n = 10, tag = "tag"):#risultati in formato trec ev
     if len(results) < n:
         n = len(results)
     for rank in xrange(0,n):
-        print query,'\t',"Q0",'\t',results[rank]['docid'],'\t',rank,'\t',results[rank].score,'\t',tag
+        print query,'\t',"Q0",'\t',results[rank]['identifier'],'\t',rank,'\t',results[rank].score,'\t',tag
         rank += 1
         
 # ---------------------------------------------------------------------------------------- #
