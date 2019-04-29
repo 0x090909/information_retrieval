@@ -9,14 +9,14 @@ Il progetto e' organizzato nelle seguenti cartelle:
 Nella repository attuale e' caricata un indice che e' stato fatto secondo questo schema:
 
 ```python
-schema = Schema(docid      		= ID(stored=True),
-				title      		= TEXT(stored=True),
-				identifier	   	= ID(stored=True),
-				terms 			= NGRAM(stored=True),
-				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(stored=True),
-				publication		= TEXT(stored=True),
-				source 			= TEXT(stored=True))
+schema = Schema(docid      	= ID(stored=True),
+		title      	= TEXT(stored=True),
+		identifier	= ID(stored=True),
+		terms 		= NGRAM(stored=True),
+		authors      	= NGRAM(stored=True),
+		abstract 	= TEXT(stored=True),
+		publication	= TEXT(stored=True),
+		source 		= TEXT(stored=True))
 
 ```
 
