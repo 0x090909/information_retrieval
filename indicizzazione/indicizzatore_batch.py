@@ -20,13 +20,13 @@ def gettagdata(dom,tag):
 
 #--- definizione dello schema ---#
 schema = Schema(docid      = ID(stored=True),
-		title      = NUMERIC(stored=True),
-		identifier	   = TEXT(stored=True),
-	        terms = TEXT,
-		authors      = TEXT,
-		abstract = TEXT,
-                publication = TEXT,
-                source = TEXT)
+		title      = TEXT(stored=True),
+		identifier	   = ID(stored=True),
+	        terms = NGRAM(stored=True),
+		authors      = NGRAM(stored=True),
+		abstract = TEXT(stored=True),
+                publication = TEXT(stored=True),
+                source = TEXT(stored=True))
 
 #--- elementi XML possibili ---#
 tags = ['I',
@@ -51,7 +51,7 @@ writer = ix.writer()
 #--- scansione dei file dei documenti ---#
 #leggi file xml
 try:
-	docs = open("ohsumed.87.xml","r") #we have a document per line
+	docs = open(sys.argv[2],"r") #we have a document per line
 	i = 1
 	for doc in docs:
 			progress = (i/54711.0)*100
@@ -70,14 +70,14 @@ try:
 			this_A	    = gettagdata(dom,'A')
 
 			#--- indicizzazione e archiviazione del documento ---#
-			writer.add_document(I	 	= this_I,
-							   	U   	= this_U,
-							   	S		= this_S,
-							   	M		= this_M,
-							   	T	    = this_T,
-			                    P       = this_P,
-			                    W       = this_W,
-			                    A       = this_A)
+			writer.add_document(docid	 	= this_I,
+							   	title   	= this_U,
+							   	identifier		= this_S,
+							   	terms		= this_M,
+							   	authors	    = this_T,
+			                    abstract       = this_P,
+			                    publication       = this_W,
+			                    source       = this_A)
     #print listaDocumenti
 	print "\r Indexed everything!",
 	#--- chiusura sicura del writer ---#
