@@ -73,7 +73,7 @@ else:                                         				# altrimenti procedi
     text = infile.read()
     #--- dom delle query
     dom = parseString(text)
-    #--- estrazione dei dati della query
+    #-- estrazione dei dati della query
     title = gettagdata(dom,'title')
 	num = gettagdata(dom,'num')
 	
