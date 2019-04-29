@@ -1,3 +1,5 @@
+#RUN DI BASE
+
 #--- importazione di interi moduli ---#
 import string as str
 import sys
@@ -28,8 +30,7 @@ def res(results, query = "1", n = 10, tag = "tag"):
     if len(results) < n:
         n = len(results)
     for rank in xrange(0,n):
-        print query,"Q0",results[rank].docnum,\
-          rank,results[rank].score,tag
+        print query,'\t',"Q0",'\t',results[rank]['identifier'],'\t',rank,'\t',results[rank].score,'\t',tag
         rank += 1
 
 #--- elementi XML possibili ---#
@@ -48,7 +49,7 @@ schema = Schema(docid      	= ID(stored=True),
 		title      	= TEXT(stored=True),
 		identifier	= ID(stored=True),
 		terms 		= NGRAM(stored=True),
-		authors      	= NGRAM(stored=True),
+		authors     = NGRAM(stored=True),
 		abstract 	= TEXT(stored=True),
 		publication	= TEXT(stored=True),
 		source 		= TEXT(stored=True))
@@ -58,34 +59,38 @@ un_campo = 'title'
 due_campi = ["title", "abstract"]
 tre_campi = ["title", "abstract", "terms"]
 
-# checking index
-if not os.path.exists(sys.argv[1]):
-    # quitting if not existing
-    print sys.argv[1],"does not exist"
-else:
-    # if the index is existing
-    # opening index
-    st = FileStorage(sys.argv[1])
-    ix = st.open_index()
-    # reading a query
-    querytext = getquery("Enter a query (hit enter to end): ")
-    # while not empty
-    while querytext <> "":
-        # if the second argument is 1 search one field
-        if sys.argv[2]=='1':
-            query = QueryParser(un_campo,schema).parse(querytext)
-        # if the second argument is 2 search two fields
-        elif sys.argv[2]=='2':
-            query = MultifieldParser(due_campi,ix.schema).parse(querytext)
-        else:
-            # search three fields
-            query = MultifieldParser(tre_campi,ix.schema).parse(querytext)
-        # get results using TF_IDF (BM25F may be used instead)
-        results = ix.searcher(weighting=scoring.TF_IDF()).search(query)
-        # printing results
-        res(results)
-        # reading new query
-        querytext = getquery("Enter a query (hit enter to end): ")
-    # closing index
-    ix.searcher().close()
-    
+MAXDOCS = 10 												# max num doc reperiti
+runtag = "BASELINE"
+
+if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
+    print sys.argv[1],"does not exist"        				# esci se non esiste
+else:                                         				# altrimenti procedi
+    st = FileStorage(sys.argv[1])             				# afferra la maniglia e
+    ix = st.open_index()                      				# apri il file corrispondente
+    #--- apertura del file delle query ---#
+    infile = open(sys.argv[2],'r')
+    #--- lettura del file
+    text = infile.read()
+    #--- dom delle query
+    dom = parseString(text)
+    #--- estrazione dei dati della query
+    title = gettagdata(dom,'title')
+	num = gettagdata(dom,'num')
+	
+	for qid in num:
+        title[int(qid)-1].encode('utf-8')                                   # prepara il testo della query
+        if sys.argv[3]=='1':                                                # se il secondo argomento e' 1
+            query = qp(un_campo,                                            # cerca l'indice usando un solo campo
+                       schema,                                              # usando lo schema dato
+                       group = qparser.OrGroup).parse(title[int(qid)-1])    # e l'operatore OR
+        elif sys.argv[3]=='2':                                              # altrimenti 
+            query = mp(due_campi,                                           # cerca l'indice usando due campi
+                       schema,                                              # usando lo schema dato e
+                       group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+		elif sys.argv[3]=='2':                                              # altrimenti 
+            query = mp(tre_campi,                                           # cerca l'indice usando tre campi
+                       schema,                                              # usando lo schema dato e
+                       group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+        results = ix.searcher(weighting=scoring.TF_IDF()).search(query,limit=MAXDOCS)
+        #--- res(results,query,MAXDOCS,runtag)                          	#
+		res(results,qid,MAXDOCS,runtag) 
