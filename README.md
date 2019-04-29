@@ -28,5 +28,8 @@ bisogna estrarre dallo zip contenuto nella cartella indicizzatore
 
 I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minuti.
 
-Caterina e' entrata a collaborare
+Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True) seguendo lo spunto dato dalla documentazione whoosh:
+> https://whoosh.readthedocs.io/en/latest/batch.html
+
+
 
