@@ -19,14 +19,14 @@ def gettagdata(dom,tag):
 	return node.firstChild.data.strip()
 
 #--- definizione dello schema ---#
-schema = Schema(docid      = ID(stored=True),
-		title      = TEXT(stored=True),
-		identifier	   = ID(stored=True),
-	        terms = NGRAM(stored=True),
-		authors      = NGRAM(stored=True),
-		abstract = TEXT(stored=True),
-                publication = TEXT(stored=True),
-                source = TEXT(stored=True))
+schema = Schema(docid      		= ID(stored=True),
+				title      		= TEXT(stored=True),
+				identifier	   	= ID(stored=True),
+				terms 			= NGRAM(stored=True),
+				authors      	= NGRAM(stored=True),
+				abstract 		= TEXT(stored=True),
+				publication		= TEXT(stored=True),
+				source 			= TEXT(stored=True))
 
 #--- elementi XML possibili ---#
 tags = ['I',
@@ -72,12 +72,12 @@ try:
 			#--- indicizzazione e archiviazione del documento ---#
 			writer.add_document(docid	 	= this_I,
 							   	title   	= this_U,
-							   	identifier		= this_S,
+							   	identifier	= this_S,
 							   	terms		= this_M,
 							   	authors	    = this_T,
-			                    abstract       = this_P,
-			                    publication       = this_W,
-			                    source       = this_A)
+			                    abstract    = this_P,
+			                    publication = this_W,
+			                    source      = this_A)
     #print listaDocumenti
 	print "\r Indexed everything!",
 	#--- chiusura sicura del writer ---#
