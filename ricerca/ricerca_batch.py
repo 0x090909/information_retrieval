@@ -93,3 +93,5 @@ else:                                         				# altrimenti procedi
         results = ix.searcher().search(query,limit=MAXDOCS)
         #--- res(results,query,MAXDOCS,runtag)                          	#
         res(results,qid,MAXDOCS,runtag)
+    infile.close()
+    ix.searcher().close()
