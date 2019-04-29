@@ -28,4 +28,5 @@ bisogna estrarre dallo zip contenuto nella cartella indicizzatore
 
 I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minuti.
 
+Caterina e' entrata a collaborare
 
