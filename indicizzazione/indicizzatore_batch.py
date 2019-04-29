@@ -19,14 +19,14 @@ def gettagdata(dom,tag):
 	return node.firstChild.data.strip()
 
 #--- definizione dello schema ---#
-schema = Schema(I      = ID(stored=True),
-				U      = NUMERIC(stored=True),
-				S      = TEXT(stored=True),
-				M      = TEXT,
-				T      = TEXT,
-				P      = TEXT,
-                W      = TEXT,
-                A      = TEXT)
+schema = Schema(docid      = ID(stored=True),
+		title      = NUMERIC(stored=True),
+		identifier	   = TEXT(stored=True),
+	        terms = TEXT,
+		authors      = TEXT,
+		abstract = TEXT,
+                publication = TEXT,
+                source = TEXT)
 
 #--- elementi XML possibili ---#
 tags = ['I',
