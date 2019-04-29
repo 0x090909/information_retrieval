@@ -33,3 +33,6 @@ Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True)
 
 ## NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazini di parametri diverse per il BM25 abbiamo 2x3 run 
  
+# Ricerca 
+
+In questo paragrafo metteremo i risultati temporanei ottenuti con le varie RUN che poi dovranno essere formattate per bene e inserite nel documento finale.
