@@ -50,40 +50,38 @@ writer = ix.writer(limitmb=2048,procs=4,multisegment=True)
 
 #--- scansione dei file dei documenti ---#
 #leggi file xml
-try:
-	docs = open(sys.argv[2],"r") #we have a document per line
-	i = 1
-	for doc in docs:
-			progress = (i/54711.0)*100
-			print "\r Indexing progess: %f " % (progress) + "%",
-	        #--- document object model ---#
-			dom = parseString(doc)
-			i = i+1
-			#--- estrazione dei dati dal documento ---#
-			this_I	 	= gettagdata(dom,'I')
-			this_U      = gettagdata(dom,'U')
-			this_S		= gettagdata(dom,'S')
-			this_M		= gettagdata(dom,'M')
-			this_T	    = gettagdata(dom,'T')
-			this_P	    = gettagdata(dom,'P')
-			this_W	    = gettagdata(dom,'W')
-			this_A	    = gettagdata(dom,'A')
 
-			#--- indicizzazione e archiviazione del documento ---#
-			writer.add_document(docid	 	= this_I,
-							   	title   	= this_U,
-							   	identifier	= this_S,
-							   	terms		= this_M,
-							   	authors	    = this_T,
-			                    abstract    = this_P,
-			                    publication = this_W,
-			                    source      = this_A)
-    #print listaDocumenti
-	print "\r Indexed everything!",
-	#--- chiusura sicura del writer ---#
-	print "committing index...",
-	writer.commit()
-	print "done"
+docs = open(sys.argv[2],"r") #we have a document per line
+i = 1
+for doc in docs:
+		progress = (i/54711.0)*100
+		print "\r Indexing progess: %f " % (progress) + "%",
+	    #--- document object model ---#
+		dom = parseString(doc)
+		i = i+1
+		#--- estrazione dei dati dal documento ---#
+		this_I = gettagdata(dom,'I')
+		this_U = gettagdata(dom,'U')
+		this_S = gettagdata(dom,'S')
+		this_M = gettagdata(dom,'M')
+		this_T = gettagdata(dom,'T')
+		this_P = gettagdata(dom,'P')
+		this_W = gettagdata(dom,'W')
+		this_A = gettagdata(dom,'A')
 
-except IOError as e:
-    print("Couldn't open or write to file (%s)." % e)
+		#--- indicizzazione e archiviazione del documento ---#
+		writer.add_document(docid	 	= this_I,
+						   	title   	= this_T,
+							identifier	= this_U,
+							terms		= this_M,
+							authors	    = this_A,
+			                abstract    = this_W,
+			                publication = this_P,
+			                source      = this_S)
+#print listaDocumenti
+
+print "\r Indexed everything!",
+#--- chiusura sicura del writer ---#
+print "committing index...",
+writer.commit()
+print "done"
