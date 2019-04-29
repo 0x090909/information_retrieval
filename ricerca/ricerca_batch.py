@@ -11,9 +11,8 @@ from xml.dom.minidom import parse, parseString
 from whoosh import scoring,qparser
 from whoosh.fields import *
 from whoosh.filedb.filestore import FileStorage
-from whoosh.qparser import QueryParser
-from whoosh.qparser import MultifieldParser
-
+from whoosh.qparser import QueryParser as qp
+from whoosh.qparser import MultifieldParser as mp
 #--- estrazione dei dati di un tag ---#
 def gettagdata(dom,tag):
     nodes = dom.getElementsByTagName(tag)
@@ -76,7 +75,6 @@ else:                                         				# altrimenti procedi
     #-- estrazione dei dati della query
     title = gettagdata(dom,'title')
     num = gettagdata(dom,'num')
-
     for qid in num:
         title[int(qid)-1].encode('utf-8')                                   # prepara il testo della query
         if sys.argv[3]=='1':                                                # se il secondo argomento e' 1
@@ -92,6 +90,6 @@ else:                                         				# altrimenti procedi
                         schema,                                              # usando lo schema dato e
                         group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
 
-        results = ix.searcher(weighting=scoring.TF_IDF()).search(query,limit=MAXDOCS)
+        results = ix.searcher().search(query,limit=MAXDOCS)
         #--- res(results,query,MAXDOCS,runtag)                          	#
         res(results,qid,MAXDOCS,runtag)

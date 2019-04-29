@@ -20,7 +20,7 @@ def res(results, query = "1", n = 10, tag = "tag"):
     if len(results) < n:
         n = len(results)
     for rank in xrange(0,n):
-        print str(rank) + " " +(results[rank]["S"])
+        print str(rank) + " " +(results[rank]["title"])
         rank += 1
 
 def getquery(prompt):
@@ -30,20 +30,21 @@ def getquery(prompt):
 
 #--- definizione dello schema (deve essere quello usato
 #--- dall'indicizzatore
-schema = Schema(I      = ID(stored=True),
-				U      = NUMERIC(stored=True),
-				S      = TEXT(stored=True),
-				M      = TEXT,
-				T      = TEXT,
-				P      = TEXT,
-                W      = TEXT,
-                A      = TEXT)
+schema = Schema(docid      	= ID(stored=True),
+        		title      	= TEXT(stored=True),
+        		identifier	= ID(stored=True),
+        		terms 		= NGRAM(stored=True),
+        		authors     = NGRAM(stored=True),
+        		abstract 	= TEXT(stored=True),
+        		publication	= TEXT(stored=True),
+        		source 		= TEXT(stored=True))
 
 #--- campi di ricerca
 # M - sono le keyword
 # T - e' il titolo
-un_campo = 'M'
-due_campi = ["M", "T"]
+
+un_campo = 'title'
+due_campi = ["title", "abstract"]
 
 
 #--- verifica dell'esistenza dell'indice
@@ -54,12 +55,13 @@ else:
     #--- procedi se esiste
     st = FileStorage(sys.argv[1])
     ix = st.open_index()
+    print ix
     querytext = getquery("Enter a query (hit enter to end): ")
     while querytext <> "":
         #--- togli il commento per cercare su piu' campi
         #--- query = MultifieldParser(due_campi,ix.schema).parse(querytext)
         #--- e commenta la riga seguente
-        query = MultifieldParser(due_campi,ix.schema).parse(querytext)
+        query = QueryParser(un_campo,schema).parse(querytext)
         results = ix.searcher(weighting=scoring.TF_IDF()).search(query)
         #--- res(results,query)
         res(results)
