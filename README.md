@@ -31,5 +31,5 @@ I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minu
 Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True) seguendo lo spunto dato dalla documentazione whoosh:
 > https://whoosh.readthedocs.io/en/latest/batch.html
 
-
-
+## NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazini di parametri diverse per il BM25 abbiamo 2x3 run 
+ 
