@@ -44,45 +44,48 @@ tags = ['I',
 
 #--- definizione dello schema (deve essere quello usato
 #--- dall'indicizzatore
-schema = Schema(I      = ID(stored=True),
-				U      = NUMERIC(stored=True),
-				S      = TEXT(stored=True),
-				M      = TEXT,
-				T      = TEXT,
-				P      = TEXT,
-                W      = TEXT,
-                A      = TEXT)
+schema = Schema(docid      	= ID(stored=True),
+		title      	= TEXT(stored=True),
+		identifier	= ID(stored=True),
+		terms 		= NGRAM(stored=True),
+		authors      	= NGRAM(stored=True),
+		abstract 	= TEXT(stored=True),
+		publication	= TEXT(stored=True),
+		source 		= TEXT(stored=True))
 
-#--- campi di ricerca
-# M - sono le keyword
-# T - e' il titolo
-un_campo = 'M'
-due_campi = ["M", "T"]
+# search fields
+un_campo = 'title'
+due_campi = ["title", "abstract"]
+tre_campi = ["title", "abstract", "terms"]
 
-#--- verifica dell'esistenza dell'indice
+# checking index
 if not os.path.exists(sys.argv[1]):
-    #--- esci se non esiste
+    # quitting if not existing
     print sys.argv[1],"does not exist"
 else:
-    #--- procedi se esiste
+    # if the index is existing
+    # opening index
     st = FileStorage(sys.argv[1])
     ix = st.open_index()
-    #--- apertura del file delle query ---#
-    infile = open(sys.argv[2],'r')
-    #--- lettura del file
-    text = infile.read()
-    #--- dom delle query
-    dom = parseString(text)
-    #--- estrazione dei dati della query
-    title = gettagdata(dom,'T')
-    num   = gettagdata(dom,'I')
-    #--- scansione delle query e reperimento
-    for id in num:
-        title[int(id)-1].encode('utf-8')
-        # print int(id),title[int(id)-1]
-        query = QueryParser(un_campo,None,\
-                            group = qparser.OrGroup).parse(title[int(id)-1])
-        results = ix.searcher(weighting=scoring.TF_IDF()).search(query,\
-							  limit=1000)
-        res(results,id,1000,"tag")
+    # reading a query
+    querytext = getquery("Enter a query (hit enter to end): ")
+    # while not empty
+    while querytext <> "":
+        # if the second argument is 1 search one field
+        if sys.argv[2]=='1':
+            query = QueryParser(un_campo,schema).parse(querytext)
+        # if the second argument is 2 search two fields
+        elif sys.argv[2]=='2':
+            query = MultifieldParser(due_campi,ix.schema).parse(querytext)
+        else:
+            # search three fields
+            query = MultifieldParser(tre_campi,ix.schema).parse(querytext)
+        # get results using TF_IDF (BM25F may be used instead)
+        results = ix.searcher(weighting=scoring.TF_IDF()).search(query)
+        # printing results
+        res(results)
+        # reading new query
+        querytext = getquery("Enter a query (hit enter to end): ")
+    # closing index
     ix.searcher().close()
+    
