@@ -75,22 +75,23 @@ else:                                         				# altrimenti procedi
     dom = parseString(text)
     #-- estrazione dei dati della query
     title = gettagdata(dom,'title')
-	num = gettagdata(dom,'num')
-	
-	for qid in num:
+    num = gettagdata(dom,'num')
+
+    for qid in num:
         title[int(qid)-1].encode('utf-8')                                   # prepara il testo della query
         if sys.argv[3]=='1':                                                # se il secondo argomento e' 1
-            query = qp(un_campo,                                            # cerca l'indice usando un solo campo
-                       schema,                                              # usando lo schema dato
-                       group = qparser.OrGroup).parse(title[int(qid)-1])    # e l'operatore OR
-        elif sys.argv[3]=='2':                                              # altrimenti 
+            query = qp( un_campo,                                            # cerca l'indice usando un solo campo
+                        schema,                                              # usando lo schema dato
+                        group = qparser.OrGroup).parse(title[int(qid)-1])    # e l'operatore OR
+        elif sys.argv[3]=='2':                                              # altrimenti
             query = mp(due_campi,                                           # cerca l'indice usando due campi
-                       schema,                                              # usando lo schema dato e
-                       group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
-		elif sys.argv[3]=='2':                                              # altrimenti 
+                        schema,                                              # usando lo schema dato e
+                        group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+        elif sys.argv[3]=='2':                                              # altrimenti
             query = mp(tre_campi,                                           # cerca l'indice usando tre campi
-                       schema,                                              # usando lo schema dato e
-                       group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+                        schema,                                              # usando lo schema dato e
+                        group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+
         results = ix.searcher(weighting=scoring.TF_IDF()).search(query,limit=MAXDOCS)
         #--- res(results,query,MAXDOCS,runtag)                          	#
-		res(results,qid,MAXDOCS,runtag) 
+        res(results,qid,MAXDOCS,runtag)
