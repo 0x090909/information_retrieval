@@ -9,14 +9,14 @@ Il progetto e' organizzato nelle seguenti cartelle:
 Nella repository attuale e' caricata un indice che e' stato fatto secondo questo schema:
 
 ```python
-schema = Schema(I 	= ID(stored=True),
-		U      	= NUMERIC(stored=True),
-		S      	= TEXT(stored=True),
-		M      	= TEXT,
-		T      	= TEXT,
-		P      	= TEXT,
-                W      	= TEXT,
-                A      	= TEXT)
+schema = Schema(docid      	= ID(stored=True),
+		title      	= TEXT(stored=True),
+		identifier	= ID(stored=True),
+		terms 		= NGRAM(stored=True),
+		authors      	= NGRAM(stored=True),
+		abstract 	= TEXT(stored=True),
+		publication	= TEXT(stored=True),
+		source 		= TEXT(stored=True))
 
 ```
 
@@ -28,5 +28,8 @@ bisogna estrarre dallo zip contenuto nella cartella indicizzatore
 
 I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minuti.
 
-Caterina e' entrata a collaborare
+Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True) seguendo lo spunto dato dalla documentazione whoosh:
+> https://whoosh.readthedocs.io/en/latest/batch.html
+
+
 
