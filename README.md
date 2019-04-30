@@ -38,10 +38,10 @@ Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True)
 In questo paragrafo metteremo i risultati temporanei ottenuti con le varie RUN che poi dovranno essere formattate per bene e inserite nel documento finale.
 
 ### NOTA: come leggere il nome di file di output
- 	*run (baseline, TFIDF..)
-	*numero di campi (1 o più)
-	*treceval
-	*out
+* run (baseline, TFIDF..)
+* numero di campi (1 o più)
+* treceval
+* out
 
 #### Baseline RUN
 A un campo:
@@ -52,34 +52,34 @@ A due campi:
 
 ### Output treceval BASELINE_UN_CAMPO.TRECEVAL
 num_q          	all	63
-num_ret        	all	630
-num_rel        	all	2823
-num_rel_ret    	all	0
-map            	all	0.0000
-gm_ap          	all	0.0000
-R-prec         	all	0.0000
-bpref          	all	0.0000
-recip_rank     	all	0.0000
-ircl_prn.0.00  	all	0.0000
-ircl_prn.0.10  	all	0.0000
-ircl_prn.0.20  	all	0.0000
-ircl_prn.0.30  	all	0.0000
-ircl_prn.0.40  	all	0.0000
-ircl_prn.0.50  	all	0.0000
-ircl_prn.0.60  	all	0.0000
-ircl_prn.0.70  	all	0.0000
-ircl_prn.0.80  	all	0.0000
-ircl_prn.0.90  	all	0.0000
-ircl_prn.1.00  	all	0.0000
-P5             	all	0.0000
-P10            	all	0.0000
-P15            	all	0.0000
-P20            	all	0.0000
-P30            	all	0.0000
-P100           	all	0.0000
-P200           	all	0.0000
-P500           	all	0.0000
-P1000          	all	0.0000
+	num_ret        	all	630
+	num_rel        	all	2823
+	num_rel_ret    	all	0
+	map            	all	0.0000
+	gm_ap          	all	0.0000
+	R-prec         	all	0.0000
+	bpref          	all	0.0000
+	recip_rank     	all	0.0000
+	ircl_prn.0.00  	all	0.0000
+	ircl_prn.0.10  	all	0.0000
+	ircl_prn.0.20  	all	0.0000
+	ircl_prn.0.30  	all	0.0000
+	ircl_prn.0.40  	all	0.0000
+	ircl_prn.0.50  	all	0.0000
+	ircl_prn.0.60  	all	0.0000
+	ircl_prn.0.70  	all	0.0000
+	ircl_prn.0.80  	all	0.0000
+	ircl_prn.0.90  	all	0.0000
+	ircl_prn.1.00  	all	0.0000
+	P5             	all	0.0000
+	P10            	all	0.0000
+	P15            	all	0.0000
+	P20            	all	0.0000
+	P30            	all	0.0000
+	P100           	all	0.0000
+	P200           	all	0.0000
+	P500           	all	0.0000
+	P1000          	all	0.0000
 
 #### Considerazioni:
 La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
