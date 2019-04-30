@@ -7,7 +7,7 @@
 	</desc>
  </query>
 
- <query>
+<query>
 	<num>2</num>
 	<title>60 yo male with disseminated intravascular coagulation</title>
 	<desc>
@@ -147,7 +147,7 @@
 	<num>19</num>
 	<title>FATIGUE</title>
 	<desc>
-	  FIBROMYALGIA/FIBROSITIS, DIAGNOSIS AND TREATMENT 
+	  FIBROMYALGIA/FIBROSITIS, DIAGNOSIS AND TREATMENT
 	</desc>
  </query>
 
@@ -501,5 +501,5 @@
 	<desc>
 	  HIV and the GI tract, recent reviews
 	</desc>
- </query>
+ </query> -->
 </top>
