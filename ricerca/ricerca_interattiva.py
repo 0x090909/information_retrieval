@@ -7,6 +7,7 @@ from whoosh import scoring
 from whoosh.fields import *
 from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import QueryParser
+from whoosh import qparser
 from whoosh.qparser import MultifieldParser
 
 # def res(results,query):
@@ -61,7 +62,8 @@ else:
         #--- togli il commento per cercare su piu' campi
         #--- query = MultifieldParser(due_campi,ix.schema).parse(querytext)
         #--- e commenta la riga seguente
-        query = QueryParser(un_campo,schema).parse(querytext)
+        query = QueryParser(un_campo,schema, group=qparser.OrGroup).parse(querytext)
+        print query
         results = ix.searcher(weighting=scoring.TF_IDF()).search(query)
         #--- res(results,query)
         res(results)
