@@ -31,17 +31,17 @@ I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minu
 Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True) seguendo lo spunto dato dalla documentazione whoosh:
 > https://whoosh.readthedocs.io/en/latest/batch.html
 
-### NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazioni di parametri diverse per il BM25 abbiamo 2x3 run 
+### NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazioni di parametri diverse per il BM25 abbiamo 2x3 run
 
 # Ricerca
 
 In questo paragrafo metteremo i risultati temporanei ottenuti con le varie RUN che poi dovranno essere formattate per bene e inserite nel documento finale.
 
 ### NOTA: come leggere il nome di file di output
- 	* run (baseline, TFIDF..)
-	* numero di campi (1 o più)
-	* treceval
-	* out
+ 	*run (baseline, TFIDF..)
+	*numero di campi (1 o più)
+	*treceval
+	*out
 
 #### Baseline RUN
 A un campo:
