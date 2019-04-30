@@ -45,13 +45,16 @@ In questo paragrafo metteremo i risultati temporanei ottenuti con le varie RUN c
 
 #### Baseline RUN
 A un campo:
-``` python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 1 > BASELINE_UN_CAMPO.RUN ```
+``` python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 1 > BASELINE_UN_CAMPO.RUN
+```
 
 A due campi:
-``` python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_DUE_CAMPI.RUN ```
+``` python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_DUE_CAMPI.RUN
+```
 
 ### Output treceval BASELINE_UN_CAMPO.TRECEVAL
-num_q          	all	63
+```
+  num_q          	all	63
 	num_ret        	all	630
 	num_rel        	all	2823
 	num_rel_ret    	all	0
@@ -80,6 +83,6 @@ num_q          	all	63
 	P200           	all	0.0000
 	P500           	all	0.0000
 	P1000          	all	0.0000
-
+```
 #### Considerazioni:
 La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
