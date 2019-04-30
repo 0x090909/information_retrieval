@@ -78,7 +78,7 @@ for doc in docs:
 			                abstract    = this_W,
 			                publication = this_P,
 			                source      = this_S)
-#print listaDocumenti
+ #print listaDocumenti
 
 print "\r Indexed everything!",
 #--- chiusura sicura del writer ---#

@@ -88,3 +88,165 @@ python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_D
 ```
 #### Considerazioni:
 La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
+
+### Output treceval, 1 campo, TFIDF:
+```c
+  num_q          	all	63
+	num_ret        	all	630
+	num_rel        	all	2823
+	num_rel_ret    	all	0
+	map            	all	0.0000
+	gm_ap          	all	0.0000
+	R-prec         	all	0.0000
+	bpref          	all	0.0000
+	recip_rank     	all	0.0000
+	ircl_prn.0.00  	all	0.0000
+	ircl_prn.0.10  	all	0.0000
+	ircl_prn.0.20  	all	0.0000
+	ircl_prn.0.30  	all	0.0000
+	ircl_prn.0.40  	all	0.0000
+	ircl_prn.0.50  	all	0.0000
+	ircl_prn.0.60  	all	0.0000
+	ircl_prn.0.70  	all	0.0000
+	ircl_prn.0.80  	all	0.0000
+	ircl_prn.0.90  	all	0.0000
+	ircl_prn.1.00  	all	0.0000
+	P5             	all	0.0000
+	P10            	all	0.0000
+	P15            	all	0.0000
+	P20            	all	0.0000
+	P30            	all	0.0000
+	P100           	all	0.0000
+	P200           	all	0.0000
+	P500           	all	0.0000
+	P1000          	all	0.0000
+```
+### Output treceval, 2 campi, TFIDF:
+```c
+  num_q          	all	63
+	num_ret        	all	630
+	num_rel        	all	2823
+	num_rel_ret    	all	0
+	map            	all	0.0000
+	gm_ap          	all	0.0000
+	R-prec         	all	0.0000
+	bpref          	all	0.0000
+	recip_rank     	all	0.0000
+	ircl_prn.0.00  	all	0.0000
+	ircl_prn.0.10  	all	0.0000
+	ircl_prn.0.20  	all	0.0000
+	ircl_prn.0.30  	all	0.0000
+	ircl_prn.0.40  	all	0.0000
+	ircl_prn.0.50  	all	0.0000
+	ircl_prn.0.60  	all	0.0000
+	ircl_prn.0.70  	all	0.0000
+	ircl_prn.0.80  	all	0.0000
+	ircl_prn.0.90  	all	0.0000
+	ircl_prn.1.00  	all	0.0000
+	P5             	all	0.0000
+	P10            	all	0.0000
+	P15            	all	0.0000
+	P20            	all	0.0000
+	P30            	all	0.0000
+	P100           	all	0.0000
+	P200           	all	0.0000
+	P500           	all	0.0000
+	P1000          	all	0.0000
+```
+### Output treceval, 3 campi, TFIDF:
+```c
+  num_q          	all	63
+	num_ret        	all	630
+	num_rel        	all	2823
+	num_rel_ret    	all	0
+	map            	all	0.0000
+	gm_ap          	all	0.0000
+	R-prec         	all	0.0000
+	bpref          	all	0.0000
+	recip_rank     	all	0.0000
+	ircl_prn.0.00  	all	0.0000
+	ircl_prn.0.10  	all	0.0000
+	ircl_prn.0.20  	all	0.0000
+	ircl_prn.0.30  	all	0.0000
+	ircl_prn.0.40  	all	0.0000
+	ircl_prn.0.50  	all	0.0000
+	ircl_prn.0.60  	all	0.0000
+	ircl_prn.0.70  	all	0.0000
+	ircl_prn.0.80  	all	0.0000
+	ircl_prn.0.90  	all	0.0000
+	ircl_prn.1.00  	all	0.0000
+	P5             	all	0.0000
+	P10            	all	0.0000
+	P15            	all	0.0000
+	P20            	all	0.0000
+	P30            	all	0.0000
+	P100           	all	0.0000
+	P200           	all	0.0000
+	P500           	all	0.0000
+	P1000          	all	0.0000
+```
+
+### Output treceval, 2 campi, BM25 default:
+```
+	num_q          	all	63
+	num_ret        	all	630
+	num_rel        	all	2823
+	num_rel_ret    	all	1
+	map            	all	0.0000
+	gm_ap          	all	0.0000
+	R-prec         	all	0.0003
+	bpref          	all	0.0003
+	recip_rank     	all	0.0018
+	ircl_prn.0.00  	all	0.0018
+	ircl_prn.0.10  	all	0.0000
+	ircl_prn.0.20  	all	0.0000
+	ircl_prn.0.30  	all	0.0000
+	ircl_prn.0.40  	all	0.0000
+	ircl_prn.0.50  	all	0.0000
+	ircl_prn.0.60  	all	0.0000
+	ircl_prn.0.70  	all	0.0000
+	ircl_prn.0.80  	all	0.0000
+	ircl_prn.0.90  	all	0.0000
+	ircl_prn.1.00  	all	0.0000
+	P5             	all	0.0000
+	P10            	all	0.0016
+	P15            	all	0.0011
+	P20            	all	0.0008
+	P30            	all	0.0005
+	P100           	all	0.0002
+	P200           	all	0.0001
+	P500           	all	0.0000
+	P1000          	all	0.0000
+```
+### Output treceval, 2 campi, BM25 default:
+```c
+  num_q          	all	63
+	num_ret        	all	630
+	num_rel        	all	2823
+	num_rel_ret    	all	0
+	map            	all	0.0000
+	gm_ap          	all	0.0000
+	R-prec         	all	0.0000
+	bpref          	all	0.0000
+	recip_rank     	all	0.0000
+	ircl_prn.0.00  	all	0.0000
+	ircl_prn.0.10  	all	0.0000
+	ircl_prn.0.20  	all	0.0000
+	ircl_prn.0.30  	all	0.0000
+	ircl_prn.0.40  	all	0.0000
+	ircl_prn.0.50  	all	0.0000
+	ircl_prn.0.60  	all	0.0000
+	ircl_prn.0.70  	all	0.0000
+	ircl_prn.0.80  	all	0.0000
+	ircl_prn.0.90  	all	0.0000
+	ircl_prn.1.00  	all	0.0000
+	P5             	all	0.0000
+	P10            	all	0.0000
+	P15            	all	0.0000
+	P20            	all	0.0000
+	P30            	all	0.0000
+	P100           	all	0.0000
+	P200           	all	0.0000
+	P500           	all	0.0000
+	P1000          	all	0.0000
+```
