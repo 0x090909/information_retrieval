@@ -69,7 +69,7 @@ schema = Schema(docid      	= ID(stored=True),
 un_campo = "title"                            				# 
 due_campi = ["title", "abstract"]             				# 
 tre_campi = ["title", "abstract", "terms"]
-runtag = "RUNTAG"                             				# 
+runtag = ""                             				# 
                                                             #
 MAXDOCS = 10                                  				# max num doc reperiti
 MAXLSATERMS = 100                             				# max num righe matrice LSA
@@ -118,15 +118,18 @@ else:                                         				# altrimenti procedi
         #NOTA:stiamo usando TF_IDF 
         results = ix.searcher(weighting=scoring.TF_IDF()).search(query,limit=MAXDOCS)
         if len(sys.argv) < 5:                                               # caso base
+            runtag+="BASETFIDF"
             #--- res(results,query,MAXDOCS,runtag)                          #
             res(results,qid,MAXDOCS,runtag)						            #
         #--- query expansion                                                #
+        runtag+="FEEDBK"
         elif sys.argv[4]=='m':                                              # se il quarto arg e' m
             hit = randint(0,min([10,len(results)])-1)                       # cerca i documeni simili
             more_results = results[hit].more_like_this("title")             #
             res(more_results,qid,MAXDOCS,runtag)                            # stampa i nuovi risultati
             results = more_results
         elif sys.argv[4]=='e':                                              # se il quarto arg e' e
+            runtag+="EXP"
             #creo un insieme contenente gli identificatori dei documenti trovati piu' rilevanti
             resdocs = set([results[h]['identifier'] for h in range(min([10,len(results)]))]) 
             with ix.searcher() as s:# prepara un alias
@@ -142,10 +145,13 @@ else:                                         				# altrimenti procedi
                 for term,score in expansion_terms:#query costruita usando i termini trovati da key_term()
                     expanded_query_text = term + ' ' + expanded_query_text
                 if sys.argv[3]=='1':
+                    runtag+="1C"
                     expanded_query = qp(un_campo,schema,group = qparser.OrGroup).parse(expanded_query_text)
                 elif sys.argv[3]=='2':
+                    runtag+="2C"
                     expanded_query = mp(due_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
                 else:
+                    runtag+="3C"
                     expanded_query = mp(tre_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
                 more_results = ix.searcher(weighting=scoring.TF_IDF()).search(expanded_query,limit=MAXDOCS)
                 res(more_results,qid,MAXDOCS,runtag)
@@ -153,6 +159,7 @@ else:                                         				# altrimenti procedi
         
         # ANCORA DA PROVARE QUESTA PARTE
         elif sys.argv[4]=='i':                                              # se il quarto arg e' i
+            runtag+="IMP"
             with ix.searcher() as s:                                        # prepara un alias
                 reldocids = [int(s.document_number(docid=results[i]['identifier'])) for i in xrange(min([3,len(results)]))] # e una lista di documenti rilevanti		
                 expansion_terms = s.key_terms(reldocids,"title",MAXRFTERMS)
@@ -161,10 +168,13 @@ else:                                         				# altrimenti procedi
             for term,score in expansion_terms:#query costruita usando i termini trovati da key_term()
                 expanded_query_text = term + ' ' + expanded_query_text
             if sys.argv[3]=='1':
+                runtag+="1C"
                 expanded_query = qp(un_campo,schema,group = qparser.OrGroup).parse(expanded_query_text)
             elif sys.argv[3]=='2':
+                runtag+="2C"
                 expanded_query = mp(due_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
             else:
+                runtag+="3C"
                 expanded_query = mp(tre_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
             more_results = ix.searcher(weighting=scoring.TF_IDF()).search(expanded_query,limit=MAXDOCS)
             res(more_results,qid,MAXDOCS,runtag)
