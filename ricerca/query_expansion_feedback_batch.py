@@ -1,5 +1,5 @@
 #--- importazione di interi moduli
-import string as str
+import string as st
 import sys
 import getopt
 import os.path
@@ -24,7 +24,7 @@ def gettagdata(dom,tag):
         return None
     tagdata = []
     for node in nodes:
-        tagdata.append(str.rstrip(str.lstrip(node.firstChild.data)))
+        tagdata.append(st.rstrip(st.lstrip(node.firstChild.data)))
     return tagdata
 
 # ---------------------------------------------------------------------------------------- #
