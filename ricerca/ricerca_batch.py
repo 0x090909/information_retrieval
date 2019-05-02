@@ -13,6 +13,8 @@ from whoosh.fields import *
 from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import QueryParser as qp
 from whoosh.qparser import MultifieldParser as mp
+from whoosh.formats import Frequency
+
 #--- estrazione dei dati di un tag ---#
 def gettagdata(dom,tag):
     nodes = dom.getElementsByTagName(tag)
@@ -44,21 +46,20 @@ tags = ['I',
 
 #--- definizione dello schema (deve essere quello usato
 #--- dall'indicizzatore
-schema = Schema(docid      	= ID(stored=True),
-		title      	= TEXT(stored=True),
-		identifier	= ID(stored=True),
-		terms 		= NGRAM(stored=True),
-		authors     = NGRAM(stored=True),
-		abstract 	= TEXT(stored=True),
-		publication	= TEXT(stored=True),
-		source 		= TEXT(stored=True))
-
+schema = Schema(docid      		= ID(stored=True),
+				title      		= TEXT(stored=True),
+				identifier	   	= ID(stored=True),
+				terms 			= NGRAM(stored=True),
+				authors      	= NGRAM(stored=True),
+				abstract 		= TEXT(stored=True,vector=Frequency()),
+				publication		= TEXT(stored=True),
+				source 			= TEXT(stored=True))
 # search fields
 un_campo = 'title'
 due_campi = ["title", "abstract"]
 tre_campi = ["title", "abstract", "terms"]
 
-MAXDOCS = 10 												# max num doc reperiti
+MAXDOCS = 1000												# max num doc reperiti
 runtag = "BASELINE"
 
 if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
