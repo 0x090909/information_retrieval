@@ -1,10 +1,11 @@
 #RUN DI BASE
 
 #--- importazione di interi moduli ---#
-import string as st
+import string as str
 import sys
 import getopt
 import os.path
+import json
 
 #--- importazione di parti di modulo ---#
 from xml.dom.minidom import parse, parseString
@@ -14,6 +15,7 @@ from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import QueryParser as qp
 from whoosh.qparser import MultifieldParser as mp
 from whoosh.formats import Frequency
+from whoosh.analysis import StandardAnalyzer, RegexAnalyzer, StopFilter, RegexTokenizer
 
 #--- estrazione dei dati di un tag ---#
 def gettagdata(dom,tag):
@@ -22,7 +24,7 @@ def gettagdata(dom,tag):
         return None
     tagdata = []
     for node in nodes:
-        tagdata.append(st.rstrip(st.lstrip(node.firstChild.data)))
+        tagdata.append(str.rstrip(str.lstrip(node.firstChild.data)))
     return tagdata
 
 #--- stampa i risultati in forma trec_eval
@@ -46,14 +48,25 @@ tags = ['I',
 
 #--- definizione dello schema (deve essere quello usato
 #--- dall'indicizzatore
+#prendi stop words dal file
+json_stop_words = open("../indicizzazione/stopWords.json","r")
+json_string = ""
+for line in json_stop_words:
+	json_string = json_string+line
+
+datastore = json.loads(json_string)
+
+analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
+#--- definizione dello schema ---#
 schema = Schema(docid      		= ID(stored=True),
-				title      		= TEXT(stored=True),
+				title      		= TEXT(analyzer=analyzer,stored=True),
 				identifier	   	= ID(stored=True),
 				terms 			= NGRAM(stored=True),
 				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(stored=True,vector=Frequency()),
+				abstract 		= TEXT(analyzer=analyzer,stored=True),
 				publication		= TEXT(stored=True),
 				source 			= TEXT(stored=True))
+
 # search fields
 un_campo = 'title'
 due_campi = ["title", "abstract"]
