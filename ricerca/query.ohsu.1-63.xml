@@ -1,7 +1,7 @@
 <top>
  <query>
 	<num>1</num>
-	<title>60 year old menopausal woman without hormone replacement therapy</title>
+	<title>menopausal woman without hormone replacement therapy</title>
 	<desc>
 	  Are there adverse effects on lipids when progesterone is given with estrogen replacement therapy
 	</desc>
@@ -9,7 +9,7 @@
 
 <query>
 	<num>2</num>
-	<title>60 yo male with disseminated intravascular coagulation</title>
+	<title>disseminated intravascular coagulation</title>
 	<desc>
 	  pathophysiology and treatment of disseminated intravascular coagulation
 	</desc>
@@ -25,7 +25,7 @@
 
  <query>
 	<num>4</num>
-	<title>58 yo with cancer and hypercalcemia</title>
+	<title>cancer and hypercalcemia</title>
 	<desc>
 	  effectiveness of etidronate in treating hypercalcemia of malignancy
 	</desc>
@@ -33,7 +33,7 @@
 
  <query>
 	<num>5</num>
-	<title>55 yo female,postmenopausal</title>
+	<title>postmenopausal</title>
 	<desc>
 	  does estrogen replacement therapy cause breast cancer
 	</desc>
@@ -41,7 +41,7 @@
 
  <query>
 	<num>6</num>
-	<title>30 year old with fever, lymphadenopathy, neurologic changes and rash</title>
+	<title>fever lymphadenopathy, neurologic changes and rash</title>
 	<desc>
 	  t-cell lymphoma associated with autoimmune symptoms
 	</desc>
@@ -501,5 +501,5 @@
 	<desc>
 	  HIV and the GI tract, recent reviews
 	</desc>
- </query> -->
+ </query>
 </top>

@@ -7,6 +7,7 @@ import os.path
 from whoosh.index import create_in, open_dir
 from whoosh.fields import *
 from xml.dom.minidom import parse, parseString
+from whoosh.formats import Frequency
 
 #--- estrazione dei dati di un tag ---#
 def gettagdata(dom,tag):
@@ -24,7 +25,7 @@ schema = Schema(docid      		= ID(stored=True),
 				identifier	   	= ID(stored=True),
 				terms 			= NGRAM(stored=True),
 				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(stored=True),
+				abstract 		= TEXT(stored=True,vector=Frequency()),
 				publication		= TEXT(stored=True),
 				source 			= TEXT(stored=True))
 
