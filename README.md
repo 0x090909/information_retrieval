@@ -71,39 +71,18 @@ python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_D
 Output treceval
 ===============
 
-##### Output treceval, 1 campo, BM25 default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
-```
-num_q          	all	63
-num_ret        	all	37454
-num_rel        	all	670
-num_rel_ret    	all	307
-map            	all	0.1073
-gm_ap          	all	0.0055
-R-prec         	all	0.1187
-bpref          	all	0.4538
-recip_rank     	all	0.2998
-ircl_prn.0.00  	all	0.3191
-ircl_prn.0.10  	all	0.2841
-ircl_prn.0.20  	all	0.2028
-ircl_prn.0.30  	all	0.1406
-ircl_prn.0.40  	all	0.1271
-ircl_prn.0.50  	all	0.1070
-ircl_prn.0.60  	all	0.0637
-ircl_prn.0.70  	all	0.0376
-ircl_prn.0.80  	all	0.0206
-ircl_prn.0.90  	all	0.0081
-ircl_prn.1.00  	all	0.0069
-P5             	all	0.1524
-P10            	all	0.1048
-P15            	all	0.1026
-P20            	all	0.0905
-P30            	all	0.0804
-P100           	all	0.0352
-P200           	all	0.0202
-P500           	all	0.0092
-P1000          	all	0.0049
+##### BM25 default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-```
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    307    | num_rel_ret        all    387    | num_rel_ret        all    383    |
+| map                all    0.1073 | map                all    0.1289 | map                all    0.1227 |
+
+
+
 #### Considerazioni:
 La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
 
