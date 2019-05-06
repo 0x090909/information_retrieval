@@ -31,6 +31,17 @@ I tempi di indicizzazione su un processore Dual Core sono stati di circa 10 minu
 Siamo riusciti a velocizzare l'indicizzazione (con tutti i campi in stored=True) seguendo lo spunto dato dalla documentazione whoosh:
 > https://whoosh.readthedocs.io/en/latest/batch.html
 
+Abbiamo osservato che togliendo le stop word, aumenta il numero di documenti rilevanti reperiti.
+Dunque, attraverso un programma apposito (cerca_stop_words.py) abbiamo creato un elenco di tutte le stop word trovate all'interno della collezione di documenti. Il criterio che abbiamo usato e' stato la lunghezza che, se inferiore o uguale a una certa soglia S, determinava l'appartenenza alla lista di stop word.
+Per determinare la soglia abbiamo effettuato alcuni tentativi:
+* S=4, la lista includeva troppe parole appartenenti al lessico strettamente medico (HIVs)
+* S=2, la lista includeva sigle di indicatori di interesse medico (RR,CP)
+* S=1, la lista includeva le lettere alfabetiche, le cifre da 0 a 9 e qualche carattere speciale ("%","$"..)
+Abbiamo deciso di porre la soglia S=1, perche' parole di lunghezza maggiore sarebbero potute essere di interesse per l'utente.
+All'elenco di stop word trovate come descritto sopra, abbiamo aggiunto le stop word generali per la lingua inglese (congiunizoni, articoli, avverbi) provenienti da nltk, il Natural Language Toolkit, uno degli strumenti piu' usati per fare l'analisi dei testi, scritto interamente in python.
+
+
+
 ### NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazioni di parametri diverse per il BM25 abbiamo 2x3 run
 
 # Ricerca
