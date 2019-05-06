@@ -47,7 +47,7 @@ if __name__ == "__main__":
         else:
             listAbstract = []
         listOfAll = set(listTerms+listTitle+listAbstract)-set("not")
-        stop =[stop for stop in listOfAll if len(stop)<=4]
+        stop =[stop for stop in listOfAll if len(stop)<=1]
         stopWords += stop
     uniqueStop = set(stopWords)
     print json.dumps(list(uniqueStop))
