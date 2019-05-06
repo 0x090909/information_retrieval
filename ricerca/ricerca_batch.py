@@ -103,7 +103,6 @@ else:                                         				# altrimenti procedi
             query = mp(tre_campi,                                           # cerca l'indice usando tre campi
                         schema,                                              # usando lo schema dato e
                         group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
-
         results = ix.searcher(weighting=scoring.BM25F()).search(query,limit=MAXDOCS)
         #--- res(results,query,MAXDOCS,runtag)                          	#
         res(results,qid,MAXDOCS,runtag)

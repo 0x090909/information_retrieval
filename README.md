@@ -68,6 +68,9 @@ A due campi:
 python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_DUE_CAMPI.RUN
 ```
 
+Output treceval
+===============
+
 ### Output treceval, 2 campi, BM25 default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 10:
 ```
 	num_q          	all	63
@@ -105,8 +108,7 @@ La precisione media dei risultati del reperimento è zero quindi non è utilizza
 
 
 ### Output treceval BASELINE_UN_CAMPO.TRECEVAL
-Output treceval, 1 campo, TFIDF:
-================================
+### Output treceval, 1 campo, TFIDF:
 ### Output treceval, 2 campi, TFIDF:
 ### Output treceval, 3 campi, TFIDF:
 ### Output treceval, 2 campi, BM25 default:
