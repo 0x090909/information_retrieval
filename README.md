@@ -95,10 +95,6 @@ Output treceval
 ##### Considerazioni:
 Il numero di documenti reperiti per tipo di schema di pesatura non differisce significativamente a seconda del numero di campi considerato, tuttavia quello che cambia evidentemente e' la precisione media che e' migliore con la combinazione BM25F a 2 campi
 
-
-
-### Output treceval BASELINE_UN_CAMPO.TRECEVAL
-### Output treceval, 1 campo, TFIDF:
-### Output treceval, 2 campi, TFIDF:
-### Output treceval, 3 campi, TFIDF:
-### Output treceval, 2 campi, BM25 default:
+Alla luce dei dati osservati consideriamo come parametri BASELINE: 
+* Documenti rilevanti reperiti: 387
+* Mean Average Precision: 0.1289
