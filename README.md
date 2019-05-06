@@ -71,7 +71,7 @@ python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_D
 Output treceval
 ===============
 
-##### BM25 default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
+##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
 |              1 Campo             |              2 Campi             |              3 Campi             |
 |----------------------------------|----------------------------------|----------------------------------|
@@ -82,9 +82,19 @@ Output treceval
 | map                all    0.1073 | map                all    0.1289 | map                all    0.1227 |
 
 
+##### TF_IDF, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-#### Considerazioni:
-La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    305    | num_rel_ret        all    380    | num_rel_ret        all    382    |
+| map                all    0.0833 | map                all    0.0591 | map                all    0.0829 |
+
+##### Considerazioni:
+Il numero di documenti reperiti per tipo di schema di pesatura non differisce significativamente a seconda del numero di campi considerato, tuttavia quello che cambia evidentemente e' la precisione media che e' migliore con la combinazione BM25F a 2 campi
+
 
 
 ### Output treceval BASELINE_UN_CAMPO.TRECEVAL
