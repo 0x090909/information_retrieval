@@ -1,10 +1,12 @@
-# Per iniziare
+Per iniziare
+============
 
 Il progetto e' organizzato nelle seguenti cartelle:
 * indicizzazione -> contiene i programmi per l'indicizzazione di un singolo documento e l'indicizzazione di tutti i documenti
 * ricerca -> contiene i programmi per la ricerca interattiva
 
-# Indicizzazione
+Indicizzazione
+==============
 
 Nella repository attuale e' caricata un indice che e' stato fatto secondo questo schema:
 
@@ -44,7 +46,8 @@ All'elenco di stop word trovate come descritto sopra, abbiamo aggiunto le stop w
 
 ### NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazioni di parametri diverse per il BM25 abbiamo 2x3 run
 
-# Ricerca
+Ricerca
+=======
 
 In questo paragrafo metteremo i risultati temporanei ottenuti con le varie RUN che poi dovranno essere formattate per bene e inserite nel documento finale.
 
@@ -65,139 +68,7 @@ A due campi:
 python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_DUE_CAMPI.RUN
 ```
 
-### Output treceval BASELINE_UN_CAMPO.TRECEVAL
-```c
-  num_q          	all	63
-	num_ret        	all	630
-	num_rel        	all	2823
-	num_rel_ret    	all	0
-	map            	all	0.0000
-	gm_ap          	all	0.0000
-	R-prec         	all	0.0000
-	bpref          	all	0.0000
-	recip_rank     	all	0.0000
-	ircl_prn.0.00  	all	0.0000
-	ircl_prn.0.10  	all	0.0000
-	ircl_prn.0.20  	all	0.0000
-	ircl_prn.0.30  	all	0.0000
-	ircl_prn.0.40  	all	0.0000
-	ircl_prn.0.50  	all	0.0000
-	ircl_prn.0.60  	all	0.0000
-	ircl_prn.0.70  	all	0.0000
-	ircl_prn.0.80  	all	0.0000
-	ircl_prn.0.90  	all	0.0000
-	ircl_prn.1.00  	all	0.0000
-	P5             	all	0.0000
-	P10            	all	0.0000
-	P15            	all	0.0000
-	P20            	all	0.0000
-	P30            	all	0.0000
-	P100           	all	0.0000
-	P200           	all	0.0000
-	P500           	all	0.0000
-	P1000          	all	0.0000
-```
-#### Considerazioni:
-La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
-
-### Output treceval, 1 campo, TFIDF:
-```c
-  num_q          	all	63
-	num_ret        	all	630
-	num_rel        	all	2823
-	num_rel_ret    	all	0
-	map            	all	0.0000
-	gm_ap          	all	0.0000
-	R-prec         	all	0.0000
-	bpref          	all	0.0000
-	recip_rank     	all	0.0000
-	ircl_prn.0.00  	all	0.0000
-	ircl_prn.0.10  	all	0.0000
-	ircl_prn.0.20  	all	0.0000
-	ircl_prn.0.30  	all	0.0000
-	ircl_prn.0.40  	all	0.0000
-	ircl_prn.0.50  	all	0.0000
-	ircl_prn.0.60  	all	0.0000
-	ircl_prn.0.70  	all	0.0000
-	ircl_prn.0.80  	all	0.0000
-	ircl_prn.0.90  	all	0.0000
-	ircl_prn.1.00  	all	0.0000
-	P5             	all	0.0000
-	P10            	all	0.0000
-	P15            	all	0.0000
-	P20            	all	0.0000
-	P30            	all	0.0000
-	P100           	all	0.0000
-	P200           	all	0.0000
-	P500           	all	0.0000
-	P1000          	all	0.0000
-```
-### Output treceval, 2 campi, TFIDF:
-```c
-  num_q          	all	63
-	num_ret        	all	630
-	num_rel        	all	2823
-	num_rel_ret    	all	0
-	map            	all	0.0000
-	gm_ap          	all	0.0000
-	R-prec         	all	0.0000
-	bpref          	all	0.0000
-	recip_rank     	all	0.0000
-	ircl_prn.0.00  	all	0.0000
-	ircl_prn.0.10  	all	0.0000
-	ircl_prn.0.20  	all	0.0000
-	ircl_prn.0.30  	all	0.0000
-	ircl_prn.0.40  	all	0.0000
-	ircl_prn.0.50  	all	0.0000
-	ircl_prn.0.60  	all	0.0000
-	ircl_prn.0.70  	all	0.0000
-	ircl_prn.0.80  	all	0.0000
-	ircl_prn.0.90  	all	0.0000
-	ircl_prn.1.00  	all	0.0000
-	P5             	all	0.0000
-	P10            	all	0.0000
-	P15            	all	0.0000
-	P20            	all	0.0000
-	P30            	all	0.0000
-	P100           	all	0.0000
-	P200           	all	0.0000
-	P500           	all	0.0000
-	P1000          	all	0.0000
-```
-### Output treceval, 3 campi, TFIDF:
-```c
-  num_q          	all	63
-	num_ret        	all	630
-	num_rel        	all	2823
-	num_rel_ret    	all	0
-	map            	all	0.0000
-	gm_ap          	all	0.0000
-	R-prec         	all	0.0000
-	bpref          	all	0.0000
-	recip_rank     	all	0.0000
-	ircl_prn.0.00  	all	0.0000
-	ircl_prn.0.10  	all	0.0000
-	ircl_prn.0.20  	all	0.0000
-	ircl_prn.0.30  	all	0.0000
-	ircl_prn.0.40  	all	0.0000
-	ircl_prn.0.50  	all	0.0000
-	ircl_prn.0.60  	all	0.0000
-	ircl_prn.0.70  	all	0.0000
-	ircl_prn.0.80  	all	0.0000
-	ircl_prn.0.90  	all	0.0000
-	ircl_prn.1.00  	all	0.0000
-	P5             	all	0.0000
-	P10            	all	0.0000
-	P15            	all	0.0000
-	P20            	all	0.0000
-	P30            	all	0.0000
-	P100           	all	0.0000
-	P200           	all	0.0000
-	P500           	all	0.0000
-	P1000          	all	0.0000
-```
-
-### Output treceval, 2 campi, BM25 default:
+### Output treceval, 2 campi, BM25 default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 10:
 ```
 	num_q          	all	63
 	num_ret        	all	630
@@ -229,35 +100,13 @@ La precisione media dei risultati del reperimento è zero quindi non è utilizza
 	P500           	all	0.0000
 	P1000          	all	0.0000
 ```
+#### Considerazioni:
+La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
+
+
+### Output treceval BASELINE_UN_CAMPO.TRECEVAL
+Output treceval, 1 campo, TFIDF:
+================================
+### Output treceval, 2 campi, TFIDF:
+### Output treceval, 3 campi, TFIDF:
 ### Output treceval, 2 campi, BM25 default:
-```c
-  num_q          	all	63
-	num_ret        	all	630
-	num_rel        	all	2823
-	num_rel_ret    	all	0
-	map            	all	0.0000
-	gm_ap          	all	0.0000
-	R-prec         	all	0.0000
-	bpref          	all	0.0000
-	recip_rank     	all	0.0000
-	ircl_prn.0.00  	all	0.0000
-	ircl_prn.0.10  	all	0.0000
-	ircl_prn.0.20  	all	0.0000
-	ircl_prn.0.30  	all	0.0000
-	ircl_prn.0.40  	all	0.0000
-	ircl_prn.0.50  	all	0.0000
-	ircl_prn.0.60  	all	0.0000
-	ircl_prn.0.70  	all	0.0000
-	ircl_prn.0.80  	all	0.0000
-	ircl_prn.0.90  	all	0.0000
-	ircl_prn.1.00  	all	0.0000
-	P5             	all	0.0000
-	P10            	all	0.0000
-	P15            	all	0.0000
-	P20            	all	0.0000
-	P30            	all	0.0000
-	P100           	all	0.0000
-	P200           	all	0.0000
-	P500           	all	0.0000
-	P1000          	all	0.0000
-```
