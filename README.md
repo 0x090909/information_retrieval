@@ -84,13 +84,14 @@ Output treceval
 
 ##### TF_IDF, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-|              1 Campo             |              2 Campi             |              3 Campi             |
-|----------------------------------|----------------------------------|----------------------------------|
-| num_q              all    63     | num_q              all    63     | num_q              all    63     |
-| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
-| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
-| num_rel_ret        all    305    | num_rel_ret        all    380    | num_rel_ret        all    382    |
-| map                all    0.0833 | map                all    0.0591 | map                all    0.0829 |
+|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
+|----------------|----------|----------|-----------|
+|num_q       all |   63     |  63      |  63       |
+|num_ret     all |   37454  |  57356   |  58456    |
+|num_rel     all |   670    |  670     |  670      |
+|num_rel_ret all |   305    |  380     |  382      |
+|map         all |   0.0833 |  0.0591  |  0.0829   |
+ 
 
 ##### Considerazioni:
 Il numero di documenti reperiti per tipo di schema di pesatura non differisce significativamente a seconda del numero di campi considerato, tuttavia quello che cambia evidentemente e' la precisione media che e' migliore con la combinazione BM25F a 2 campi
@@ -101,20 +102,19 @@ Alla luce dei dati osservati consideriamo come parametri BASELINE:
 
 ##### BM25F default, testo senza stopword, numero risultati restituiti per ogni query = 1000:
 
-|              1 Campo             |              2 Campi             |              3 Campi*             |
-|----------------------------------|----------------------------------|----------------------------------|
-| num_q              all    60     | num_q              all    63     | num_q              all    63     |
-| num_ret            all    27959  | num_ret            all    59950  | num_ret            all    58456  |
-| num_rel            all    626    | num_rel            all    670    | num_rel            all    670    |
-| num_rel_ret        all    208    | num_rel_ret        all    539    | num_rel_ret        all    382    |
-| map                all    0.1124 | map                all    0.2478 | map                all    0.0829 |
+|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
+|----------------|----------|----------|-----------|
+|num_q       all |   63     |  63      |  63       |
+|num_ret     all |   27959  |  59950   |  58456    |
+|num_rel     all |   626    |  670     |  670      |
+|num_rel_ret all |   208    |  539     |  382      |
+|map         all |   0.1124 |  0.2478  |  0.0829   |
 
 ##### BM25F default, testo senza stopword, numero risultati restituiti per ogni query = 100:
-
-|              1 Campo             |              2 Campi             |              3 Campi*             |
-|----------------------------------|----------------------------------|----------------------------------|
-| num_q              all    63     | num_q              all    63     | num_q              all    63     |
-| num_ret            all    6157   | num_ret            all    6244   | num_ret            all    58456  |
-| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
-| num_rel_ret        all    317    | num_rel_ret        all    395    | num_rel_ret        all    383    |
-| map                all    0.1764 | map                all    0.2412 | map                all    0.1227 |
+|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
+|----------------|----------|----------|-----------|
+|num_q       all |   63     |  63      |  63       |
+|num_ret     all |   6157   |  6244    |  58456    |
+|num_rel     all |   670    |  670     |  670      |
+|num_rel_ret all |   317    |  395     |  383      |
+|map         all |   0.1764 |  0.2412  |  0.1227   |
