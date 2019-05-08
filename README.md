@@ -40,9 +40,9 @@ Per determinare la soglia abbiamo effettuato alcuni tentativi:
 * S=2, la lista includeva sigle di indicatori di interesse medico (RR,CP)
 * S=1, la lista includeva le lettere alfabetiche, le cifre da 0 a 9 e qualche carattere speciale ("%","$"..)
 Abbiamo deciso di porre la soglia S=1, perche' parole di lunghezza maggiore sarebbero potute essere di interesse per l'utente.
-All'elenco di stop word trovate come descritto sopra, abbiamo aggiunto le stop word generali per la lingua inglese (congiunizoni, articoli, avverbi) provenienti da nltk, il Natural Language Toolkit, uno degli strumenti piu' usati per fare l'analisi dei testi, scritto interamente in python.
-
+All'elenco di stop word trovate come descritto sopra, abbiamo aggiunto le stop word generali per la lingua inglese (congiunizoni, articoli, avverbi) provenienti da
 https://www.ranks.nl/stopwords
+uno degli strumenti piu' usati per fare l'analisi dei testi, scritto interamente in python.
 
 ### NOTA: il numero di run dipende dal numero di variabili considerate e dal numero di valori che possono assumere, per esempio se proviamo due indici diversi e tre combinazioni di parametri diverse per il BM25 abbiamo 2x3 run
 
@@ -73,25 +73,24 @@ Output treceval
 
 ##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
-|----------------|----------|----------|-----------|
-|num_q       all |   63     |  63      |  63       |
-|num_ret     all |   37454  |  57356   |  58456    |
-|num_rel     all |   670    |  670     |  670      |
-|num_rel_ret all |   307    |  387     |  383      |
-|map         all |   0.1073 |  0.1289  |  0.1227   |
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    307    | num_rel_ret        all    387    | num_rel_ret        all    383    |
+| map                all    0.1073 | map                all    0.1289 | map                all    0.1227 |
 
 
 ##### TF_IDF, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
-|----------------|----------|----------|-----------|
-|num_q       all |   63     |  63      |  63       |
-|num_ret     all |   37454  |  57356   |  58456    |
-|num_rel     all |   670    |  670     |  670      |
-|num_rel_ret all |   305    |  380     |  382      |
-|map         all |   0.0833 |  0.0591  |  0.0829   |
- 
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    305    | num_rel_ret        all    380    | num_rel_ret        all    382    |
+| map                all    0.0833 | map                all    0.0591 | map                all    0.0829 |
 
 ##### Considerazioni:
 Il numero di documenti reperiti per tipo di schema di pesatura non differisce significativamente a seconda del numero di campi considerato, tuttavia quello che cambia evidentemente e' la precisione media che e' migliore con la combinazione BM25F a 2 campi
@@ -102,19 +101,20 @@ Alla luce dei dati osservati consideriamo come parametri BASELINE:
 
 ##### BM25F default, testo senza stopword, numero risultati restituiti per ogni query = 1000:
 
-|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
-|----------------|----------|----------|-----------|
-|num_q       all |   63     |  63      |  63       |
-|num_ret     all |   27959  |  59950   |  58456    |
-|num_rel     all |   626    |  670     |  670      |
-|num_rel_ret all |   208    |  539     |  382      |
-|map         all |   0.1124 |  0.2478  |  0.0829   |
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    60     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    27959  | num_ret            all    59950  | num_ret            all    61300  |
+| num_rel            all    626    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    208    | num_rel_ret        all    539    | num_rel_ret        all    508    |
+| map                all    0.1124 | map                all    0.2478 | map                all    0.1489 |
 
 ##### BM25F default, testo senza stopword, numero risultati restituiti per ogni query = 100:
-|    Parametri   | 1 Campo  |  2 Campi |  3 Campi  |
-|----------------|----------|----------|-----------|
-|num_q       all |   63     |  63      |  63       |
-|num_ret     all |   6157   |  6244    |  58456    |
-|num_rel     all |   670    |  670     |  670      |
-|num_rel_ret all |   317    |  395     |  383      |
-|map         all |   0.1764 |  0.2412  |  0.1227   |
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    6157   | num_ret            all    6244   | num_ret            all    6271   |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    317    | num_rel_ret        all    395    | num_rel_ret        all    305    |
+| map                all    0.1764 | map                all    0.2412 | map                all    0.1415 |
