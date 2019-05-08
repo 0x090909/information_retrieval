@@ -68,8 +68,8 @@ A due campi:
 python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_DUE_CAMPI.RUN
 ```
 
-Output treceval
-===============
+Output treceval Baseline
+========================
 
 ##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
@@ -99,7 +99,27 @@ Alla luce dei dati osservati consideriamo come parametri BASELINE:
 * Documenti rilevanti reperiti: **387**
 * Mean Average Precision: **0.1289**
 
-##### BM25F default, testo senza stopword, numero risultati restituiti per ogni query = 1000:
+Miglioramenti dalla Baseline: stopWords
+=======================================
+
+##### BM25F default, testo senza stopword cliniche, numero risultati restituiti per ogni query = 1000:
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    54873  | num_ret            all    612669 | num_ret            all    61908  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    477    | num_rel_ret        all    570    | num_rel_ret        all    538    |
+| map                all    0.2045 | map                all    0.2752 | map                all    0.1665 |
 
 
-##### BM25F default, testo senza stopword, numero risultati restituiti per ogni query = 100:
+##### BM25F default, testo senza stopword cliniche, numero risultati restituiti per ogni query = 100:
+
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    6204   | num_ret            all    6244   | num_ret            all    6271   |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    351    | num_rel_ret        all    416    | num_rel_ret        all    327    |
+| map                all    0.1986 | map                all    0.2677 | map                all    0.1581 |
