@@ -59,11 +59,11 @@ datastore = json.loads(json_string)
 analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
 #--- definizione dello schema ---#
 schema = Schema(docid      		= ID(stored=True),
-				title      		= TEXT(analyzer=analyzer,stored=True),
+				title      		= TEXT(stored=True),
 				identifier	   	= ID(stored=True),
 				terms 			= NGRAM(stored=True),
 				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(analyzer=analyzer,stored=True),
+				abstract 		= TEXT(stored=True),
 				publication		= TEXT(stored=True),
 				source 			= TEXT(stored=True))
 
@@ -87,7 +87,7 @@ else:                                         				# altrimenti procedi
     #--- dom delle query
     dom = parseString(text)
     #-- estrazione dei dati della query
-    title = gettagdata(dom,'title')
+    title = gettagdata(dom,'desc')
     num = gettagdata(dom,'num')
     for qid in num:
         title[int(qid)-1].encode('utf-8')                                   # prepara il testo della query
