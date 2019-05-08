@@ -115,7 +115,6 @@ Miglioramenti dalla Baseline: stopWords
 
 ##### BM25F default, testo senza stopword cliniche, numero risultati restituiti per ogni query = 100:
 
-
 |              1 Campo             |              2 Campi             |              3 Campi             |
 |----------------------------------|----------------------------------|----------------------------------|
 | num_q              all    63     | num_q              all    63     | num_q              all    63     |
@@ -123,3 +122,26 @@ Miglioramenti dalla Baseline: stopWords
 | num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
 | num_rel_ret        all    351    | num_rel_ret        all    416    | num_rel_ret        all    327    |
 | map                all    0.1986 | map                all    0.2677 | map                all    0.1581 |
+
+##### BM25F default, testo senza stopword generali, numero risultati restituiti per ogni query = 1000:
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    54945  | num_ret            all    61269  | num_ret            all    61908  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    475    | num_rel_ret        all    563    | num_rel_ret        all    539    |
+| map                all    0.2022 | map                all    0.2661 | map                all    0.1652 |
+
+##### BM25F default, testo senza stopword generali, numero risultati restituiti per ogni query = 100:
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    6204   | num_ret            all    6244   | num_ret            all    6271   |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    346    | num_rel_ret        all    415    | num_rel_ret        all    326    |
+| map                all    0.1961 | map                all    0.2587 | map                all    0.1569 |
+
+##### Considerazioni:
+La rimozione delle stop word cliniche, con numero di risultati restituiti per ogni query = 1000, da' i migliori risultati per i campi map e numero di documenti rilevanti reperiti.
