@@ -20,7 +20,7 @@ def gettagdata(dom,tag):
 		return None
 	return node.firstChild.data.strip()
 #prendi stop words dal file
-json_stop_words = open("stopWords.json","r")
+json_stop_words = open("./indicizzazione/stopWords_clinico.json","r")
 json_string = ""
 for line in json_stop_words:
 	json_string = json_string+line
