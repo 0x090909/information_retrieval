@@ -49,7 +49,8 @@ tags = ['I',
 #--- definizione dello schema (deve essere quello usato
 #--- dall'indicizzatore
 #prendi stop words dal file
-json_stop_words = open("../indicizzazione/stopWords.json","r")
+json_stop_words = open("../indicizzazione/stopWords_clinico.json","r")
+# json_stop_words = open("../indicizzazione/stopWords_generali.json","r")
 json_string = ""
 for line in json_stop_words:
 	json_string = json_string+line
