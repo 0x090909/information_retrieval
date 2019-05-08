@@ -73,7 +73,7 @@ Output treceval
 
 ##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-|              1 Campo             |              2 Campi             |              3 Campi             |
+|              |1 Campo             |              2 Campi             |              3 Campi             |
 |----------------------------------|----------------------------------|----------------------------------|
 |num_q              all |   63     |    63                            |  63                              |
 |num_ret            all |   37454  |     57356                        |  58456                           |
