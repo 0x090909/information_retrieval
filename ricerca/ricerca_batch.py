@@ -49,8 +49,8 @@ tags = ['I',
 #--- definizione dello schema (deve essere quello usato
 #--- dall'indicizzatore
 #prendi stop words dal file
-json_stop_words = open("../indicizzazione/stopWords_clinico.json","r")
-# json_stop_words = open("../indicizzazione/stopWords_generali.json","r")
+# json_stop_words = open("../indicizzazione/stopWords_clinico.json","r")
+json_stop_words = open("../indicizzazione/stopWords_generali.txt","r")
 json_string = ""
 for line in json_stop_words:
 	json_string = json_string+line
@@ -73,7 +73,7 @@ un_campo = 'title'
 due_campi = ["title", "abstract"]
 tre_campi = ["title", "abstract", "terms"]
 
-MAXDOCS = 100												# max num doc reperiti
+MAXDOCS = 1000												# max num doc reperiti
 runtag = "BASELINE"
 
 if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
