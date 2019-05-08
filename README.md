@@ -73,13 +73,13 @@ Output treceval
 
 ##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
-|              |1 Campo             |              2 Campi             |              3 Campi             |
-|----------------------------------|----------------------------------|----------------------------------|
-|num_q              all |   63     |    63                            |  63                              |
-|num_ret            all |   37454  |     57356                        |  58456                           |
-|num_rel            all |   670    |      670                         |    670                           |
-|num_rel_ret        all |   307    |     387                          |    383                           |
-|map                all |   0.1073 |    0.1289                        |   0.1227                         |
+|    Yo          |1 Campo             |              2 Campi             |              3 Campi             |
+|----------------|-----------------|----------------------------------|----------------------------------|
+|num_q       all |   63     |    63                            |  63                              |
+|num_ret     all |   37454  |     57356                        |  58456                           |
+|num_rel     all |   670    |      670                         |    670                           |
+|num_rel_ret all |   307    |     387                          |    383                           |
+|map             |   all    |   0.1073 |    0.1289                        |   0.1227                         |
 
 
 ##### TF_IDF, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
