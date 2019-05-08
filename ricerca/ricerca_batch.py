@@ -72,7 +72,7 @@ un_campo = 'title'
 due_campi = ["title", "abstract"]
 tre_campi = ["title", "abstract", "terms"]
 
-MAXDOCS = 1000												# max num doc reperiti
+MAXDOCS = 100												# max num doc reperiti
 runtag = "BASELINE"
 
 if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
