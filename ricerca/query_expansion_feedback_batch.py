@@ -4,6 +4,7 @@ import sys
 import getopt
 import os.path
 import numpy as np
+import json
 #--- importazione di parti di modulo
 from whoosh import scoring,qparser,highlight as hl
 from whoosh.fields import *
@@ -14,7 +15,7 @@ from whoosh.searching import Searcher
 from xml.dom.minidom import parse, parseString
 from random import randint
 from random import sample
-from whoosh.analysis import StemmingAnalyzer
+from whoosh.analysis import StandardAnalyzer, RegexAnalyzer, StopFilter, RegexTokenizer
 
 # ---------------------------------------------------------------------------------------- #
 # estrazione dei dati di un tag
@@ -32,9 +33,9 @@ class intgen:
     def __init__(self):                       				# inizializza un generatore di interi
         self.index = {}                       				# mappa chiave->intero
         self.nextint = 0                      				# prossimo intero
-    def id2int(self,myid):                      				# dai l'intero della chiave
-        if myid not in self.index:              				# se la chiave non e' stata ancora vista
-           self.index[myid] = self.nextint      				# inseriscila e dalle l'intero
+    def id2int(self,myid):                      			# dai l'intero della chiave
+        if myid not in self.index:              			# se la chiave non e' stata ancora vista
+           self.index[myid] = self.nextint      			# inseriscila e dalle l'intero
            self.nextint += 1                  				# prepara il prossimo intero
         return self.index[id]                 				# ritorna l'intero della chiave
     def int2id(self,integer):                 				# dai la chiave dell'intero
@@ -59,32 +60,38 @@ def res(results, query = "1", n = 10, tag = "tag"):#risultati in formato trec ev
 def getquery(prompt):                         				#
     return raw_input(prompt)                  				#
                                               				#
-stem_ana = StemmingAnalyzer()
+json_stop_words = open("../indicizzazione/stopWords.json","r")
+json_string = ""
+for line in json_stop_words:
+	json_string = json_string+line
+
+datastore = json.loads(json_string)
+
+analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
 #--- definizione dello schema ---#
 schema = Schema(docid      		= ID(stored=True),
-				title      		= TEXT(analyzer=stem_ana,stored=True),
+				title      		= TEXT(analyzer=analyzer,stored=True),
 				identifier	   	= ID(stored=True),
 				terms 			= NGRAM(stored=True),
-				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(analyzer=stem_ana,stored=True),
+				authors      		= NGRAM(stored=True),
+				abstract 		= TEXT(analyzer=analyzer,stored=True),
 				publication		= TEXT(stored=True),
 				source 			= TEXT(stored=True))
-
 
 un_campo = "title"                            				#
 due_campi = ["title", "abstract"]             				#
 tre_campi = ["title", "abstract", "terms"]
 runtag = ""                             				#
                                                             #
-MAXDOCS = 10                                  				# max num doc reperiti
+MAXDOCS = 100                                  				# max num doc reperiti
 MAXLSATERMS = 100                             				# max num righe matrice LSA
 MAXRFTERMS = 100                              				# max num termini retroazione
 
 if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
     print sys.argv[1],"does not exist"        				# esci se non esiste
 else:                                         				# altrimenti procedi
-    st = FileStorage(sys.argv[1])             				# afferra la maniglia e
-    ix = st.open_index()                      				# apri il file corrispondente
+    fst = FileStorage(sys.argv[1])             				# afferra la maniglia e
+    ix = fst.open_index()                      				# apri il file corrispondente
     #--- apertura del file delle query ---#
     infile = open(sys.argv[2],'r')
     #--- lettura del file
@@ -94,8 +101,10 @@ else:                                         				# altrimenti procedi
     #--- estrazione dei dati della query
     title = gettagdata(dom,'title')
     num   = gettagdata(dom,'num')
-    if sys.argv[4]=='e':                         # se il quarto argomento e' e, per leggere il file di rilevanza
-        relfile = open("qrels-treceval.txt",'r') # apro il file di rilevanza dei documenti per query
+    #title = [re.sub(r"\d+ ","",x.replace(",","").replace(".","").replace("and ","").replace("with ","").replace("of ","").replace("on ","").replace("y ","").replace("o ","").replace(" yo","").replace("the ","").replace("/"," ").replace("a ","").replace("without ","").replace("is ","").replace("in ","").replace("to ","").replace("for ","")) for x in title]
+    
+    if len(sys.argv) == 5 and sys.argv[4]=='e':                         # se il quarto argomento e' e, per leggere il file di rilevanza
+        relfile = open("qrels.ohsu.batch.87.txt",'r') # apro il file di rilevanza dei documenti per query
         #questa parte e' un po' campata per aria usando un dizionario, sono ben accetti suggerimenti per migliorarla
         reldocs = {}
         for r in relfile.readlines():
@@ -106,7 +115,7 @@ else:                                         				# altrimenti procedi
                 reldocs[a[0]] = set(a[1])        # aggiungo numero query come chiave nel dizionario ed il relativo documento
         relfile.close()
     #--- scansione delle query e reperimento
-    for qid in num:
+    for qid in num[:]:
         title[int(qid)-1].encode('utf-8')                                   # prepara il testo della query
         if sys.argv[3]=='1':                                                # se il secondo argomento e' 1
             query = qp(un_campo,                                            # cerca l'indice usando un solo campo
@@ -121,23 +130,20 @@ else:                                         				# altrimenti procedi
                        schema,                                              # usando lo schema dato e
                        group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
         #NOTA:stiamo usando TF_IDF
-        results = ix.searcher(weighting=scoring.TF_IDF()).search(query,limit=MAXDOCS)
+        results = ix.searcher(weighting=scoring.BM25F()).search(query,limit=MAXDOCS)
         if len(sys.argv) < 5:                                               # caso base
-            runtag+="BASETFIDF"
+            runtag ="BASEBM25"
             #--- res(results,query,MAXDOCS,runtag)                          #
             res(results,qid,MAXDOCS,runtag)						            #
         #--- query expansion                                                #
-        elif sys.argv[4]=='m':
-            runtag+="FEEDBK"                                           # se il quarto arg e' m
+        elif sys.argv[4]=='m':                                              # se il quarto arg e' m
             hit = randint(0,min([10,len(results)])-1)                       # cerca i documeni simili
             more_results = results[hit].more_like_this("title")             #
             res(more_results,qid,MAXDOCS,runtag)                            # stampa i nuovi risultati
             results = more_results
         elif sys.argv[4]=='e':                                              # se il quarto arg e' e
-            runtag+="FEEDBK"
-            runtag+="EXP"
             #creo un insieme contenente gli identificatori dei documenti trovati piu' rilevanti
-            resdocs = set([results[h]['identifier'] for h in range(min([10,len(results)]))])
+            resdocs = set([results[h]['identifier'] for h in range(min([100,len(results)]))])
             with ix.searcher() as s:# prepara un alias
                 if qid in reldocs:
                     reldocids = resdocs & reldocs[qid] # insieme intersezione dei documenti rilevanti e di quelli trovati
@@ -151,39 +157,41 @@ else:                                         				# altrimenti procedi
                 for term,score in expansion_terms:#query costruita usando i termini trovati da key_term()
                     expanded_query_text = term + ' ' + expanded_query_text
                 if sys.argv[3]=='1':
-                    runtag+="1C"
+                    runtag ="FDBKEXP1C"
                     expanded_query = qp(un_campo,schema,group = qparser.OrGroup).parse(expanded_query_text)
                 elif sys.argv[3]=='2':
-                    runtag+="2C"
+                    runtag ="FDBKEXP2C"
                     expanded_query = mp(due_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
                 else:
-                    runtag+="3C"
+                    runtag ="FDBKEXP3C"
                     expanded_query = mp(tre_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
-                more_results = ix.searcher(weighting=scoring.TF_IDF()).search(expanded_query,limit=MAXDOCS)
+                more_results = ix.searcher(weighting=scoring.BM25F()).search(expanded_query,limit=MAXDOCS)
                 res(more_results,qid,MAXDOCS,runtag)
                 results = more_results
 
         # ANCORA DA PROVARE QUESTA PARTE
         elif sys.argv[4]=='i':                                              # se il quarto arg e' i
             with ix.searcher() as s:                                        # prepara un alias
-                reldocids = [int(s.document_number(identifier=results[i]['identifier'])) for i in xrange(min([3,len(results)]))] # e una lista di documenti rilevanti
+                reldocids = [int(s.document_number(identifier=results[i]['identifier'])) for i in xrange(min([5,len(results)]))] # e una lista di documenti rilevanti
                 expansion_terms = s.key_terms(reldocids,"title",MAXRFTERMS)
                 #usa TFIDF per trovare termini utili(TFIDF medio alto) nei documenti detti rilevanti
             expanded_query_text = ""
             for term,score in expansion_terms:#query costruita usando i termini trovati da key_term()
                 expanded_query_text = term + ' ' + expanded_query_text
             if sys.argv[3]=='1':
-                runtag="FEEDBK_IMP_1C"
+                runtag="FDBKIMP1C"
                 expanded_query = qp(un_campo,schema,group = qparser.OrGroup).parse(expanded_query_text)
             elif sys.argv[3]=='2':
-                runtag="FEEDBK_IMP_2C"
+                runtag="FDBKIMP2C"
                 expanded_query = mp(due_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
             else:
-                runtag="FEEDBK_IMP_3C"
+                runtag="FDBKIMP3C"
                 expanded_query = mp(tre_campi,schema,group = qparser.OrGroup).parse(expanded_query_text)
-            more_results = ix.searcher(weighting=scoring.TF_IDF()).search(expanded_query,limit=MAXDOCS)
+            #print title[int(qid)-1]
+            #print expanded_query    
+            more_results = ix.searcher(weighting=scoring.BM25F()).search(expanded_query,limit=MAXDOCS)
             res(more_results,qid,MAXDOCS,runtag)
-            results = more_results
+            #results = more_results
     infile.close()
     ix.searcher().close()
 

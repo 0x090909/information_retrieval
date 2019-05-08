@@ -1,7 +1,7 @@
 #RUN DI BASE
 
 #--- importazione di interi moduli ---#
-import string as str
+import string as st
 import sys
 import getopt
 import os.path
@@ -24,7 +24,7 @@ def gettagdata(dom,tag):
         return None
     tagdata = []
     for node in nodes:
-        tagdata.append(str.rstrip(str.lstrip(node.firstChild.data)))
+        tagdata.append(st.rstrip(st.lstrip(node.firstChild.data)))
     return tagdata
 
 #--- stampa i risultati in forma trec_eval
@@ -78,8 +78,8 @@ runtag = "BASELINE"
 if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
     print sys.argv[1],"does not exist"        				# esci se non esiste
 else:                                         				# altrimenti procedi
-    st = FileStorage(sys.argv[1])             				# afferra la maniglia e
-    ix = st.open_index()                      				# apri il file corrispondente
+    fst = FileStorage(sys.argv[1])             				# afferra la maniglia e
+    ix = fst.open_index()                      				# apri il file corrispondente
     #--- apertura del file delle query ---#
     infile = open(sys.argv[2],'r')
     #--- lettura del file

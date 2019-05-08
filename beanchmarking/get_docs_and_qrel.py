@@ -10,7 +10,7 @@
 #con numero di volte in titolo;abstract;tremini
 
 #--- importazione di interi moduli
-import string as S
+import string as st
 import sys
 import getopt
 import os.path
@@ -33,9 +33,33 @@ def gettagdata(dom,tag):
         return None
     tagdata = []
     for node in nodes:
-        tagdata.append(S.rstrip(S.lstrip(node.firstChild.data)))   
+        tagdata.append(st.rstrip(st.lstrip(node.firstChild.data)))   
     return tagdata
+
+
+import json
+from whoosh.analysis import StandardAnalyzer, RegexAnalyzer, StopFilter, RegexTokenizer
+
+json_stop_words = open("../indicizzazione/stopWords.json","r")
+json_string = ""
+for line in json_stop_words:
+	json_string = json_string+line
+
+datastore = json.loads(json_string)
+
+analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
+#--- definizione dello schema ---#
+
+schema = Schema(docid           = ID(stored=True),
+                title           = TEXT(analyzer=analyzer,stored=True),
+                identifier      = ID(stored=True),
+                terms           = NGRAM(stored=True),
+                authors         = NGRAM(stored=True),
+                abstract        = TEXT(analyzer=analyzer,stored=True),
+                publication     = TEXT(stored=True),
+                source          = TEXT(stored=True))
   
+'''
 schema = Schema(docid      	    = ID(stored=True),
                 title      	    = TEXT(stored=True),
                 identifier      = ID(stored=True),
@@ -44,15 +68,16 @@ schema = Schema(docid      	    = ID(stored=True),
                 abstract        = TEXT(stored=True),
                 publication	    = TEXT(stored=True),
                 source          = TEXT(stored=True))
+'''
 
 campo = "identifier"
 fields = ["title", "abstract", "terms"]
 
-if not os.path.exists(sys.argv[1]):           				# controlla se l'indice non c'e'
-    print sys.argv[1],"does not exist"        				# esci se non esiste
-else:                                         				# altrimenti procedi
-    st = FileStorage(sys.argv[1])             				# afferra la maniglia e
-    ix = st.open_index()                      				# apri il file corrispondente
+if not os.path.exists(sys.argv[1]):                     # controlla se l'indice non c'e'
+    print sys.argv[1],"does not exist"                  # esci se non esiste
+else:                                                   # altrimenti procedi
+    fst = FileStorage(sys.argv[1])                      # afferra la maniglia e
+    ix = fst.open_index()                               # apri il file corrispondente
     #--- apertura del file delle query ---#
     infile = open(sys.argv[2],'r')
     #--- lettura del file
@@ -63,7 +88,8 @@ else:                                         				# altrimenti procedi
     title = gettagdata(dom,'title')
     num   = gettagdata(dom,'num')
     #tolte un po' di parole "inutili"
-    title = [re.sub(r"\d+ ","",x.replace(",","").replace(".","").replace("and ","").replace("with ","").replace("of ","").replace("on","").replace("y","").replace("o","").replace("yo","").replace("the","")) for x in title]
+    #title = [re.sub(r"\d+ ","",x.replace(" and "," ").replace(" with "," ").replace(" of "," ").replace(" on "," ").replace(" y "," ").replace(" o "," ").replace(" yo "," ").replace(" the "," ").replace(" a "," ").replace(" is "," ").replace(" in "," ").replace(" to "," ").replace(" for "," ")) for x in title]
+    title=[x.replace(",","").replace("/"," ").replace(".","").replace("-"," ").lower() for x in title]
     relfile = open(sys.argv[3],'r') # apro il file di rilevanza dei documenti per query
     reldocs = {}
     maxres = 1
@@ -106,8 +132,8 @@ else:                                         				# altrimenti procedi
                         for l in fields:                                            # per ogni campo ("title", "abstract" e "terms")
                             c1 = 0
                             try:
-                                for k in j[l].split(" "):                           # per ogni parola del campo
-                                    if k==h:                                        # controllo se la parola e' uguale al termine corrente
+                                for k in j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").lower().split(" "):                           # per ogni parola del campo
+                                    if k==h :                                        # controllo se la parola e' uguale al termine corrente
                                         c1 += 1                                      # se si' aggiungo 1 al conteggio
                                         c2 += 1
                                 row[-1] += str(c1).rjust(3," ")                      # riga del tipo ***;***;*** ***;***;*** ...
@@ -138,7 +164,7 @@ else:                                         				# altrimenti procedi
                     c = 0
                     for j in results:                                       # per ogni documento
                         try:
-                            for k in j[l].split(" "):                           # per ogni parola del campo
+                            for k in j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").lower().split(" "):                           # per ogni parola del campo
                                 if k==h:                                        # controllo se la parola e' uguale al termine corrente
                                     c += 1                                      # se si' aggiungo 1 al conteggio
                                     tot += 1         
@@ -156,5 +182,4 @@ else:                                         				# altrimenti procedi
     ix.searcher().close()
 
 
-#uso: python qrel_....py cartella_indice file_query file_qrels modalita'(iq, tnn) 
-
+#uso: python get_....py cartella_indice file_query file_qrels modalita'(iq, tnn) 

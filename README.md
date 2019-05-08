@@ -71,44 +71,30 @@ python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_D
 Output treceval
 ===============
 
-### Output treceval, 2 campi, BM25 default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 10:
-```
-	num_q          	all	63
-	num_ret        	all	630
-	num_rel        	all	2823
-	num_rel_ret    	all	1
-	map            	all	0.0000
-	gm_ap          	all	0.0000
-	R-prec         	all	0.0003
-	bpref          	all	0.0003
-	recip_rank     	all	0.0018
-	ircl_prn.0.00  	all	0.0018
-	ircl_prn.0.10  	all	0.0000
-	ircl_prn.0.20  	all	0.0000
-	ircl_prn.0.30  	all	0.0000
-	ircl_prn.0.40  	all	0.0000
-	ircl_prn.0.50  	all	0.0000
-	ircl_prn.0.60  	all	0.0000
-	ircl_prn.0.70  	all	0.0000
-	ircl_prn.0.80  	all	0.0000
-	ircl_prn.0.90  	all	0.0000
-	ircl_prn.1.00  	all	0.0000
-	P5             	all	0.0000
-	P10            	all	0.0016
-	P15            	all	0.0011
-	P20            	all	0.0008
-	P30            	all	0.0005
-	P100           	all	0.0002
-	P200           	all	0.0001
-	P500           	all	0.0000
-	P1000          	all	0.0000
-```
-#### Considerazioni:
-La precisione media dei risultati del reperimento è zero quindi non è utilizzabile come baseline, in quanto poco utile.
+##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    307    | num_rel_ret        all    387    | num_rel_ret        all    383    |
+| map                all    0.1073 | map                all    0.1289 | map                all    0.1227 |
 
 
-### Output treceval BASELINE_UN_CAMPO.TRECEVAL
-### Output treceval, 1 campo, TFIDF:
-### Output treceval, 2 campi, TFIDF:
-### Output treceval, 3 campi, TFIDF:
-### Output treceval, 2 campi, BM25 default:
+##### TF_IDF, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
+
+|              1 Campo             |              2 Campi             |              3 Campi             |
+|----------------------------------|----------------------------------|----------------------------------|
+| num_q              all    63     | num_q              all    63     | num_q              all    63     |
+| num_ret            all    37454  | num_ret            all    57356  | num_ret            all    58456  |
+| num_rel            all    670    | num_rel            all    670    | num_rel            all    670    |
+| num_rel_ret        all    305    | num_rel_ret        all    380    | num_rel_ret        all    382    |
+| map                all    0.0833 | map                all    0.0591 | map                all    0.0829 |
+
+##### Considerazioni:
+Il numero di documenti reperiti per tipo di schema di pesatura non differisce significativamente a seconda del numero di campi considerato, tuttavia quello che cambia evidentemente e' la precisione media che e' migliore con la combinazione BM25F a 2 campi
+
+Alla luce dei dati osservati consideriamo come parametri BASELINE: 
+* Documenti rilevanti reperiti: **387**
+* Mean Average Precision: **0.1289**
