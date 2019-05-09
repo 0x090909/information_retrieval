@@ -71,6 +71,8 @@ python ricerca_batch.py ../ohsumed_index_dir/ query.ohsu.1-63.xml 2 > BASELINE_D
 Output treceval Baseline
 ========================
 
+###### Nota: Si intende 1 campo: [Titolo], 2 campi : [Titolo, Abstract], 3 campi : [Titolo, Abstract, Terms]
+
 ##### BM25F default, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000:
 
 |              1 Campo             |              2 Campi             |              3 Campi             |
