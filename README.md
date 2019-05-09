@@ -146,4 +146,7 @@ Miglioramenti dalla Baseline: stopWords
 | map                all    0.1961 | map                all    0.2587 | map                all    0.1569 |
 
 ##### Considerazioni:
-La rimozione delle stop word cliniche, con numero di risultati restituiti per ogni query = 1000, da' i migliori risultati per i campi map e numero di documenti rilevanti reperiti.
+La rimozione delle stop word cliniche, con numero di risultati restituiti per ogni query = 1000, da' i migliori risultati per i campi map e numero di documenti rilevanti reperiti con i seguenti numeri:
+
+* Documenti rilevanti reperiti: 570
+* Mean Average Precision: 0.2752
