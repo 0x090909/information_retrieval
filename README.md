@@ -155,3 +155,9 @@ RoadMap:
 ========
 
 Trovare la combinazione migliore di ottimizzazione scegliendo tra utilizzo di stopwords o meno e a questo combinato la personalizzazione dei parametri dello schema di reperimento BM25F.
+
+In pratica dobbiamo eseguire 2 * (numero di coppie di parametri per il BM25F) esperimenti affinche' possiamo trovare la combinazione migliore che massimizza il map.
+
+* Algoritmi di ottimizzazione:
+	** Line search
+	** Grid search
