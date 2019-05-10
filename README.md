@@ -150,3 +150,8 @@ La rimozione delle stop word cliniche, con numero di risultati restituiti per og
 
 * Documenti rilevanti reperiti: 570
 * Mean Average Precision: 0.2752
+
+RoadMap: 
+========
+
+Trovare la combinazione migliore di ottimizzazione scegliendo tra utilizzo di stopwords o meno e a questo combinato la personalizzazione dei parametri dello schema di reperimento BM25F.
