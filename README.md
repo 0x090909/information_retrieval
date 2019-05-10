@@ -158,6 +158,6 @@ Trovare la combinazione migliore di ottimizzazione scegliendo tra utilizzo di st
 
 In pratica dobbiamo eseguire 2 * (numero di coppie di parametri per il BM25F) esperimenti affinche' possiamo trovare la combinazione migliore che massimizza il map.
 
-* Algoritmi di ottimizzazione:
-	** Line search
-	** Grid search
+### Algoritmi di ottimizzazione da poter utilizzare:
+* Line search
+* Grid search
