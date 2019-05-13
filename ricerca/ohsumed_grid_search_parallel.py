@@ -43,6 +43,14 @@ tags = ['I',
 		'P',
 		'W',
 		'A']
+#prendi stop words dal file
+json_stop_words = open("../indicizzazione/stopWords_clinico.json","r")
+#json_stop_words = open("../indicizzazione/stopWords_generali.txt","r")
+json_string = ""
+for line in json_stop_words:
+	json_string = json_string+line
+
+datastore = json.loads(json_string)
 
 analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
 #--- definizione dello schema ---#
