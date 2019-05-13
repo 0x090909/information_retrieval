@@ -86,8 +86,8 @@ def cerca_max(b_min, b_max, proc):
     num   = gettagdata(dom,'num')
     b = b_min+0.01
     while b_min < b <= b_max:
-        k1 = 1.0
-        while k1 <= 2.0:
+        k1 = 0.0
+        while k1 <= 10.0:
             outfile = open(str(proc)+"/ohsumed-b"+str(b)+"-k"+str(k1)+".txt","w")
             #--- scansione delle query e reperimento
             for id in num:
@@ -108,7 +108,7 @@ def cerca_max(b_min, b_max, proc):
                 print b,k1
                 results = ix.searcher(weighting=scoring.BM25F(B=b,K1=k1)).search(query,limit=1000)
                 res(results,id,1000,"cacm-b"+str(b)+"-k"+str(k1),outfile)
-            k1 += 0.1
+            k1 += 0.5
         b += 0.05
     ix.searcher().close()
     print("Worker "+ str(proc) + " done")
@@ -119,7 +119,7 @@ if __name__ == "__main__":
 	    #--- esci se non esiste
 	    print sys.argv[1],"does not exist"
 	else:
-	    processes = [mp.Process(target=cerca_max, args=(0.7,0.75,1)), mp.Process(target=cerca_max, args=(0.75,0.8,2))]
+	    processes = [mp.Process(target=cerca_max, args=(0.0,0.25,1)), mp.Process(target=cerca_max, args=(0.25,0.5,2)), mp.Process(target=cerca_max, args=(0.5,0.75,3)), mp.Process(target=cerca_max, args=(0.75,1,4))]
 	# Run processes
 	for p in processes:
 	    p.start()
