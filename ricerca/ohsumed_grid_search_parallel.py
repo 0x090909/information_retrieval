@@ -12,6 +12,7 @@ from whoosh.fields import *
 from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import QueryParser
 from whoosh.qparser import MultifieldParser
+from whoosh.analysis import StandardAnalyzer, RegexAnalyzer, StopFilter, RegexTokenizer
 
 #--- estrazione dei dati di un tag ---#
 def gettagdata(dom,tag):
