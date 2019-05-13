@@ -32,7 +32,7 @@ def res(results, query, n, tag, outf):
     if len(results) < n:
         n = len(results)
     for rank in xrange(0,n):
-        s = query + " " + "Q0" + " " + str(results[rank].docnum) + " " + str(rank) + " " + str(results[rank].score) + " " + tag + "\n"
+        s = query + " " + "Q0" + " " + str(results[rank]['identifier']) + " " + str(rank) + " " + str(results[rank].score) + " " + tag + "\n"
         outf.write(s)
         rank += 1
 
@@ -57,11 +57,11 @@ datastore = json.loads(json_string)
 analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
 #--- definizione dello schema ---#
 schema = Schema(docid      		= ID(stored=True),
-				title      		= TEXT(stored=True),
+				title      		= TEXT(analyzer=analyzer,stored=True),
 				identifier	   	= ID(stored=True),
 				terms 			= NGRAM(stored=True),
 				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(stored=True),
+				abstract 		= TEXT(analyzer=analyzer,stored=True),
 				publication		= TEXT(stored=True),
 				source 			= TEXT(stored=True))
 #--- campi di ricerca
@@ -86,8 +86,8 @@ def cerca_max(b_min, b_max, proc):
     num   = gettagdata(dom,'num')
     b = b_min+0.01
     while b_min < b <= b_max:
-        k1 = 0.0
-        while k1 <= 10.0:
+        k1 = 1.0
+        while k1 <= 2.0:
             outfile = open(str(proc)+"/ohsumed-b"+str(b)+"-k"+str(k1)+".txt","w")
             #--- scansione delle query e reperimento
             for id in num:
@@ -105,9 +105,10 @@ def cerca_max(b_min, b_max, proc):
                     query = multiparser(tre_campi,                                           # cerca l'indice usando tre campi
                                 schema,                                              # usando lo schema dato e
                                 group = qparser.OrGroup).parse(title[int(id)-1])    # l'operatore OR
+                print b,k1
                 results = ix.searcher(weighting=scoring.BM25F(B=b,K1=k1)).search(query,limit=1000)
-                res(results,id,1000,str(proc)+"/cacm-b"+str(b)+"-k"+str(k1),outfile)
-            k1 += 0.5
+                res(results,id,1000,"cacm-b"+str(b)+"-k"+str(k1),outfile)
+            k1 += 0.1
         b += 0.05
     ix.searcher().close()
     print("Worker "+ str(proc) + " done")
@@ -118,8 +119,7 @@ if __name__ == "__main__":
 	    #--- esci se non esiste
 	    print sys.argv[1],"does not exist"
 	else:
-	    processes = [mp.Process(target=cerca_max, args=(0,0.25,1)), mp.Process(target=cerca_max, args=(0.25,0.50,2)), mp.Process(target=cerca_max, args=(0.50,0.75,3)), mp.Process(target=cerca_max, args=(0.75,1,4))]
-	# Run processes
+	    processes = [mp.Process(target=cerca_max, args=(0.7,0.75,1)), mp.Process(target=cerca_max, args=(0.75,0.8,2))]
 	# Run processes
 	for p in processes:
 	    p.start()

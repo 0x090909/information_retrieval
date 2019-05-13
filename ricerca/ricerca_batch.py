@@ -60,14 +60,13 @@ datastore = json.loads(json_string)
 analyzer = StandardAnalyzer(stoplist=frozenset(datastore))
 #--- definizione dello schema ---#
 schema = Schema(docid      		= ID(stored=True),
-				title      		= TEXT(stored=True),
+				title      		= TEXT(analyzer=analyzer,stored=True),
 				identifier	   	= ID(stored=True),
 				terms 			= NGRAM(stored=True),
 				authors      	= NGRAM(stored=True),
-				abstract 		= TEXT(stored=True),
+				abstract 		= TEXT(analyzer=analyzer,stored=True),
 				publication		= TEXT(stored=True),
 				source 			= TEXT(stored=True))
-
 # search fields
 un_campo = 'title'
 due_campi = ["title", "abstract"]
