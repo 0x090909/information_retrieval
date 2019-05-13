@@ -4,6 +4,7 @@ import sys
 import getopt
 import os.path
 import multiprocessing as mp
+import json
 
 #--- importazione di parti di modulo ---#
 from xml.dom.minidom import parse, parseString
