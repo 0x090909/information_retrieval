@@ -11,8 +11,9 @@ from xml.dom.minidom import parse, parseString
 from whoosh import scoring,qparser
 from whoosh.fields import *
 from whoosh.filedb.filestore import FileStorage
-from whoosh.qparser import QueryParser
-from whoosh.qparser import MultifieldParser
+from whoosh.qparser import QueryParser as qp
+from whoosh.qparser import MultifieldParser as multiparser
+from whoosh.formats import Frequency
 from whoosh.analysis import StandardAnalyzer, RegexAnalyzer, StopFilter, RegexTokenizer
 
 #--- estrazione dei dati di un tag ---#
@@ -95,15 +96,15 @@ def cerca_max(b_min, b_max, proc):
                 if sys.argv[3]=='1':                                                # se il secondo argomento e' 1
                     query = qp( un_campo,                                            # cerca l'indice usando un solo campo
                                 schema,                                              # usando lo schema dato
-                                group = qparser.OrGroup).parse(title[int(qid)-1])    # e l'operatore OR
+                                group = qparser.OrGroup).parse(title[int(id)-1])    # e l'operatore OR
                 elif sys.argv[3]=='2':                                              # altrimenti
-                    query = mp(due_campi,                                           # cerca l'indice usando due campi
+                    query = multiparser(due_campi,                                           # cerca l'indice usando due campi
                                 schema,                                              # usando lo schema dato e
-                                group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+                                group = qparser.OrGroup).parse(title[int(id)-1])    # l'operatore OR
                 elif sys.argv[3]=='3':                                              # altrimenti
-                    query = mp(tre_campi,                                           # cerca l'indice usando tre campi
+                    query = multiparser(tre_campi,                                           # cerca l'indice usando tre campi
                                 schema,                                              # usando lo schema dato e
-                                group = qparser.OrGroup).parse(title[int(qid)-1])    # l'operatore OR
+                                group = qparser.OrGroup).parse(title[int(id)-1])    # l'operatore OR
                 results = ix.searcher(weighting=scoring.BM25F(B=b,K1=k1)).search(query,limit=1000)
                 res(results,id,1000,str(proc)+"/cacm-b"+str(b)+"-k"+str(k1),outfile)
             k1 += 0.5

@@ -151,13 +151,19 @@ La rimozione delle stop word cliniche, con numero di risultati restituiti per og
 * Documenti rilevanti reperiti: 570
 * Mean Average Precision: 0.2752
 
-RoadMap: 
+Dunque, i successivi esperimenti saranno portati avanti con due indici in parallelo: uno completo, l'altro senza stop words cliniche.
+
+RoadMap:
 ========
 
-Trovare la combinazione migliore di ottimizzazione scegliendo tra utilizzo di stopwords o meno e a questo combinato la personalizzazione dei parametri dello schema di reperimento BM25F.
+Trovare la combinazione migliore di ottimizzazione scegliendo tra utilizzo di stopwords (cliniche) o meno e a questo combinato la personalizzazione dei parametri dello schema di reperimento BM25F.
 
 In pratica dobbiamo eseguire 2 * (numero di coppie di parametri per il BM25F) esperimenti affinche' possiamo trovare la combinazione migliore che massimizza il map.
 
 ### Algoritmi di ottimizzazione da poter utilizzare:
 * Line search
 * Grid search
+
+#### Grid search
+Tentativo con b in [0.0;1] e k in [0.0;10], con passo rispettivamente uguale a 0.05 e 0.5.
+Utilizzando 4 processori riusciamo a velocizzare il procedimento.
