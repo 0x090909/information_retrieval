@@ -41,7 +41,7 @@ Questo progetto tratta la realizzazione attraverso il pacchetto \emph{Whoosh}, d
 volto al reperimento di documenti della collezione sperimentale \emph{OHSUMED} indicizzata opportunamente.
 Il progetto è anche corredato di un webserver che permette all'utente di interrogare il motore di ricerca
 in forma interattiva attraverso un browser a scelta.
- \keywords{{\it
+ \keywords{{\It
       Information Retrieval  \and IR \and statistica \and reperimento \and indicizzazione \and Whoosh \and Python \and webserver \and web \and interrogazione web}}
 \end{abstract}
 
@@ -50,10 +50,15 @@ in forma interattiva attraverso un browser a scelta.
 
 Lo scopo è di costruire un motore di ricerca che sia in grado di reperire i documenti rilevanti relativi a una esigenza informativa\footnote{insieme delle circostanze in cui unapersona ha un problema da risolvere o un compito da svolgeree richiede informazioni importanti, utili o necessarie per larisoluzione del problema o lo svolgimento del compito}
 espressa dall'utente sotto forma di query, dalla collezione sperimentale Ohsumed.
+La differenza tra un sistema di Informational Retrival e un DBMS (Databse Management System), e' che in questo caso i dati non sono strutturati, cioe' non possono essere vincolati a uno schema predefinto, e nonostante cio' il sistema deve riuscire a destreggiarsi tra le migliaia di pagine.
 
 
 Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato la configurazione migliore tra un sistema di
-reperimento con o senza uso di stopwords e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F \cite{WBC}.
+reperimento con o senza uso di stopwords e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F.
+Abbiamo calibrato le nostre scelte e tratto le conlcusioni finali facendo delle prove di reperimento di documenti con diverse combinazioni tra schemi di pesatura e liste di stop word, andando a confrontare due parametri fondamentali: il map, cioe' il 'mean average precision', un indicatore della precisione media del documento in corrispondenza di una determinata interrogazione, e il numero di documenti rilevanti reperiti.
+Nei prossimi paragrafi si descriveranno nello specifico i metodi utlizzati per quanto riguarda l'indicizzazione\footnotne{In generale l'indicizzazione e' la rappresentazione di una struttra logica che combina dati di tipo diverso; nel nostro caso si e' affrontata unicamente la codfica di dati di tipo testo} e il reperimento di documenti, accompagnati dai risultati che abbiamo ottenuto negli esperimenti, principalmente sotto forma di tabelle.
+
+\cite{WBC}.
 
 
 
