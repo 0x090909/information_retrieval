@@ -106,8 +106,8 @@ def cerca_max(b_min, b_max, proc):
                                 schema,                                              # usando lo schema dato e
                                 group = qparser.OrGroup).parse(title[int(id)-1])    # l'operatore OR
                 print b,k1
-                results = ix.searcher(weighting=scoring.BM25F(B=b,K1=k1)).search(query,limit=1000)
-                res(results,id,1000,"cacm-b"+str(b)+"-k"+str(k1),outfile)
+                results = ix.searcher(weighting=scoring.BM25F(B=b,K1=k1)).search(query,limit=500)
+                res(results,id,500,"cacm-b"+str(b)+"-k"+str(k1),outfile)
             k1 += 0.1
         b += 0.05
     ix.searcher().close()
