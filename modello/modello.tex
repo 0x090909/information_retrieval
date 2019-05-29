@@ -5,6 +5,8 @@
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage{listings}
+\usepackage{threeparttable}
 % Used for displaying a sample figure. If possible, figure files
 % should be included in EPS format.  If you use the hyperref package,
 % please uncomment the following line to display URLs in blue roman
@@ -12,7 +14,7 @@
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
 \begin{document}
 %
-\title{Organizzazione e contenuti della relazione di mini-progetto per il gruppo ACC}
+\title{Da mettere alla fine degli esperimenti}
 %
 % \titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
@@ -23,7 +25,7 @@
   Caterina Buranelli\inst{2} \and
   Cristi Gutu\inst{3}}
 %
-\authorrunning{P. Autore et al.}
+\authorrunning{Alessandro Stefani, Caterina Buranelli, Cristi Gutu}
 % First names are abbreviated in the running head.  If there are more
 % than two authors, 'et al.' is used.
 %
@@ -37,35 +39,23 @@
 % typeset the header of the contribution
 %
 \begin{abstract}
+DA FINIRE QUANDO ABBIAMO MESSO A POSTO LA SEZIONE ESPERIMENTI.
 Questo progetto tratta la realizzazione attraverso il pacchetto \emph{Whoosh}, di un motore di ricerca
 volto al reperimento di documenti della collezione sperimentale \emph{OHSUMED} indicizzata opportunamente.
-Il progetto e' anche corredato di un webserver che permette all'utente di interrogare il motore di ricerca
+Il progetto è anche corredato di un webserver che permette all'utente di interrogare il motore di ricerca
 in forma interattiva attraverso un browser a scelta.
  \keywords{{\it
-=======
- \keywords{{\It
       Information Retrieval  \and IR \and statistica \and reperimento \and indicizzazione \and Whoosh \and Python \and webserver \and web \and interrogazione web}}
 \end{abstract}
 
 \section{Introduzione}
 \label{sec:introduzione}
+
 Lo scopo finale di un Sistema di Information Retrieval (IRS) e' quello di reperire documenti rilevanti relativi a una certa esigenza informativa\footnote{insieme delle circostanze in cui unapersona ha un problema da risolvere o un compito da svolgeree richiede informazioni importanti, utili o necessarie per larisoluzione del problema o lo svolgimento del compito}; dunque i documenti sono il primo ingresso del sistema, mentre il secondo e' costitutito dalle interrogazioni; i documenti devono essere indicizzati e nell'indice creato, si andra' a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza e' la proprieta' che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte e' detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Cio' che descrive i documenti e cio' che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale in entrtambi i casi.
-L'indicizzazione e' un trade-off tra il  miglioramento della rapprerentazione del contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza). Benche' ci sia sempre tensione tra queste due caratteristiche, ad oggi la questione piu' studiata e' quella dell'efficienza,
-
-Lo scopo è di costruire un motore di ricerca che sia in grado di reperire i documenti rilevanti relativi a una esigenza informativa\footnote{insieme delle circostanze in cui unapersona ha un problema da risolvere o un compito da svolgeree richiede informazioni importanti, utili o necessarie per larisoluzione del problema o lo svolgimento del compito}
-espressa dall'utente sotto forma di query, dalla collezione sperimentale Ohsumed.
-La differenza tra un sistema di Informational Retrival e un DBMS (Databse Management System), e' che in questo caso i dati non sono strutturati, cioe' non possono essere vincolati a uno schema predefinto, e nonostante cio' il sistema deve riuscire a destreggiarsi tra le migliaia di pagine.
-
+L'indicizzazione e' un trade-off tra il  miglioramento della rapprerentazione del contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza). Benche' ci sia sempre tensione tra queste due caratteristiche, ad oggi la questione piu' studiata e' quella dell'efficienza.
 
 Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato la configurazione migliore tra un sistema di
-reperimento con o senza uso di stopwords e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F.
-Abbiamo calibrato le nostre scelte e tratto le conlcusioni finali facendo delle prove di reperimento di documenti con diverse combinazioni tra schemi di pesatura e liste di stop word, andando a confrontare due parametri fondamentali: il map, cioe' il 'mean average precision', un indicatore della precisione media del documento in corrispondenza di una determinata interrogazione, e il numero di documenti rilevanti reperiti.
-Nei prossimi paragrafi si descriveranno nello specifico i metodi utlizzati per quanto riguarda l'indicizzazione\footnotne{In generale l'indicizzazione e' la rappresentazione di una struttra logica che combina dati di tipo diverso; nel nostro caso si e' affrontata unicamente la codfica di dati di tipo testo} e il reperimento di documenti, accompagnati dai risultati che abbiamo ottenuto negli esperimenti, principalmente sotto forma di tabelle.
-Questo progetto tratta la realizzazione attraverso il pacchetto \emph{Whoosh}, di un motore di ricerca
-volto al reperimento di documenti della collezione sperimentale \emph{OHSUMED} indicizzata opportunamente.
-Il progetto è anche corredato di un webserver che permette all'utente di interrogare il motore di ricerca
-in forma interattiva attraverso un browser a scelta.
-\cite{WBC}.
+reperimento con o senza uso di stopwords e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F \cite{WBC}.
 
 
 
@@ -108,58 +98,159 @@ usati negli esperimenti e si eviti di parlare di quei metodi che poi
 non sono stati usati; ad esempio, se si conducono degli esperimenti
 con BM25F, si deve descrivere questo schema di pesatura in questa
 sezione.
-
-\section{Metodi proposti}
-\label{sec:metodi-utilizzati}
-
-Nel caso in cui si siano sviluppati:
-\begin{itemize}
-\item modelli di reperimento,
-\item metodi di indicizzazione,
-\item schemi di pesatura o
-\item altri metodi o tecniche
-\end{itemize}
-propri, non documentati in libri di testo o altra letteratura, si
-scriva in questa sezione una descrizione accurata e completa.  Si
-mettano in evidenza le caratteristiche distintive dei propri
-contributi.  Se non si \`e proposto nulla di nuovo, si scriva
-\emph{Nessuno}.  In una delle ultime lezioni si vedr\`a come
-implementare delle proprie funzioni di reperimento e schemi di
-pesatura.
+%
+%\section{Metodi proposti}
+%\label{sec:metodi-utilizzati}
+%
+%Nel caso in cui si siano sviluppati:
+%\begin{itemize}
+%\item modelli di reperimento,
+%\item metodi di indicizzazione,
+%\item schemi di pesatura o
+%\item altri metodi o tecniche
+%\end{itemize}
+%propri, non documentati in libri di testo o altra letteratura, si
+%scriva in questa sezione una descrizione accurata e completa.  Si
+%mettano in evidenza le caratteristiche distintive dei propri
+%contributi.  Se non si \`e proposto nulla di nuovo, si scriva
+%\emph{Nessuno}.  In una delle ultime lezioni si vedr\`a come
+%implementare delle proprie funzioni di reperimento e schemi di
+%pesatura.
 
 \section{Esperimenti}
 \label{sec:esperimenti}
 
-Si descriva la collezione sperimentale OHSUMED in termini di
-dimensione e tipo di dati.  Si descrivano i risultati dei confronti
-tra metodi di base e/o quelli proposti.  Cruciale \`e la descrizione
-accurata degli esperimenti: essa deve permetterne la replicazione.
 
-Il \textit{software}, sia quello a titolo esemplificativo dei concetti
-che quello che realizza i propri metodi, va caricato su moodle nella
-cartella messa a disposizione pi\`u avanti.  Nella relazione va
-scritta la descrizione dell'algoritmo in modo preciso e completo da
-permetterne la riproduzione.
+Per gli esperimenti si \`e utilizzato la collezione sperimentale 
+chiamata OHSUMED\footnote{ \url{https://bit.ly/2wpOynZ}}, la collezione contiene circa 54711 documenti.
+Gli esperimenti effettivi sono iniziati solamente dopo aver stabilito quale
+e' la baseline dalla quale partiamo, in altre parole ci siamo chiesti quale
+sia la base di parteza dalla quale dobbiamo migliorare il nostro sistema 
+di ricerca.  \par
+
+Affinche Woosh possa indicizzare una collezione di documenti, necessita la
+specificazione di uno schema, che include per ogni campo, nome del campo
+e tipo di quel campo. \par
+
+\begin{lstlisting}
+schema = Schema(docid      	= ID(stored=True),
+		title      	= TEXT(stored=True),
+		identifier	= ID(stored=True),
+		terms 		= NGRAM(stored=True),
+		authors      	= NGRAM(stored=True),
+		abstract 	= TEXT(stored=True),
+		publication	= TEXT(stored=True),
+		source 		= TEXT(stored=True))
+\end{lstlisting}
+\begin{tablenotes}
+      \small
+      \item \bf Figura: Schema necessario all'inidicizzazione dei documenti. 
+    \end{tablenotes}
+
+
+Definito lo schema abbiamo sfruttato la configurazione strettamente necessaria senza alcun tuning per avere 
+un sistema di reperimento "minimale". 
+
+La configurazione baseline ideale, \`e stata scelta in base al MAP variando il parametro che indica quale schema di 
+pesatura usare nel processo di reperimento tra cui TF\_IDF e BM25F .
+
+ Il processo e codice di indicizzazione \`e  facilmente comprensibile visionando il file  \emph{indicizzazione\_batch\_baseline.py}. \par
+\lstset{
+  language=bash,
+  basicstyle=\ttfamily
+}
+
+Per eseguire l'indicizzazione  baseline \`e sufficiente lanciare il seguente script python con il comando:
+\begin{lstlisting}
+  python indicizzazione_batch_baseline.py \ 
+  cartella_indice file_documenti.xml
+\end{lstlisting}
+
+Per eseguire il reperimento che poi produce il file treceval baseline basato sullo schema TF\_IDF \`e sufficiente lanciare 
+lo script python con il comando:
+
+\begin{lstlisting}
+  python reperimento_batch_baseline.py cartella_indice \
+  file_query.xml 1 > reperimento_baseline.treceval
+\end{lstlisting}
+
+Per eseguire il reperimento che poi produce il file treceval baseline basato sullo schema BM25F \`e sufficiente lanciare 
+lo script python con il comando:
+
+\begin{lstlisting}
+  python reperimento_batch_baseline.py cartella_indice \
+  file_query.xml 2 > reperimento_baseline.treceval
+\end{lstlisting}
+
+\subsection{Risultati baseline con schema di pesatura TF IDF}
+Descrizione: "1 Campo" significa che il reperimento e' stato eseguito soltanto 
+valutando il campo title,   "2 Campi" titolo e abstract,  "3 Campi" titolo e abstract e terms.
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\textbf{ 1 Campo }                 & \textbf{ 2 Campi }                 & \textbf{ 3 Campi }                  \\
+---------------------------------- & ---------------------------------- & ----------------------------------  \\
+ num\textit{q all 63 }             &  num\textit{q all 63 }             &  num\textit{q all 63 }              \\
+ num\textit{ret all 37454 }        &  num\textit{ret all 57356 }        &  num\textit{ret all 58456 }         \\
+ num\textit{rel all 670 }          &  num\textit{rel all 670 }          &  num\textit{rel all 670 }           \\
+ num\textit{rel}ret all 305        &  num\textit{rel}ret all 380        &  num\textit{rel}ret all 382         \\
+map all 0.0833                     & map all 0.0591                     & map all 0.0829                     
+\end{tabular} 
+\begin{tablenotes}
+      \small
+      \item \bf Figura: Risultati treceval, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000, pesatura TF IDF.
+    \end{tablenotes}
+\end{table}
+
+\subsection{Risultati baseline con schema di pesatura BM25F}
+Descrizione: "1 Campo" significa che il reperimento e' stato eseguito soltanto 
+valutando il campo title,   "2 Campi" titolo e abstract,  "3 Campi" titolo e abstract e terms.
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\textbf{ 1 Campo }           & \textbf{ 2 Campi }           & \textbf{ 3 Campi }            \\
+---------------------------------- & ---------------------------------- & ----------------------------------  \\
+ num\textit{q all 63 }       &  num\textit{q all 63 }       &  num\textit{q all 63 }        \\
+ num\textit{ret all 37454 }  &  num\textit{ret all 57356 }  &  num\textit{ret all 58456 }   \\
+ num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
+ num\textit{rel}ret all 307  &  num\textit{rel}ret all 387  &  num\textit{rel}ret all 383   \\
+map all 0.1073               & map all \bf 0.1289               & map all 0.1227               
+\end{tabular} 
+\begin{tablenotes}
+      \small
+      \item \bf Figura: Risultati treceval, nessuna manipolazione del testo, numero risultati restituiti per 
+ogni query = 1000, pesatura BM25F.
+    \end{tablenotes}
+\end{table}
+
+Alla luce dei risultati si e' scelto come valori per i parametri baseline: \textit{Documenti rilevanti reperiti}:  387 
+\textit{Mean Average Precision\cite{WBC_map}}:  0.1289.
+
+\subsection{Primo tentativo: uso delle stopwords}
+
+Le stopwords sono parole che in ogni lingua servono a legare tra loro altre parole e che non portano informazione 
+significativa al contenuto informativo\cite{WBC_stopwords} .\par
+
+Inizialmente si \`e pensato che utilizzare le stopwords generali della lingua inglese sia sufficiente per eliminare le 
+parole che non portano informazione, e di conseguenza aumentare il parametro di interesse: M.A.P.  tuttavia i risultati
+non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopwords cliniche, cio\`e stopwords utilizzate 
+soltato in ambito clinico/medico \cite{stopwords_cliniche}.
 
 \begin{thebibliography}{8}
-\bibitem{ref_article1}
-Autore, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
-
-\bibitem{ref_lncs1}
-Autore, F., Autore, S.: Title of a proceedings paper. In: Editor,
-F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
-Springer, Heidelberg (2016). \doi{10.10007/1234567890}
 
 \bibitem{WBC}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 250-252
 
-\bibitem{ref_proc1}
-Autore, A.-B.: Contribution title. In: 9th International Proceedings
-on Proceedings, pp. 1--2. Publisher, Location (2010)
+\bibitem{WBC_stopwords}
+W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 90
 
-\bibitem{ref_url1}
-LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
-Oct 2017
+\bibitem{WBC_map}
+W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 313
+
+\bibitem{stopwords_cliniche}
+Discovering Related Clinical Concepts Using Large Amounts of Clinical Notes. Ganesan, Kavita and Lloyd, Shane and Sarkar,
+ Vikren, (2016), pp. 27-33
+
 \end{thebibliography}
 
 \begin{figure}[h!]
