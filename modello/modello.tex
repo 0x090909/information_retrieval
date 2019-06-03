@@ -55,7 +55,7 @@ Lo scopo finale di un Sistema di Information Retrieval (IRS) e' quello di reperi
 L'indicizzazione e' un trade-off tra il  miglioramento della rapprerentazione del contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza). Benche' ci sia sempre tensione tra queste due caratteristiche, ad oggi la questione piu' studiata e' quella dell'efficienza.
 
 Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato la configurazione migliore tra un sistema di
-reperimento con o senza uso di stopwords e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F \cite{WBC}.
+reperimento con o senza uso di stopword e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F \cite{WBC}.
 
 
 
@@ -128,7 +128,7 @@ e' la baseline dalla quale partiamo, in altre parole ci siamo chiesti quale
 sia la base di parteza dalla quale dobbiamo migliorare il nostro sistema 
 di ricerca.  \par
 
-Affinche Woosh possa indicizzare una collezione di documenti, necessita la
+Affinch\`e Whoosh possa indicizzare una collezione di documenti, necessita la
 specificazione di uno schema, che include per ogni campo, nome del campo
 e tipo di quel campo. \par
 
@@ -144,17 +144,17 @@ schema = Schema(docid      	= ID(stored=True),
 \end{lstlisting}
 \begin{tablenotes}
       \small
-      \item \bf Figura: Schema necessario all'inidicizzazione dei documenti. 
+      \item \bf Figura: Schema necessario all'indicizzazione dei documenti. 
     \end{tablenotes}
 
 
 Definito lo schema abbiamo sfruttato la configurazione strettamente necessaria senza alcun tuning per avere 
 un sistema di reperimento "minimale". 
 
-La configurazione baseline ideale, \`e stata scelta in base al MAP variando il parametro che indica quale schema di 
+La configurazione baseline ideale, \`e stata scelta in base al Mean Average Precision (M.A.P.)\cite{WBC_map} variando il parametro che indica quale schema di 
 pesatura usare nel processo di reperimento tra cui TF\_IDF e BM25F .
 
- Il processo e codice di indicizzazione \`e  facilmente comprensibile visionando il file  \emph{indicizzazione\_batch\_baseline.py}. \par
+ Il processo e codice di indicizzazione sono  facilmente comprensibili visionando il file  \emph{indicizzazione\_batch\_baseline.py}. \par
 \lstset{
   language=bash,
   basicstyle=\ttfamily
@@ -223,31 +223,54 @@ ogni query = 1000, pesatura BM25F.
     \end{tablenotes}
 \end{table}
 
-Alla luce dei risultati si e' scelto come valori per i parametri baseline: \textit{Documenti rilevanti reperiti}:  387 
-\textit{Mean Average Precision\cite{WBC_map}}:  0.1289.
+Alla luce dei risultati si e' scelto come valori per i parametri baseline: \textit{Documenti rilevanti reperiti}:  387;
+\textit{M.A.P}:  0.1289.
 
-\subsection{Primo tentativo: uso delle stopwords}
+\subsection{Primo tentativo: uso delle stopword}
 
-Le stopwords sono parole che in ogni lingua servono a legare tra loro altre parole e che non portano informazione 
-significativa al contenuto informativo\cite{WBC_stopwords} .\par
+Le stopword\cite{WBC_stopword} sono parole che non portano informazione 
+significativa al contenuto informativo come congiunzioni, articoli, avverbi..\par
 
-Inizialmente si \`e pensato che utilizzare le stopwords generali della lingua inglese sia sufficiente per eliminare le 
-parole che non portano informazione, e di conseguenza aumentare il parametro di interesse: M.A.P.  tuttavia i risultati
-non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopwords cliniche, cio\`e stopwords utilizzate 
-soltato in ambito clinico/medico \cite{stopwords_cliniche}.
+Inizialmente si \`e pensato di utilizzare le stopword generali della lingua inglese per eliminare le
+parole che non portano informazione significativa. I risultati sono stati accettabili, ma siamo riusciti a migliorarli togliendo anche stopword cliniche, cio\`e  strettamente inerenti al contesto medico e abbiamo ottenuto i seguenti risultati:
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\textbf{ 1 Campo }           & \textbf{ 2 Campi }           & \textbf{ 3 Campi }            \\
+---------------------------------- & ---------------------------------- & ----------------------------------  \\
+ num\textit{q all 63 }       &  num\textit{q all 63 }       &  num\textit{q all 63 }        \\
+ num\textit{ret all 54873 }  &  num\textit{ret all 612669 }  &  num\textit{ret all 61908 }   \\
+ num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
+ num\textit{rel}ret all 477  &  num\textit{rel}ret all 570  &  num\textit{rel}ret all 538   \\
+map all 0.2045               & map all \bf 0.2752               & map all 0.1665               
+\end{tabular} 
+\begin{tablenotes}
+      \small
+      \item \bf Figura: Risultati treceval, rimozione delle stopword cliniche, numero risultati restituiti per 
+ogni query = 1000, pesatura BM25F.
+    \end{tablenotes}
+\end{table}
+
+
+
+%
+%Inizialmente si \`e pensato che utilizzare le stopword generali della lingua inglese fosse sufficiente per eliminare le 
+%parole che non portano informazione, e di conseguenza aumentare il parametro di interesse M.A.P; i risultati
+%non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopword cliniche, cio\`e stopword utilizzate 
+%soltato in ambito clinico/medico \cite{stopword_cliniche}.
 
 \begin{thebibliography}{8}
 
 \bibitem{WBC}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 250-252
 
-\bibitem{WBC_stopwords}
+\bibitem{WBC_stopword}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 90
 
 \bibitem{WBC_map}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 313
 
-\bibitem{stopwords_cliniche}
+\bibitem{stopword_cliniche}
 Discovering Related Clinical Concepts Using Large Amounts of Clinical Notes. Ganesan, Kavita and Lloyd, Shane and Sarkar,
  Vikren, (2016), pp. 27-33
 
