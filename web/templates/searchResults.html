@@ -1,0 +1,12 @@
+$def with (results)
+<html>
+	<head>
+		<title>Search results</title>
+		<link rel="stylesheet" href="/static/style.css">
+	</head>
+	<body>
+		<h1>Ecco i risultati:</h1>
+		$# i due punti impediscono a templetor di fare escape dell'html
+		$:results
+	</body>
+</html>

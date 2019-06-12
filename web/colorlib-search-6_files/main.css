@@ -819,10 +819,21 @@ legend {
   -ms-flex-align: center;
       align-items: center;
   font-family: 'Poppins', sans-serif;
-  background: url("../images/Searchs_006.png");
+  background: url("../dna/2328064.jpg");
   background-size: cover;
-  background-position: center center;
   padding: 15px;
+}
+
+.s006:before {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 1;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    z-index: 0;
 }
 
 .s006 form {
@@ -836,6 +847,7 @@ legend {
   font-weight: 800;
   text-align: center;
   margin-bottom: 59px;
+  z-index: -1;
 }
 
 .s006 form .inner-form {
@@ -949,4 +961,3 @@ legend {
     height: 26px;
   }
 }
-
