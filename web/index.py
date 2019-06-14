@@ -1,33 +1,42 @@
 import web
 from whoosh.index import create_in
 from whoosh.fields import *
+from whoosh import qparser
+from whoosh import scoring
 from whoosh.qparser import QueryParser
+from whoosh.filedb.filestore import FileStorage
 
 render = web.template.render('templates')
 
 urls = (
-	'/hello', 'hello',
+	'/','index',
+	'/index', 'index',
 	'/search', 'search'
 )
 
-class hello:
+class index:
 	def GET(self):
-		return render.hello('marco','dussin')
+		return render.index()
 
 class search:
 	def GET(self):
+		user_data = web.input()
 		#inizializzo due documenti
-		schema = Schema(title=TEXT(stored=True), path=ID(stored=True), content=TEXT)
-		ix = create_in("indexdir", schema)
-		writer = ix.writer()
-		writer.add_document(title=u"First document", path=u"/a", content=u"This is the first document we've added!")
-		writer.add_document(title=u"Second document", path=u"/b", content=u"The second one is even more interesting!")
-		writer.add_document(title=u"Third document", path=u"/b", content=u"The third one is a copy of the first!")
-		writer.commit()
+		schema = Schema(docid      	= ID(stored=True),
+		        		title      	= TEXT(stored=True),
+		        		identifier	= ID(stored=True),
+		        		terms 		= NGRAM(stored=True),
+		        		authors     = NGRAM(stored=True),
+		        		abstract 	= TEXT(stored=True),
+		        		publication	= TEXT(stored=True),
+		        		source 		= TEXT(stored=True))
+		st = FileStorage("../ohsumed_index_dir_stopwords_clinico")
+		ix = st.open_index()
 		titles = '<ol>'
 		with ix.searcher() as searcher:
-			query = QueryParser("content", ix.schema).parse("first")
-			results = searcher.search(query)
+			q = QueryParser("title",schema, group=qparser.OrGroup).parse(user_data.query)
+			results = ix.searcher(weighting=scoring.TF_IDF()).search(q)
+
 			for r in results:
 				titles = titles + '<li>' +(r["title"]) + '</li>'
 		titles = titles + '</ol>'
