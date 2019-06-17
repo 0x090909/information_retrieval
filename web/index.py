@@ -41,7 +41,7 @@ class search:
 				searcher, # limit=None is required!
 				page=user_data.page, items_per_page=10)
 
-		titles = titles + '</ol>'
+		searcherlen = len(searcher)
 		out = [{"abstract":article.get('abstract')[:300] + '...' if "abstract" in article.keys() and len(article.get('abstract')) > 300   else article.get('abstract'), "docid":article.get("docid"),"title":article.get("title")} for article in page]
 		return render.searchResults(out, user_data, searcherlen)
 
