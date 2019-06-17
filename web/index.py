@@ -40,7 +40,7 @@ class search:
 			for r in results:
 				titles = titles + '<li>' +(r["title"]) + '</li>'
 		titles = titles + '</ol>'
-		out = [{"abstract":article.get('abstract')[:150] + '...' if len(article.get('abstract')) > 150 and "abstract" in article.keys() else article.get('abstract'), "docid":article.get("docid"),"title":article.get("title")} for article in results]
+		out = [{"abstract":article.get('abstract')[:150] + '...' if "abstract" in article.keys() and len(article.get('abstract')) > 150   else article.get('abstract'), "docid":article.get("docid"),"title":article.get("title")} for article in results]
 		return render.searchResults(out, user_data)
 
 if __name__ == "__main__":
