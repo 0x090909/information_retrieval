@@ -40,7 +40,7 @@ class search:
 			for r in results:
 				titles = titles + '<li>' +(r["title"]) + '</li>'
 		titles = titles + '</ol>'
-		return render.searchResults(results)
+		return render.searchResults(results, user_data)
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())
