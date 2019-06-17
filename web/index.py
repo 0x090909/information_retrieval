@@ -5,6 +5,7 @@ from whoosh import qparser
 from whoosh import scoring
 from whoosh.qparser import QueryParser
 from whoosh.filedb.filestore import FileStorage
+from paginate_whoosh import WhooshPage
 
 render = web.template.render('templates')
 
@@ -35,13 +36,13 @@ class search:
 		titles = '<ol>'
 		with ix.searcher() as searcher:
 			q = QueryParser("title",schema, group=qparser.OrGroup).parse(user_data.query)
-			results = ix.searcher(weighting=scoring.TF_IDF()).search(q, limit=1000)
+			page = WhooshPage(
+				ix.searcher(weighting=scoring.TF_IDF()).search(q, limit=1000), # limit=None is required!
+				page=user_data.page, items_per_page=10)
 
-			for r in results:
-				titles = titles + '<li>' +(r["title"]) + '</li>'
 		titles = titles + '</ol>'
-		out = [{"abstract":article.get('abstract')[:300] + '...' if "abstract" in article.keys() and len(article.get('abstract')) > 300   else article.get('abstract'), "docid":article.get("docid"),"title":article.get("title")} for article in results]
-		return render.searchResults(out, user_data)
+		out = [{"abstract":article.get('abstract')[:300] + '...' if "abstract" in article.keys() and len(article.get('abstract')) > 300   else article.get('abstract'), "docid":article.get("docid"),"title":article.get("title")} for article in page]
+		return render.searchResults(pages, user_data)
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())
