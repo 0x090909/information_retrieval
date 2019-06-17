@@ -1,4 +1,5 @@
 $def with (results)
+$def with (user_data)
 
 <html>
 	<head>
@@ -15,7 +16,7 @@ $def with (results)
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <h2>
-                        160 results found for: <span class="text-navy">"Bootdey"</span>
+                        $len(results) results found for: <span class="text-navy">"$user_data.query"</span>
                     </h2>
                     <small>Request time  (0.23 seconds)</small>
 
