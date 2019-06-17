@@ -46,15 +46,13 @@ $def with (results, user_data, searcherlen)
 
                     <div class="text-center">
                         <div class="btn-group">
-                            <button class="btn btn-white" type="button"><i class="glyphicon glyphicon-chevron-left"></i></button>
-                            <button class="btn btn-white">1</button>
-                            <button class="btn btn-white  active">2</button>
+                            <button onclick="window.location=./search?query=$user_data.query&page=$user_data.page" class="btn btn-white">1</button>
+                            <button onclick="window.location=./search?query=$user_data.query&page=$user_data.page+1" class="btn btn-white  active">2</button>
                             <button class="btn btn-white">3</button>
                             <button class="btn btn-white">4</button>
                             <button class="btn btn-white">5</button>
                             <button class="btn btn-white">6</button>
                             <button class="btn btn-white">7</button>
-                            <button class="btn btn-white" type="button"><i class="glyphicon glyphicon-chevron-right"></i> </button>
                         </div>
                     </div>
                 </div>
