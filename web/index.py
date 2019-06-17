@@ -35,7 +35,7 @@ class search:
 		titles = '<ol>'
 		with ix.searcher() as searcher:
 			q = QueryParser("title",schema, group=qparser.OrGroup).parse(user_data.query)
-			results = ix.searcher(weighting=scoring.TF_IDF()).search(q)
+			results = ix.searcher(weighting=scoring.TF_IDF()).search(q, limit=1000)
 
 			for r in results:
 				titles = titles + '<li>' +(r["title"]) + '</li>'
