@@ -33,14 +33,13 @@ $def with (results, user_data)
                         </form>
                     </div>
 										$for article in results:
-											$abstract = (article.get('abstract')[:150] + '...') if len(article.get('abstract')) > 150 else article.get('abstract')
-
 											<div class="hr-line-dashed"></div>
 											<div class="search-result">
 													<h3><a href="#">$article['title']</a></h3>
 													<a href="#" class="search-link">https://aleste.com/$article['docid']</a>
 													<p>
-														$abstract
+														$(article.get('abstract')[:150] + '...') if len(article.get('abstract')) > 150 else article.get('abstract')
+
 													</p>
 											</div>
 
