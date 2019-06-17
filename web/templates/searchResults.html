@@ -1,69 +1,63 @@
-$def with (results, user_data, searcherlen)
-
-
+$def with (results, user_data, searcherlen, pages)
 <html>
-	<head>
-		<title>Search results</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="/static/style.css">
-	</head>
-	<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <h2>
-                        $searcherlen results found for: <span class="text-navy">"$user_data.query"</span>
-                    </h2>
-                    <small>Request time  (0.23 seconds)</small>
+<head>
+	<title>Search results</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+<div class="container bootstrap snippet">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<h2>
+						$searcherlen results found for: <span class="text-navy">"$user_data.query"</span>
+					</h2>
+					<small>Request time  (0.23 seconds)</small>
 
-                    <div class="search-form">
-                        <form action="search" method="get">
-                            <div class="input-group">
-                                <input type="text" placeholder="$user_data.query" name="query" class="form-control input-lg">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-lg btn-primary" type="submit">
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-										$for article in results:
-											<div class="hr-line-dashed"></div>
-											<div class="search-result">
-													<h3><a href="#">$article['title']</a></h3>
-													<a href="#" class="search-link">https://aleste.com/$article['docid']</a>
-													<p>
-														$article.get("abstract")
+					<div class="search-form">
+						<form action="search" method="get">
+							<div class="input-group">
+								<input type="text" placeholder="$user_data.query" name="query" class="form-control input-lg">
+								<div class="input-group-btn">
+									<button class="btn btn-lg btn-primary" type="submit">
+										Search
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					$for article in results:
+						<div class="hr-line-dashed"></div>
+						<div class="search-result">
+							<h3><a href="#">$article['title']</a></h3>
+							<a href="#" class="search-link">https://aleste.com/$article['docid']</a>
+							<p>
+								$article.get("abstract")
 
-													</p>
-											</div>
+							</p>
+						</div>
 
 
-                    <div class="text-center">
-                        <div class="btn-group">
-                            <button onclick="window.location=./search?query=$user_data.query&page=$user_data.page" class="btn btn-white">1</button>
-                            <button onclick="window.location=./search?query=$user_data.query&page=$user_data.page+1" class="btn btn-white  active">2</button>
-                            <button class="btn btn-white">3</button>
-                            <button class="btn btn-white">4</button>
-                            <button class="btn btn-white">5</button>
-                            <button class="btn btn-white">6</button>
-                            <button class="btn btn-white">7</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="text-center">
+						<div class="btn-group">
+						$for page in pages:
+							<button onclick="window.location='search?query=$user_data.query&page=$page'" class="btn btn-white">$page</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 
-	<!-- <body>
-		<h1>Ecco i risultati:</h1>
-		$# i due punti impediscono a templetor di fare escape dell'html
-		$:results
-	</body> -->
+<!-- <body>
+<h1>Ecco i risultati:</h1>
+$# i due punti impediscono a templetor di fare escape dell'html
+$:results
+</body> -->
 </html>
