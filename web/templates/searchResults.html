@@ -34,10 +34,10 @@ $def with (results)
 										$for article in results:
 											<div class="hr-line-dashed"></div>
 											<div class="search-result">
-													<h3><a href="#">$article</a></h3>
-													<a href="#" class="search-link">https://bootdey.com/</a>
+													<h3><a href="#">$article['title']</a></h3>
+													<a href="#" class="search-link">https://aleste.com/$article['docid']</a>
 													<p>
-														Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers
+														$article['abstract']
 													</p>
 											</div>
 
