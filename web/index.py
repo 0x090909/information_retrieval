@@ -9,30 +9,40 @@ from paginate_whoosh import WhooshPage
 
 render = web.template.render('templates')
 
+#inizializzo due documenti
+schema = Schema(docid      	= ID(stored=True),
+				title      	= TEXT(stored=True),
+				identifier	= ID(stored=True),
+				terms 		= NGRAM(stored=True),
+				authors     = NGRAM(stored=True),
+				abstract 	= TEXT(stored=True),
+				publication	= TEXT(stored=True),
+				source 		= TEXT(stored=True))
+st = FileStorage("../ohsumed_index_dir_stopwords_clinico")
+ix = st.open_index()
+
 urls = (
 	'/','index',
 	'/index', 'index',
-	'/search', 'search'
+	'/search', 'search',
+	'/article', 'article'
+
 )
 
 class index:
 	def GET(self):
 		return render.index()
 
+class article:
+	def GET(self):
+		user_data = web.input()
+		#user_data.docid
+		return render.post(docid)
+
 class search:
 	def GET(self):
 		user_data = web.input()
-		#inizializzo due documenti
-		schema = Schema(docid      	= ID(stored=True),
-		        		title      	= TEXT(stored=True),
-		        		identifier	= ID(stored=True),
-		        		terms 		= NGRAM(stored=True),
-		        		authors     = NGRAM(stored=True),
-		        		abstract 	= TEXT(stored=True),
-		        		publication	= TEXT(stored=True),
-		        		source 		= TEXT(stored=True))
-		st = FileStorage("../ohsumed_index_dir_stopwords_clinico")
-		ix = st.open_index()
+
 		titles = '<ol>'
 		with ix.searcher() as searcher:
 			q = QueryParser("title",schema, group=qparser.OrGroup).parse(user_data.query)
