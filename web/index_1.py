@@ -8,7 +8,7 @@ from whoosh.filedb.filestore import FileStorage
 from paginate_whoosh import WhooshPage
 from search_ohsumed import src
 
-render = web.template.render('templates')
+render = web.template.render('templates',base="main_layout")
 
 
 fst = FileStorage("../ohsumed_index_dir_stopwords_clinico")

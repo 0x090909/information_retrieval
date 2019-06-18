@@ -931,10 +931,12 @@ legend {
 }
 
 .s006 form .suggestion-wrap {
+  text-align: right;
   padding: 0 15px;
 }
 
-.s006 form .suggestion-wrap span {
+.s006 form .suggestion-wrap a {
+  position:relative;
   font-size: 14px;
   font-family: 'Helvetica', sans-serif;
   display: inline-block;
