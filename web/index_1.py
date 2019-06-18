@@ -17,8 +17,8 @@ urls = (
 	'/','index',
 	'/index', 'index',
 	'/search', 'search',
-	'/article', 'article'
-
+	'/article', 'article',
+	'/advancedsearch', 'adv_search'
 )
 
 class index:
@@ -36,6 +36,10 @@ class search:
 		user_data = web.input()
 		out, searcherlen, pages = src(fst,user_data,lim=1000)
 		return render.searchResults(out, user_data, searcherlen, pages)
+    
+class adv_search:
+	def GET(self):
+		return render.advanced()
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())

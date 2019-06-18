@@ -81,6 +81,52 @@ def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     ix.searcher().close()
     return page, reslen, pages
 
+def adv_src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
+    ix = fst.open_index()
+        
+    # ------------------------------------------------------------------------------------------------ #    
+    if lo=="o":                                                                                 
+        lgroup = qparser.OrGroup                                                                
+    elif lo=="a":                                                                               
+        lgroup = qparser.AndGroup                                                               
+        
+    # ------------------------------------------------------------------------------------------------ #
+    if w=="tf":                                                                                 
+        score = scoring.TF_IDF()                                                                
+    elif w=="bm":                                                                               
+        if opt:                                     # opt, se c'e', contiene il punto di massimo per i due parametri
+            score = scoring.BM25F(opt[0],opt[1])                                                
+        else:                                                                                   
+            score = scoring.BM25F()                                                             
+            
+    # ------------------------------------------------------------------------------------------------ #
+    if flds=="1":                                                                               
+        campi = "title"                                                                         
+        parser = qp                                                                             
+    elif flds=="2":                                                                             
+        campi = ["title", "abstract"]                                                           
+        parser = mp                                                                             
+    elif flds=="3":                                                                             
+        campi = ["title", "abstract","terms"]                                                   
+        parser = mp                                                                             
+        
+    # ------------------------------------------------------------------------------------------------- #
+    q = ud.query
+    query = parser(campi,ix.schema, group=lgroup).parse(q)     
+    new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))             #query corretta se una lettera sbagliata
+    results = ix.searcher(weighting=score).search(query,limit=None)[:1000]                      # risultati    
+    respage = 20
+    reslen = len(results)
+    page = WhooshPage(results, page=ud.page, items_per_page=respage)
+    pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
+    #pg = page.link_map("~2~","search?query="+str(ud.query)+"&page=$page")
+    #print pg
+    ix.searcher().close()
+    return page, reslen, pages
+
+
+
+
 # -------------------------------------------------------------------------------------------------- #
 if __name__ == "__main__":
     if not os.path.exists(sys.argv[1]):                                                             # controlla se l'indice non c'e'
