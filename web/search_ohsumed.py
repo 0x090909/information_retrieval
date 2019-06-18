@@ -76,7 +76,8 @@ def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     reslen = len(results)
     page = WhooshPage(results, page=ud.page, items_per_page=respage)
     pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
-    
+    #pg = page.link_map("~2~","search?query="+str(ud.query)+"&page=$page")
+    #print pg
     ix.searcher().close()
     return page, reslen, pages
 
