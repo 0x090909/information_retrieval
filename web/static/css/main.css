@@ -39,6 +39,9 @@ h1 {
 
 .current_page {
   background: #f0f0f0;
+  pointer-events: none;
+ cursor: default;
+ text-decoration: none;
 }
 
 /* Grouping content
