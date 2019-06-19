@@ -30,7 +30,7 @@ $def with (results, user_data, searcherlen, pages)
 							<a href="https://aleste.com/$article['docid']" class="search-link">https://aleste.com/$article['docid']</a>
 							<p>
 								$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
-									$article.get("abstract")[:300] + '...' 
+									$article.get("abstract")[:300] + '...'
 								$else:
 									$article.get('abstract')
 							</p>
@@ -38,11 +38,15 @@ $def with (results, user_data, searcherlen, pages)
 
 
 					<div class="text-center">
-						<div class="btn-group">
-						$for page in pages:
-							<button onclick="window.location='search?query=$user_data.query&page=$page'" class="btn btn-white">$page</button>
+						<ul class="pagination pg-blue  justify-content-center">
+											<li class="page-item">	<a href="$pages['first_page']['href']" class="page-link">$:pages['first_page']['value']</a></li>
+											<li class="page-item">	<a href="$pages['previous_page']['href']" class="page-link">$:pages['previous_page']['value']</a></li>
+											$for range_page in pages['range_pages']:
+												<li class="page-item"><a href="$range_page['href']" class="$:range_page['type'] page-link">$:range_page['value']</a></li>
 
-						</div>
+											<li class="page-item"><a href="$pages['next_page']['href']" class="page-link">$:pages['next_page']['value']</a></li>
+											<li class="page-item"><a href="$pages['last_page']['href']" class="page-link">$:pages['last_page']['value']</a></li>
+					</ul>
 					</div>
 				</div>
 			</div>
