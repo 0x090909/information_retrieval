@@ -4,7 +4,7 @@
 #tipo:
 #Query k
 #       word1 word2 ...
-#doc1   2;7;0 4;0;0 
+#doc1   2;7;0 4;0;0
 #doc2   0;0;0 0;3;0
 #...
 #con numero di volte in titolo;abstract;tremini
@@ -25,14 +25,14 @@ from xml.dom.minidom import parse, parseString
 
 import re
 # ---------------------------------------------------------------------------------------- #
-# estrazione dei dati di un tag 
+# estrazione dei dati di un tag
 def gettagdata(dom,tag):
     nodes = dom.getElementsByTagName(tag)
     if nodes is None or len(nodes)==0:
         return None
     tagdata = []
     for node in nodes:
-        tagdata.append(st.rstrip(st.lstrip(node.firstChild.data)))   
+        tagdata.append(st.rstrip(st.lstrip(node.firstChild.data)))
     return tagdata
 
 # ---------------------------------------------------------------------------------------- #
@@ -60,13 +60,13 @@ def iq(q, reldocs, title, maxres):
                             if k==g :                                        # controllo se la parola e' uguale al termine corrente
                                 c1 += 1                                      # se si' aggiungo 1 al conteggio
                                 c2 += 1
-                        row[-1] += (str(c1)+(";" if l!="terms" else "")).ljust(4," ") # riga del tipo ***;***;*** ***;***;*** ...                  
+                        row[-1] += (str(c1)+(";" if l!="terms" else "")).ljust(4," ") # riga del tipo ***;***;*** ***;***;*** ...
                     except KeyError:
                         row[-1] += "*"
                         if l!="terms":
                             row[-1] += ";  "
                 row[-1] = row[-1].ljust(lterms[g]," ")
-            # adesso dovrei avere la linea completa 
+            # adesso dovrei avere la linea completa
             print j["identifier"].ljust(11," ") + "".join(row)+(" tot. "+str(c2) if c2 != 0 else "")
             # aggiungi ultima riga con i totali
     return
@@ -91,18 +91,18 @@ def tnn(i, reldocs, title, maxres):
                     for k in j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").lower().split(" "):      # per ogni parola del campo
                         if k==g:                                        # controllo se la parola e' uguale al termine corrente
                             c += 1                                      # se si' aggiungo 1 al conteggio
-                            tot += 1         
+                            tot += 1
                 except KeyError:
                     pass
             row[-1] += (str(c)+(";" if l!="terms" else "")).ljust(4," ")                      # riga del tipo ***;***;*** ***;***;*** ...
         row[-1] = row[-1].ljust(lterms[g]," ")
-    # adesso dovrei avere la linea completa 
+    # adesso dovrei avere la linea completa
     if tot != 0:
         print "\n"+first_row
         print "query "+i.ljust(5," ")+ "".join(row)+"   tot. "+str(tot)+" parole su "+str(len(reldocs[i].split(" ")))+" documenti rilevanti"
     # aggiungi ultima riga con i totali
     return
-    
+
 # ---------------------------------------------------------------------------------------- #
 def fqt(hit, num, title):
     ql = []
@@ -157,7 +157,7 @@ else:                                                   # altrimenti procedi
     #title = gettagdata(dom,'title')
     num   = gettagdata(dom,'num')
     #desc  = gettagdata(dom,'desc')
-    #for x in range(len(title)-1):    
+    #for x in range(len(title)-1):
     #    title[x]+=" "+desc[x]
     title = gettagdata(dom,'desc')
     title = [x.replace(",","").replace("/"," ").replace(".","").replace("-"," ").replace("?","").replace("'"," ").lower() for x in title]
@@ -172,7 +172,7 @@ else:                                                   # altrimenti procedi
         if a[0] in reldocs:                  # se e' il primo documento rilevante della query a[0]
            reldocs[a[0]]+=" "+a[1]           # aggiungo all'insieme relativo alla query a[0] il documento
            count += 1
-        else:                                # altrimenti  
+        else:                                # altrimenti
             reldocs[a[0]] = a[1]             # aggiungo numero query come chiave nel dizionario ed il relativo documento
             if count > maxres:
                 maxres = count
@@ -181,7 +181,7 @@ else:                                                   # altrimenti procedi
             count = 0
     relfile.close()
     # fino ad ora ho i documenti rilevanti per query
-    
+
     if sys.argv[4] == "iq":                          #indice query
         # prendo in input le query che mi interessano
         # immagino di avere una lista di numeri di query
@@ -190,13 +190,13 @@ else:                                                   # altrimenti procedi
             q=hits.split(",")
             iq(q, reldocs, title, maxres)
             hits = raw_input("\nComma-separated query (tra 1 e 63 compresi, press enter to end): ")
-    
-    
+
+
     elif sys.argv[4] == "tnn":                                                    #tot not null
         for i in num:#per ogni query della lista
             tnn(i, reldocs, title, maxres)
-    
-    
+
+
     elif sys.argv[4] == "fqt":                                                      #find query term
         hits = raw_input("Comma-separated terms (press enter to end): ")
         while hits != "":
@@ -212,7 +212,7 @@ else:                                                   # altrimenti procedi
                     else:
                         print "\nNo details avaiable."
                     print "#"*200
-            
+
             if len(sys.argv) > 5 and sys.argv[5] == "-d" and len(hits)>1:
                 ql = fqt(hits, num, title)
                 if ql:
@@ -222,17 +222,12 @@ else:                                                   # altrimenti procedi
                         print "\n"
                 else:
                     print "\nNo details avaiable."
-            
-            hits = raw_input("\nComma-separated terms (press enter to end): ")    
+
+            hits = raw_input("\nComma-separated terms (press enter to end): ")
     infile.close()
     ix.searcher().close()
 
 
-#uso: python get_....py cartella_indice file_query file_qrels modalita'(iq, tnn, fqt) 
+#uso: python get_....py cartella_indice file_query file_qrels modalita'(iq, tnn, fqt)
 # python frq_terms_rel_docs.py ./indice_stop2/ query.ohsu.1-63.xml qrels.ohsu.batch.87.txt iq
 # python frq_terms_rel_docs.py ./indice_stop2/ query.ohsu.1-63.xml qrels.ohsu.batch.87.txt tnn
-
-
-
-
-
