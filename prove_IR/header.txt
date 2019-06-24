@@ -1,0 +1,6 @@
+/* Copyright (C) Alessandro Stefani, Cristi Gutu
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Cristi Gutu <gheorghecristi.gutu@studenti.unipd.it>, June 2019
+ * Written by Alessandro Stefani <alessandro.stefani.6@studenti.unipd.it>, June 2019
+ */
