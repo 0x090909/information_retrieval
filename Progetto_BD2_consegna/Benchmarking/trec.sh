@@ -4,8 +4,12 @@
 # * Written by Cristi Gutu <gheorghecristi.gutu@studenti.unipd.it>, June 2019
 # * Written by Alessandro Stefani <alessandro.stefani.6@studenti.unipd.it>, June 2019
 # */
+
  
 #!/bin/bash
+# Legge i file dei risultati contenuti in "./res/" ed esegue trec_eval(che si ritiene sia in "./trec_eval.8.1/trec_eval")
+# Stampa quindi i risultati di trec_eval su dei file .txt in "./trecs/"
+#
 trec="./trec_eval.8.1/trec_eval"
 qrel="./qrels.ohsu.batch.87.txt"
 

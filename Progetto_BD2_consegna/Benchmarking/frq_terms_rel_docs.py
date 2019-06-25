@@ -1,14 +1,3 @@
-#usando la modalita' iq
-#dato insieme di query ottenere i documenti rilevanti per ciascuna
-#contare il numero di volte in cui una parola della query appare nei documenti
-#tipo:
-#Query k
-#       word1 word2 ...
-#doc1   2;7;0 4;0;0 
-#doc2   0;0;0 0;3;0
-#...
-#con numero di volte in titolo;abstract;tremini
-
 #--- importazione di interi moduli
 import string as st
 import sys
@@ -37,89 +26,185 @@ def gettagdata(dom,tag):
 
 # ---------------------------------------------------------------------------------------- #
 def iq(q, reldocs, title, maxres):
-    for i in q:#per ogni query della lista
+    """
+    Funzione che serve per trovare, data una lista di query identificate da un numero tra 1 e 63, 
+    quante volte appaiono i termini delle query nei corrsipondenti documenti rilevanti,
+    suddividendo i conteggi nei tre campi title, abstract e trems.
+    Il risultato dovrebbe essere del tipo:
+    
+    #Query i
+    #       word1  word2  ...
+    #doc1   2;7;0  4;0;0   .          (word1 e' presente 2 volte in title, 7 volte in abstract e 0 volte in terms, word2 non e' presente in doc1)
+    #doc2   0;*;0  0;*;0   .          (gli asterischi indicano che, in questo caso, a doc2 manca il campo abstract)
+    #...      .      .    ...
+    
+    Per ogni i contenuto nella lista q.
+    I campi sono in ordine title;abstract;trems
+    
+    Parameters
+    ----------
+    q : list of string
+    Lista contenente gli identificatori delle query che interessano.
+    
+    reldocs : dict
+    Dizionario, deve avere come chiavi gli identificatori contenuti in q e come valori gli identificatori dei documenti rilevanti corrispondenti,
+    possibilmente ottenibili dal "file di rilevanza".
+    
+    title : list of string
+    Lista delle query
+    
+    maxres : int
+    Numero intero positivo deve indicare il numero massimo di documenti rilevanti.
+    
+    Returns
+    -------
+    None
+    """
+    
+    for i in q:                                                                         # Per ogni query della lista q
         print "\nQuery numero",i
-        query = qp(campo,ix.schema,group = qparser.OrGroup).parse(reldocs[i])  # creo una query per cercare i documenti rilevanti
-        results = ix.searcher().search(query,limit=maxres)                  # dovrebbe trovare i documenti con gli identificatori
-        query_terms = list(set(title[int(i)-1].split(" ")))                            # creo lista con i termini della query
-        first_row = " "*11
-        lterms = dict([(x,max([len(x),10])+3) for x in query_terms])
+        query = qp(campo,ix.schema,group = qparser.OrGroup).parse(reldocs[i])           # Crea una query per cercare i documenti rilevanti
+        results = ix.searcher().search(query,limit=maxres)                              # Dovrebbe trovare i documenti rilevanti usando gli identificatori
+        query_terms = list(set(title[int(i)-1].split(" ")))                             # Crea lista con i termini della query
+        first_row = " "*11  # Per compensare la lunghezza dell'identificatore dei documenti
+        lterms = dict([(x,max([len(x),10])+3) for x in query_terms])                    # Crea lista che riporta qunto spazio dedicare a ciascuna colonna
         #print lterms
-        for g in query_terms:
+        for g in query_terms:                                                           # Crea la prima riga con i termini della query
             first_row += g.ljust(lterms[g]," ")
         print first_row
-        for j in results:                                                   # per ogni documento
+        for j in results:                                                               # Per ogni documento rilevante per la query i
             row = [""]
-            c2 = 0
-            for g in query_terms:                                           # per ogni termine della query
+            c2 = 0  # Contatore per riga
+            for g in query_terms:                                                       # Per ogni termine della query
                 row.append("")
-                for l in fields:                                            # per ogni campo ("title", "abstract" e "terms")
-                    c1 = 0
+                for l in fields:                                                        # Per ogni campo ("title", "abstract" e "terms")
+                    c1 = 0  # Contatore per parola e campo
                     try:
-                        for k in j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").replace("?","").replace("'"," ").lower().split(" "):                           # per ogni parola del campo
-                            if k==g :                                        # controllo se la parola e' uguale al termine corrente
-                                c1 += 1                                      # se si' aggiungo 1 al conteggio
+                        cleaned_term = j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").replace("?","").replace("'"," ").lower().split(" ")
+                        for k in cleaned_term:                                          # Per ogni parola del campo
+                            if k==g :                                                   # Controllo se la parola e' uguale al termine corrente,
+                                c1 += 1                                                 # se si' aggiungo 1 al conteggio
                                 c2 += 1
-                        row[-1] += (str(c1)+(";" if l!="terms" else "")).ljust(4," ") # riga del tipo ***;***;*** ***;***;*** ...                  
-                    except KeyError:
+                        row[-1] += (str(c1)+(";" if l!="terms" else "")).ljust(4," ")   # aggiunge elemento come "2;  " a row[-1]               
+                    except KeyError:                                                    # Se un campo non e' presente nel documento aggiunge invece "*;  "
                         row[-1] += "*"
                         if l!="terms":
                             row[-1] += ";  "
-                row[-1] = row[-1].ljust(lterms[g]," ")
-            # adesso dovrei avere la linea completa 
-            print j["identifier"].ljust(11," ") + "".join(row)+(" tot. "+str(c2) if c2 != 0 else "")
-            # aggiungi ultima riga con i totali
-    return
+                row[-1] = row[-1].ljust(lterms[g]," ")                                  # aggiusta la spaziatura per l'elemento ***;***;***     
+            # Adesso si dovrebbe avere la riga completa sotto forma di lista di elementi delle colonne in row
+            print j["identifier"].ljust(11," ") + "".join(row)+(" tot. "+str(c2) if c2 != 0 else "") 
+            # Stampa la riga e aggiunge un'ultima colonna con i totali di riga(se non nulli)
+    return None
 
 # ---------------------------------------------------------------------------------------- #
 def tnn(i, reldocs, title, maxres):
-    query = qp(campo,ix.schema,group = qparser.OrGroup).parse(reldocs[i])  # creo una query per cercare i documenti rilevanti
-    results = ix.searcher().search(query,limit=maxres)                  # dovrebbe trovare i documenti con gli identificatori
-    query_terms = list(set(title[int(i)-1].split(" ")))                           # creo lista con i termini della query
+    """
+    Funzione che riassume i risultati ottenibili con la funzione iq(), per la query i.
+    Stampa i totali di colonna della "matrice" ottenibile da iq(), per la query i.
+    Omette eventuali query per cui i documenti rilevanti non contengono nessuna parola della query.
+    
+    Il risultato dovrebbe essere del tipo:
+                word1  word2  ...
+    #Query i    3;0;0  0;0;0  ... (word1 e' presente 3 volte in totale tra i title dei documenti rilevani, word2 non e' presente in nessun documento rilevante)
+    
+    I campi sono in ordine title;abstract;trems
+    
+    Parameters
+    ----------
+    i : string
+    Stringa che contiene l'identificatore della query che ci interessa.
+    
+    reldocs : dict
+    Dizionario, deve avere come chiavi gli identificatori di alcune query, tra cui i, e come valori gli identificatori dei documenti rilevanti corrispondenti,
+    possibilmente ottenibili dal "file di rilevanza".
+    
+    title : list of string
+    Lista delle query
+    
+    maxres : int
+    Numero intero positivo deve indicare il numero massimo di documenti rilevanti.
+    
+    Returns
+    -------
+    None
+    """
+    
+    query = qp(campo,ix.schema,group = qparser.OrGroup).parse(reldocs[i])               # Crea una query per cercare i documenti rilevanti
+    results = ix.searcher().search(query,limit=maxres)                                  # Dovrebbe trovare i documenti rilevanti usando gli identificatori
+    query_terms = list(set(title[int(i)-1].split(" ")))                                 # Crea lista con i termini della query
     first_row = " "*11
-    lterms = dict([(x,max([len(x),10])+3) for x in query_terms])
-    for g in query_terms:
+    lterms = dict([(x,max([len(x),10])+3) for x in query_terms])                        # Crea lista che riporta qunto spazio dedicare a ciascuna colonna
+    for g in query_terms:                                                               # Crea la prima riga con i termini della query
         first_row += g.ljust(lterms[g]," ")
     row = []
     tot = 0
-    for g in query_terms:                                           # per ogni termine della query
+    for g in query_terms:                                                               # Per ogni termine della query
         row.append("")
-        for l in fields:                                            # per ogni campo ("title", "abstract" e "terms")
+        for l in fields:                                                                # Per ogni campo ("title", "abstract" e "terms")
             c = 0
-            for j in results:                                       # per ogni documento
+            for j in results:                                                           # Per ogni documento
                 try:
-                    for k in j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").lower().split(" "):      # per ogni parola del campo
-                        if k==g:                                        # controllo se la parola e' uguale al termine corrente
-                            c += 1                                      # se si' aggiungo 1 al conteggio
+                    cleaned_term = j[l].replace(","," ").replace("/"," ").replace("."," ").replace("-"," ").replace("?","").replace("'"," ").lower().split(" ")
+                    for k in cleaned_term:                                              # Per ogni parola del campo
+                        if k==g:                                                        # Controllo se la parola e' uguale al termine corrente,
+                            c += 1                                                      # se si' aggiungo 1 al conteggio
                             tot += 1         
-                except KeyError:
+                except KeyError:                                                        # Se il campo non c'e' il conteggio rimane a 0 
                     pass
-            row[-1] += (str(c)+(";" if l!="terms" else "")).ljust(4," ")                      # riga del tipo ***;***;*** ***;***;*** ...
+            row[-1] += (str(c)+(";" if l!="terms" else "")).ljust(4," ")                # aggiusta la spaziatura per l'elemento ***;***;***  
         row[-1] = row[-1].ljust(lterms[g]," ")
-    # adesso dovrei avere la linea completa 
+    # Adesso si dovrebbe avere la riga completa sotto forma di lista di elementi delle colonne in row
     if tot != 0:
         print "\n"+first_row
         print "query "+i.ljust(5," ")+ "".join(row)+"   tot. "+str(tot)+" parole su "+str(len(reldocs[i].split(" ")))+" documenti rilevanti"
-    # aggiungi ultima riga con i totali
-    return
+    # Stampa la riga se il totale e' non nullo e aggiunge un'ultima colonna con il totale di riga
+    return None
     
 # ---------------------------------------------------------------------------------------- #
 def fqt(hit, num, title):
+    """
+    Funzione che permette di sapere in quali query e' presente la parola in hit o, se hit contiene piu' parole, le query dove quelle parole appaiono contemporaneamente.
+    
+    Il risultato dovrebbe essere del tipo:
+    
+    La parola 'hit' si trova nelle query: 1,2,3,...
+    
+    oppure
+    
+    Le parole 'hi1', 'hit2', ... si trovano contemporanamente nelle query: 1,2,3,... 
+    
+    Parameters
+    ----------
+    hit : string o lista di string
+    Se in formato string dovrebbe contenere solo un termine, se e' una lista puo' contenere piu' termini.
+    
+    num : list
+    Contiene gli identificatori delle query.
+    
+    title : list of string
+    Lista delle query
+    
+    Returns
+    -------
+    ql : list
+    Contiene gli identificatori delle query in cui e' presente la parola
+    """
+    
     ql = []
     if isinstance(hit, basestring):
-        for i in num:
-            query_terms = set(title[int(i)-1].split(" "))
-            if hit in query_terms:
+        for i in num:                                                                   # Per ogni query in num
+            query_terms = set(title[int(i)-1].split(" "))                               # Creo l'insieme delle parole della query
+            if hit in query_terms:                                                      # Controllo se il termine hit e' in questo insieme
                 ql.append(i)
         if ql:
             print "\nLa parola '"+hit+"' si trova nelle query: ",
-            print str(ql)[1:-1].replace("'","").replace("u","")
+            print str(ql)[1:-1].replace("'","").replace("u","")  # [1:-1] serve per togliere le parentesi quadre, replace("u","") nel caso la stringa fosse unicode
         else:
             print "\nLa parola '"+hit+"' non si trova in nessuna query."
     else:
-        for i in num:
-            query_terms = set(title[int(i)-1].split(" "))
-            if set(hit).issubset(query_terms):
+        for i in num:                                                                   # Per ogni query in num
+            query_terms = set(title[int(i)-1].split(" "))                               # Creo l'insieme delle parole della query
+            if set(hit).issubset(query_terms):                                          # Controllo se i termini in hit formano un sottoinsieme delle parole nella query 
                 ql.append(i)
         if ql:
             print "\nLe parole "+str(hit)[1:-1]+" si trovano contemporanamente nelle query: ",
@@ -182,9 +267,9 @@ else:                                                   # altrimenti procedi
     relfile.close()
     # fino ad ora ho i documenti rilevanti per query
     
-    if sys.argv[4] == "iq":                          #indice query
-        # prendo in input le query che mi interessano
-        # immagino di avere una lista di numeri di query
+    if sys.argv[4] == "iq":                                                         # identificatore query
+        # Prendo in input le query che mi interessano
+        # Si prevede di avere una lista degli identificatori delle query
         hits = raw_input("Comma-separated query (tra 1 e 63 compresi, press enter to end): ")
         while hits != "":
             q=hits.split(",")
@@ -192,12 +277,13 @@ else:                                                   # altrimenti procedi
             hits = raw_input("\nComma-separated query (tra 1 e 63 compresi, press enter to end): ")
     
     
-    elif sys.argv[4] == "tnn":                                                    #tot not null
-        for i in num:#per ogni query della lista
+    elif sys.argv[4] == "tnn":                                                      # tot not null
+        for i in num:  # Per ogni query della lista num
             tnn(i, reldocs, title, maxres)
     
     
-    elif sys.argv[4] == "fqt":                                                      #find query term
+    elif sys.argv[4] == "fqt":                                                      # find query term
+        # Se si usa l'opzione -d allora si richiamano anche le funzioni iq() e tnn() per le query ottenute da fqt()
         hits = raw_input("Comma-separated terms (press enter to end): ")
         while hits != "":
             hits = hits.split(",")
@@ -228,9 +314,9 @@ else:                                                   # altrimenti procedi
     ix.searcher().close()
 
 
-#uso: python get_....py cartella_indice file_query file_qrels modalita'(iq, tnn, fqt) 
-# python frq_terms_rel_docs.py ./indice_stop2/ query.ohsu.1-63.xml qrels.ohsu.batch.87.txt iq
-# python frq_terms_rel_docs.py ./indice_stop2/ query.ohsu.1-63.xml qrels.ohsu.batch.87.txt tnn
+# uso: python frq_terms_rel_docs.py cartella_indice file_query file_qrels modalita'(iq, tnn, fqt) 
+# python frq_terms_rel_docs.py ../indice_stop2/ query.ohsu.1-63.xml qrels.ohsu.batch.87.txt iq
+# python frq_terms_rel_docs.py ../indice_stop2/ query.ohsu.1-63.xml qrels.ohsu.batch.87.txt tnn
 
 
 
