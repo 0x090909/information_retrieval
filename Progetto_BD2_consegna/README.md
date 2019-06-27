@@ -23,11 +23,17 @@ git clone https://github.com/mastershef/information_retrieval.git
 ```
 
 ## Utilizzo
-Il progetto è suddiviso in tre parti, per ognuna di esse si ha una cartella con il proprio file README che descrive le funzionalità e il modo di utilizzare i rispettivi programmi.
+Il progetto è suddiviso in quattro sotto-cartelle, per ognuna di esse si ha un file README che descrive le funzionalità e il modo di utilizzare i rispettivi programmi.
+Le quattro cartelle sono descritte brevemente inseguito
+* Indicizzazione: contiene i programmi dedicati alla creazione degli indici e la collezione sperimentale utilizzata.
+* Ricerca: contiene i programmi per effettuare il reperimento e le  query sperimentali.
+* Benchmarking: contiene il pacchetto di trec_eval compresso, le cartelle in cui vengono salvati i risultati, i programmi per la valutazione delle run e  il file dei documenti rilevanti.
+* Analisi_frequenze: contiiene i programmi utilizzati per cercare le stopword utilizzate nella terza prova degli esperimenti.
 
 ## Supporto
+Per eventuali dubbi sul codice inviare una mail ad uno tra i seguenti indirizzi:
+
+
 
 ## Autori
-Ogni sotto cartella ha un file README che contiene le
-indicazioni su come fare funzionare i programmi per la
-ricerca, benchmarking e indicizzazione.
+
