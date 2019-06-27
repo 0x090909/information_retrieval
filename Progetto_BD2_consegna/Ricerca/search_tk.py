@@ -26,6 +26,8 @@ def gettagdata(dom,tag):
     return tagdata
 
 # -------------------------------------------------------------------------------------------------- #
+# Le parole vengono eventualmente corrette di al massimo una lettera perche' altrimenti si rischia di 
+# utilizzare parole che c'entrano poco con la parola originale 
 def expq_cor(ix,query):
     check = []
     no_check = []
@@ -35,7 +37,7 @@ def expq_cor(ix,query):
                 check.append(x[1])                                          # Forse sara' da correggere, aggiungo la parola alla lista check
             else:
                 no_check.append(x[1])                                       # Altrimenti non viene controllata
-    if "hiv" in no_check:
+    if "hiv" in no_check:  # Per migliorare un po' la query 63 (la differenza si vede prendendo 1000 risultati) 
         no_check += ["aids"]
     corrector = ix.searcher().corrector("title")
     expq=[]
