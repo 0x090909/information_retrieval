@@ -17,4 +17,4 @@ Per fare gli esperimenti sono stati utilizzati i comandi:
 	python indicizzatore_batch_stopwords.py ../indice_stop2 ./ohsumed.87.xml ./stopWords_clinico.json
 	python indicizzatore_batch_stopwords.py ../indice_stop3 ./ohsumed.87.xml ./stopWords_clinico_3.json
 ```
-Gliultimi argomenti deicomandi corrispondono ai file contenenti le stopword  utilizzate di volta in volta.
+Gli ultimi argomenti dei comandi corrispondono ai file contenenti le stopword  utilizzate di volta in volta.
