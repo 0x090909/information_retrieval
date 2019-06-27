@@ -94,7 +94,7 @@ def res(results, query = "1", n = 10, tag = "tag",resfile=None,v=False):    #ris
             resfile.write(query+'\t'+"Q0"+'\t'+results[rank]['identifier']+'\t'+str(rank)+'\t'+str(results[rank].score)+'\t'+tag+"\n")
             
 # -------------------------------------------------------------------------------------------------- #
-def src(indexdir,quer,dsc=True,flds="2",lim=100,w="bm",lo="o",opt=[],resdir="",run=""):
+def src(indexdir,quer,dsc=True,flds="2",lim=100,w="bm",opt=[],lo="o",resdir="",run=""):
     """
     Questa funzione permette di effettuare il reperimento di risultati per query contenute nel file indicato in quer dall'indice indicato in indexdir, 
     utilizzando oggetti e funzioni del modulo whoosh.
@@ -237,5 +237,7 @@ if __name__ == "__main__":
         quer = sys.argv[2]                                                                          # file delle query
         resd = sys.argv[3]                                                                          # cartella dove mettere i risultati
         tag = sys.argv[4]                                                                           # runtag e nome del file dei risultati
+        # Si possono modificare anche altri parametri come:
+        # dsc, flds, w, opt e lo, per ulteriori informazioni su questi parametri consultare help(src)  (dopo aver eseguito "from search_tk import src")
         src(fst, quer, resdir=resd, run=tag, lim=1000)
         
