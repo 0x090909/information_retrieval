@@ -25,6 +25,9 @@ git clone https://github.com/mastershef/information_retrieval.git
 ## Utilizzo
 Il progetto è suddiviso in tre parti, per ognuna di esse si ha una cartella con il proprio file README che descrive le funzionalità e il modo di utilizzare i rispettivi programmi.
 
+## Supporto
+
+## Autori
 Ogni sotto cartella ha un file README che contiene le
 indicazioni su come fare funzionare i programmi per la
 ricerca, benchmarking e indicizzazione.
