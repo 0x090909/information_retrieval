@@ -10,7 +10,7 @@ Il programma ```indicizzatore_batch_baseline.py``` permette la crezione dell'ind
 	python indicizzatore_batch_baseline.py ../indice_baseline ./ohsumed.87.xml
 ```
 
-Il programma ```indicizzatore_batch_stopwords.py``` permette invece di creare unindice che prevede l'eliminazione delle stopword.
+Il programma ```indicizzatore_batch_stopwords.py``` permette invece di creare un indice che prevede l'eliminazione delle stopword.
 Per fare gli esperimenti sono stati utilizzati i comandi:
 ```bash
 	python indicizzatore_batch_stopwords.py ../indice_stop1 ./ohsumed.87.xml ./stopWords_generali.txt 
