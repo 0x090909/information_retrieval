@@ -22,7 +22,7 @@ Da questi si ricavano quindi i map utilizzando ```get_maps.sh```  che li salva n
 ```
 Questo programma mostra anche nell'output della console i map complessivi per ogni run.
 
-Infine per effettuare i test di Wilcoxon sulle coppie di risultati si usa il programma ```evaluation.py```
+Infine per effettuare i test di Wilcoxon sulle coppie di risultati si usa il programma ```evaluation.py``` con:
 ```bash
 	python evaluation.py
 ```
