@@ -1,4 +1,4 @@
-```
+```bash
 	cd Benchmarking/
 	gunzip trec_eval.8.1.tar.gz
 	tar xf trec_eval.8.1.tar

@@ -1,4 +1,4 @@
-```
+```bash
 	cd Indicizzazione/
 	python indicizzatore_batch_baseline.py ../indice_baseline ./ohsumed.87.xml
 	python indicizzatore_batch_stopwords.py ../indice_stop1 ./ohsumed.87.xml ./stopWords_generali.txt 
