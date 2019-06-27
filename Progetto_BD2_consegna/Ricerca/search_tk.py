@@ -37,8 +37,40 @@ def expq_cor(ix,query):
                 check.append(x[1])                                          # Forse sara' da correggere, aggiungo la parola alla lista check
             else:
                 no_check.append(x[1])                                       # Altrimenti non viene controllata
-    if "hiv" in no_check:  # Per migliorare un po' la query 63 (la differenza si vede prendendo 1000 risultati) 
+                
+    # Per migliorare un po' la query 63 (la differenza si vede prendendo 1000 risultati) 
+    if "hiv" in no_check:  
         no_check += ["aids"]
+    '''
+    if "gi" in no_check: 
+        no_check += ["gastrointestinal"]  
+      
+    BASELINE_1C
+	MAP complessivo: 0.2130
+	BASELINE_2C
+	MAP complessivo: 0.2746
+	BASELINE_3C
+	MAP complessivo: 0.2156
+	STOP1_1C
+	MAP complessivo: 0.2137
+	STOP1_2C
+	MAP complessivo: 0.2748
+	STOP1_3C
+	MAP complessivo: 0.2152
+	STOP2_1C
+	MAP complessivo: 0.2156
+	STOP2_2C
+	MAP complessivo: 0.2839
+	STOP2_3C
+	MAP complessivo: 0.2167
+	STOP3_1C
+	MAP complessivo: 0.2720
+	STOP3_2C
+	MAP complessivo: 0.3510
+	STOP3_3C
+	MAP complessivo: 0.2813
+    
+    '''    
     corrector = ix.searcher().corrector("title")
     expq=[]
     for x in check:                                                         # Per ogni parola in check
