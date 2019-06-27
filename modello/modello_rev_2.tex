@@ -51,11 +51,26 @@ in forma interattiva attraverso un browser a scelta.
 \section{Introduzione}
 \label{sec:introduzione}
 
-Lo scopo finale di un Sistema di Information Retrieval (IRS) e' quello di reperire documenti rilevanti relativi a una certa esigenza informativa\footnote{insieme delle circostanze in cui unapersona ha un problema da risolvere o un compito da svolgeree richiede informazioni importanti, utili o necessarie per larisoluzione del problema o lo svolgimento del compito}; dunque i documenti sono il primo ingresso del sistema, mentre il secondo e' costitutito dalle interrogazioni; i documenti devono essere indicizzati e nell'indice creato, si andra' a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza e' la proprieta' che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte e' detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Cio' che descrive i documenti e cio' che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale in entrtambi i casi.
-L'indicizzazione e' un trade-off tra il  miglioramento della rapprerentazione del contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza). Benche' ci sia sempre tensione tra queste due caratteristiche, ad oggi la questione piu' studiata e' quella dell'efficienza.
+Lo scopo finale di un Sistema di Information Retrieval (IRS) \`e quello di reperire documenti
+ rilevanti relativi a una certa esigenza informativa\footnote{insieme delle circostanze in cui una
+ persona ha un problema da risolvere o un compito da svolgeree richiede informazioni
+ importanti, utili o necessarie per la risoluzione del problema o lo svolgimento del compito};
+  dunque i documenti sono il primo input del sistema, mentre il secondo \`e
+  costitutito dalle interrogazioni; i documenti devono essere
+  indicizzati e nell'indice creato, si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza e' la proprieta' che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte e' detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Cio' che descrive i documenti e cio' che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale
+  in entrambi i casi.
+L'indicizzazione \`e un trade-off tra il  miglioramento della rapprerentazione del
+contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza).
+Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato
+la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
 
-Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato la configurazione migliore tra un sistema di
-reperimento con o senza uso di stopword e il tuning dei parametri dello schema di pesatura\footnote{funzione che assegna per ogni documento diversi livelli d’importanza dei termini mediante dei pesi, che possono variare con l’interrogazione} BM25F .
+
+Il resto della relazione \`e organizzato come segue. Nella sezione 2, si descrivono
+alcuni dei metodi standard, i pi\`u didattici, su cui si basano gli esperimenti.
+La sezione 3, presenta l'interfaccia web e le sue modalit\`a di utilizzo.
+Nella sezione 4, sono riportati gli esperimenti fatti ed i risultati ottenuti,
+commentati e sotto forma di tabelle esplicative. Infine, nella sezione 5,
+si traggono delle brevi conclusioni.
 
 
 
@@ -90,11 +105,11 @@ suggerisce Bib\TeX\ se si scrive con \LaTeX.
 \section{Base di partenza}
 \label{sec:base-di-partenza}
 
-Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto 
+Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
 "Best Match 25 Model with Extension to Multiple Weighted Fields" o in breve BM25F
 
 
-Le stopword\cite{WBC_stopword} sono parole che non portano informazione 
+Le stopword\cite{WBC_stopword} sono parole che non portano informazione
 significativa al contenuto informativo come congiunzioni, articoli, avverbi..\par
 
 %
@@ -152,7 +167,7 @@ Si \`e optato per 100 documenti poiche un numero maggiore non porta grandi migli
 
 \vskip 1in
 Affinch\`e Whoosh possa indicizzare una collezione di documenti, necessita la
-specificazione di uno schema che include, per ogni possibile campo dei documenti della collezine, il nome del campo ed il tipo del campo. 
+specificazione di uno schema che include, per ogni possibile campo dei documenti della collezine, il nome del campo ed il tipo del campo.
 
 Lo schema di base per la collezione qui utilizzata \`e il seguente:
 \par
@@ -195,28 +210,28 @@ Si possono vedere i risultati ottenuti usando la configurazione "baseline" riass
 map all 0.2130               & map all \bf 0.2744               & map all 0.2155 \\ \hline
 \end{tabular}
 
-\caption{ Risultati treceval complessivi per tutte le query, nessuna manipolazione del testo, numero risultati restituiti per 
+\caption{ Risultati treceval complessivi per tutte le query, nessuna manipolazione del testo, numero risultati restituiti per
 ogni query = 100, pesatura BM25F.}
 \end{table}
 
 Come si nota dalla tabella il valore baseline di \textit{M.A.P} \`e 0.2744.
 \par
 
-% 
+%
 %  Il processo ed il codice per creare l'indice sono  facilmente comprensibili visionando il file  \emph{indicizzatore\_batch\_baseline.py}. \par
 % \lstset{
 %   language=bash,
 %   basicstyle=\ttfamily
 % }
-% 
+%
 % Per eseguire l'indicizzazione  baseline \`e sufficiente lanciare lo script python con il seguente comando:
 % \begin{lstlisting}
-%   indicizzatore_batch_baseline.py \ 
+%   indicizzatore_batch_baseline.py \
 %   cartella_indice file_documenti.xml
 % \end{lstlisting}
-% 
+%
 % Per eseguire il reperimento, che poi produce il file con i risultati in formato compatibile con trec\_eval, \`e sufficiente lanciare lo script python con il comando:
-% 
+%
 % \begin{lstlisting}
 %   python search_tk.py cartella_indice \
 %   file_query.xml cartella_risultati nome_file_risultati
@@ -236,7 +251,7 @@ Come con la baseline, per ciascuna prova si effettua la ricerca per uno, due e t
 
 Per la prima prova sono state utilizzate le stopword generali della lingua inglese. Queste comprendono termini come "the", "that", "is"; sono poi state aggiunte anche le lettere dell'alfabeto ed i numeri.
 
-Come si vede in Tabella 2, non sembra si sia ottenuto un miglioramento significativo rispetto alla baseline. Il MAP ottenuto utilizzando due campi "migliora" solo dello 0.0001. 
+Come si vede in Tabella 2, non sembra si sia ottenuto un miglioramento significativo rispetto alla baseline. Il MAP ottenuto utilizzando due campi "migliora" solo dello 0.0001.
 \begin{table}
 \centering
 \begin{tabular}{lll}
@@ -246,9 +261,9 @@ Come si vede in Tabella 2, non sembra si sia ottenuto un miglioramento significa
  num\textit{ret all 6228 }  &  num\textit{ret all 6244 }  &  num\textit{ret all 6271 }   \\
  num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
  num\textit{rel}ret all 350  &  num\textit{rel}ret all 418  &  num\textit{rel}ret all 367   \\
-map all 0.2137               & map all \bf 0.2745               & map all 0.2152          \\ \hline 
-\end{tabular} 
-    
+map all 0.2137               & map all \bf 0.2745               & map all 0.2152          \\ \hline
+\end{tabular}
+
 \caption{ Risultati treceval, rimozione delle stopword generali, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 
@@ -268,9 +283,9 @@ Con questa prova sono stati ottenuti risultati accettabili, infatti come si vede
  num\textit{ret all 6228 }  &  num\textit{ret all 6244 }  &  num\textit{ret all 6271 }   \\
  num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
  num\textit{rel}ret all 350  &  num\textit{rel}ret all 419  &  num\textit{rel}ret all 376   \\
-map all 0.2156               & map all \bf 0.2837               & map all 0.2166          \\ \hline 
-\end{tabular} 
-    
+map all 0.2156               & map all \bf 0.2837               & map all 0.2166          \\ \hline
+\end{tabular}
+
 \caption{ Risultati treceval, rimozione delle stopword cliniche, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 
@@ -281,7 +296,7 @@ Nell'ultima prova sono state aggiunte altre parole alla lista delle stopword. La
 
 Nella prima \`e stata ricavata la frequenza con cui le parole delle query appaiono nei rispettivi documenti rilevanti. Dopo di ci\`o le parole con frequenza prossima allo 0 sono state prese in considerazione come possibili stopword.
 
-Nella seconda fase sono state prese le query che, basandosi sui risultati della seconda prova, hanno avuto un MAP relativamente basso(inferiore a 0.2). Sono state quindi prese alcune parolo di queste query come altre possibili stopword anche basandosi sulla loro frequenza nei documenti rilevanti. 
+Nella seconda fase sono state prese le query che, basandosi sui risultati della seconda prova, hanno avuto un MAP relativamente basso(inferiore a 0.2). Sono state quindi prese alcune parolo di queste query come altre possibili stopword anche basandosi sulla loro frequenza nei documenti rilevanti.
 
 Per alcune parole la scelta se includerle nell'insieme di stopword \`e stata resa difficile dal fatto che, essendo presenti in pi\`u di una query la loro rimozione poteva significare il miglioramento di un MAP ed il peggioramento di un altro.
 
@@ -301,9 +316,9 @@ Come si pu\`o notare dalla Tabella 4 si ha un aumento del MAP rispetto alla base
  num\textit{ret all 5282 }  &  num\textit{ret all 5690 }  &  num\textit{ret all 5788 }   \\
  num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
  num\textit{rel}ret all 386  &  num\textit{rel}ret all 463  &  num\textit{rel}ret all 435   \\
-map all 0.2720               & map all \bf 0.3508               & map all 0.2813          \\ \hline 
-\end{tabular} 
-    
+map all 0.2720               & map all \bf 0.3508               & map all 0.2813          \\ \hline
+\end{tabular}
+
 \caption{ Risultati treceval, rimozione delle stopword cliniche migliorate, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 \par
@@ -319,11 +334,17 @@ La Figura 2 riassume i risultati delle tre prove e si pu\`o notare un netto migl
 
 
 \subsection{Test di significativit\`a :}
-Per avere conferma che le differenze tra i MAP ottenuti nelle varie prove e nella baseline siano significativamente diversi si \`e ritenuto opportuno effettuare dei test. Tra i test che si utilizzano comunemente a questo scopo si \`e scelto di utilizzare il test di Wilcoxon che a differenza del'alternativo t-test risulta avere pi\`u potenza statistica in caso di non normalit\`a dei dati.
+Per avere conferma che le differenze tra i MAP ottenuti nelle varie prove e nella baseline
+siano significativamente diversi si \`e ritenuto opportuno effettuare dei test.
+Tra i test che si utilizzano comunemente a questo scopo si \`e scelto di utilizzare il
+test di Wilcoxon che a differenza dell'alternativo t-test risulta avere pi\`u
+potenza statistica in caso di non normalit\`a dei dati.
 
-I test sono stati fatti tra i MAP delle prove utilizzando due campi in quanto hanno dato generalmente risultati migliori.
+I test sono stati fatti tra i MAP delle prove utilizzando due campi in quanto hanno
+dato generalmente risultati migliori.
 
-L'ipotesi alternativa \`e unilaterale ed equivale a dire che, tra le due prove confrontate, la seconda prova ha MAP maggiore della prima.
+L'ipotesi alternativa \`e unilaterale ed equivale a dire che, tra le due prove
+confrontate, la seconda prova ha MAP maggiore della prima.
 Per contro l'ipotesi nulla \`e che la prima prova ha MAP maggiore o uguale alla seconda.
 
 \begin{table}
@@ -336,9 +357,9 @@ Per contro l'ipotesi nulla \`e che la prima prova ha MAP maggiore o uguale alla 
  STOP1 contro STOP2     &  549.5    &  0.0056       \\
  BASELINE contro STOP3  &  276.0    &  $1.2749\mathrm{e}{-6}$   \\
  STOP1 contro STOP3     &  291.0    &  $1.2936\mathrm{e}{-6}$   \\
- STOP2 contro STOP3     &  290.0    &  $3.5437\mathrm{e}{-6}$   \\ \hline 
-\end{tabular} 
-    
+ STOP2 contro STOP3     &  290.0    &  $3.5437\mathrm{e}{-6}$   \\ \hline
+\end{tabular}
+
 \caption{ Statistiche test e livelli di significativit\`a osservati per i test sulla differenza dei MAP.
 STOP1 indica le stopword generali, STOP2 indica le stopword cliniche e STOP3 indica le stopword cliniche migliorate.}
 \end{table}
@@ -348,10 +369,19 @@ Invece, con la terza prova il p-value risulta molto pi\`u basso portando a rifiu
 
 
 \section{Conclusione}
+
+Come si \`e visto dai risultati delle prove, l'utilizzo di stopword inerenti al contesto
+della collezione, porta a reperire pi\`u documenti rilevanti nelle prime posizioni.
+Bisogna, per\`o, tenere in considerazione che nella terza prova, quella che ha dato
+i risultati migliori, l'insieme delle stopword creato \`e strettamente legato alle
+query sperimentali. Per questo c'\`e la possibilit\`a che i risultati ottenuti con query diverse
+siano peggiori.
+
+
 %
-%Inizialmente si \`e pensato che utilizzare le stopword generali della lingua inglese fosse sufficiente per eliminare le 
+%Inizialmente si \`e pensato che utilizzare le stopword generali della lingua inglese fosse sufficiente per eliminare le
 %parole che non portano informazione, e di conseguenza aumentare il parametro di interesse M.A.P; i risultati
-%non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopword cliniche, cio\`e stopword utilizzate 
+%non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopword cliniche, cio\`e stopword utilizzate
 %soltato in ambito clinico/medico \cite{stopword_cliniche}.
 
 \begin{thebibliography}{8}
