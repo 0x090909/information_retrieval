@@ -324,25 +324,27 @@ Per avere conferma che le differenze tra i MAP ottenuti nelle varie prove e nell
 I test sono stati fatti tra i MAP delle prove utilizzando due campi in quanto hanno dato generalmente risultati migliori.
 
 L'ipotesi alternativa \`e unilaterale ed equivale a dire che, tra le due prove confrontate, la seconda prova ha MAP maggiore della prima.
-
+Per contro l'ipotesi nulla \`e che la prima prova ha MAP maggiore o uguale alla seconda.
 
 \begin{table}
 \centering
 \begin{tabular}{lll}
 \hline
 \textbf{ Prove a confronto }  & \textbf{ statistica test }  & \textbf{ p-value }            \\ \hline
- BASELINE contro STOP1  &  582      &  0.0393      \\
+ BASELINE contro STOP1  &  582      &  0.0393       \\
  BASELINE contro STOP2  &  551.5    &  0.0092       \\
  STOP1 contro STOP2     &  549.5    &  0.0056       \\
- BASELINE contro STOP3  &  276.0    &  1.2749e-06   \\
- STOP1 contro STOP3     &  291.0    &  1.2936e-06   \\
- STOP2 contro STOP3     &  290.0    &  3.5437e-06   \\ \hline 
+ BASELINE contro STOP3  &  276.0    &  $1.2749\mathrm{e}{-6}$   \\
+ STOP1 contro STOP3     &  291.0    &  $1.2936\mathrm{e}{-6}$   \\
+ STOP2 contro STOP3     &  290.0    &  $3.5437\mathrm{e}{-6}$   \\ \hline 
 \end{tabular} 
     
 \caption{ Statistiche test e livelli di significativit\`a osservati per i test sulla differenza dei MAP.
 STOP1 indica le stopword generali, STOP2 indica le stopword cliniche e STOP3 indica le stopword cliniche migliorate.}
 \end{table}
 
+Come si vede in Tabella 5 i miglioramenti portati dalle stopword delle prime due prove hanno p-value che permettono di rifiutare l'ipotesi nulla solo in caso si prenda come soglia il livello di significativit\`a dello 0.05.
+Invece, con la terza prova il p-value risulta molto pi\`u basso portando a rifiutare l'ipotesi nulla in maniera pi\`u convincente.
 
 
 \section{Conclusione}
