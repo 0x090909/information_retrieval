@@ -8,5 +8,7 @@ do
     name=${name##*/}
     echo $name >> ./maps.txt
    	eval "cat $file | grep ^map | cut -f3 >> ./maps.txt"
+   	echo $name
+   	map=$(cat  $file | grep ^map | cut -f3 | tail -1)
+   	echo "MAP complessivo: $map"
 done
-

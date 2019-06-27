@@ -167,6 +167,7 @@ def src(indexdir,quer,dsc=True,flds="2",lim=100,w="bm",lo="o",opt=[],resdir="",r
     # Apre il file dove inserire i risultati
     if resdir and os.path.exists(resdir):
         resfile = open(resdir+"/"+run+"_"+flds+"C"+".treceval",'w')  # Se si cambiano piu' parametri e' consigliato usare la variabile tag al posto di run+"_"+flds+"C"
+        print "File dei risultati "+flds+"C"+".treceval"
     else:
         print resdir,"does not exist"
         resdir=None
