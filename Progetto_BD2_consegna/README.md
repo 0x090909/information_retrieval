@@ -30,6 +30,11 @@ Le quattro cartelle sono descritte brevemente inseguito
 * Benchmarking: contiene il pacchetto di trec_eval compresso, le cartelle in cui vengono salvati i risultati, i programmi per la valutazione delle run e  il file dei documenti rilevanti.
 * Analisi_frequenze: contiiene i programmi utilizzati per cercare le stopword utilizzate nella terza prova degli esperimenti.
 
+Per far funzionare i comandi riportati nei README delle sottocartelle  è necessario essere nellacartella principale della repository:
+```bash
+cd .../..
+```
+
 ## Supporto
 Per eventuali dubbi sul codice inviare una mail ad uno tra i seguenti indirizzi:
 
