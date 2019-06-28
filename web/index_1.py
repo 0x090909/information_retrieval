@@ -7,8 +7,9 @@ from whoosh.qparser import QueryParser
 from whoosh.filedb.filestore import FileStorage
 from paginate_whoosh import WhooshPage
 from search_ohsumed import src
+import re
 
-render = web.template.render('templates',base="main_layout")
+render = web.template.render('templates',base="main_layout",globals={'re':re})
 
 
 fst = FileStorage("../ohsumed_index_dir_stopwords_clinico")
