@@ -4,29 +4,35 @@ $def with (results, user_data, searcherlen, pages)
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-content">
-					<h2>
-						$searcherlen results found for: <span class="text-navy">"$user_data.query"</span>
-					</h2>
-					<small>Request time  (0.23 seconds)</small>
-
+				<nav class="navbar navbar-dark bg-primary">
+                <a class="navbar-brand mx-auto" href="/"> Ohsumed Search </a>
+                </nav>
+				
 					<div class="search-form">
 						<form action="search" method="get">
 							<div class="input-group">
-								<input type="text" value="$user_data.query" name="query" class="form-control input-lg">
-								<input type="hidden" value="1" name="page" class="form-control input-lg">
+								<input type="text" value="$user_data.query" name="query" class="form-control input-mg">
+								<input type="hidden" value="1" name="page" class="form-control input-mg">
 								<div class="input-group-btn">
-									<button class="btn btn-lg btn-primary" type="submit">
+									<button class="btn btn-primary btn-mg" type="submit">
 										Search
 									</button>
 								</div>
 							</div>
 						</form>
 					</div>
+
+					<h2>
+						$searcherlen results found for: <span class="text-navy">"$user_data.query"</span>
+					</h2>
+					<small>Request time  (0.23 seconds)</small>
+
 					$for article in results:
 						<div class="hr-line-dashed"></div>
 						<div class="search-result">
-							<h3><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')" target="_blank">$article['title']</a></h3>
-							<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')" class="search-link" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')</a>
+						$ link = re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+(' '+article['authors']+'"' if 'authors' in article else '"')).replace(" ",'"+"').replace(":",'"+"').replace(";","").replace(".","")
+							<h3><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" target="_blank">$article['title']</a></h3>
+							<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" class="search-link" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/?term=${link[:50]+"..." if len(link)>50 else link}</a>
 							<p>
 								$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
 									$article.get("abstract")[:300] + '...'

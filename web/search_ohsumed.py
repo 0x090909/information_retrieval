@@ -72,11 +72,11 @@ def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     query = parser(campi,ix.schema, group=lgroup).parse(q)
     new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))             #query corretta se una lettera sbagliata
     results = ix.searcher(weighting=score).search(query,limit=None)[:1000]                      # risultati
-    respage = 20
+    respage = 15
     reslen = len(results)
     page = WhooshPage(results, page=ud.page, items_per_page=respage)
     pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
-    pg = page.link_map("~3~","search?query="+str(ud.query)+"&page=$page")
+    pg = page.link_map("~2~","search?query="+str(ud.query)+"&page=$page")
     for p in pg:
         print pg[p]
     ix.searcher().close()
@@ -116,7 +116,7 @@ def adv_src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     query = parser(campi,ix.schema, group=lgroup).parse(q)
     new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))             #query corretta se una lettera sbagliata
     results = ix.searcher(weighting=score).search(query,limit=None)[:1000]                      # risultati
-    respage = 20
+    respage = 15
     reslen = len(results)
     page = WhooshPage(results, page=ud.page, items_per_page=respage)
     pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
