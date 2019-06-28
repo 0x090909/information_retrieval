@@ -25,8 +25,8 @@ $def with (results, user_data, searcherlen, pages)
 					$for article in results:
 						<div class="hr-line-dashed"></div>
 						<div class="search-result">
-							<h3><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')">$article['title']</a></h3>
-							<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')" class="search-link">https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')</a>
+							<h3><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')" target="_blank">$article['title']</a></h3>
+							<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')" class="search-link" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/?term=$re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+'"').replace(" ",'"+"').replace(":",'"+"')</a>
 							<p>
 								$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
 									$article.get("abstract")[:300] + '...'
