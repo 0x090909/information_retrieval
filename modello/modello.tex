@@ -31,7 +31,7 @@
 %
 \institute{Corso di laurea in Statistica per le tecnologie e le scienze,
   matricola 1148387 \email{alessandro.stefani.6@studenti.unipd.it} \and Corso di laurea in Statistica per le tecnologie e le scienze,
-    matricola 1234567 \email{caterina.buranelli@studenti.unipd.it} \and Corso di laurea in Statistica per le tecnologie e le scienze,
+    matricola 1163443 \email{caterina.buranelli@studenti.unipd.it} \and Corso di laurea in Statistica per le tecnologie e le scienze,
       matricola 1147351 \email{gheorghecristi.gutu@studenti.unipd.it}
   }
 %
@@ -51,7 +51,7 @@ in forma interattiva attraverso un browser a scelta.
 \section{Introduzione}
 \label{sec:introduzione}
 
-Lo scopo finale di un Sistema di Information Retrieval (IRS) e' quello di reperire documenti rilevanti relativi a una certa esigenza informativa\footnote{insieme delle circostanze in cui unapersona ha un problema da risolvere o un compito da svolgeree richiede informazioni importanti, utili o necessarie per larisoluzione del problema o lo svolgimento del compito}; dunque i documenti sono il primo ingresso del sistema, mentre il secondo e' costitutito dalle interrogazioni; i documenti devono essere indicizzati e nell'indice creato, si andra' a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza e' la proprieta' che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte e' detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Cio' che descrive i documenti e cio' che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale in entrtambi i casi.
+Lo scopo finale di un Sistema di Information Retrieval (IRS) e' quello di reperire documenti rilevanti relativi a una certa esigenza informativa\footnote{insieme delle circostanze in cui una persona ha un problema da risolvere o un compito da svolgere e richiede informazioni importanti, utili o necessarie per la risoluzione del problema o lo svolgimento del compito}; dunque i documenti sono il primo ingresso del sistema, mentre il secondo e' costitutito dalle interrogazioni; i documenti devono essere indicizzati e nell'indice creato, si andra' a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza e' la proprieta' che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte e' detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Cio' che descrive i documenti e cio' che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale in entrambi i casi.
 L'indicizzazione e' un trade-off tra il  miglioramento della rapprerentazione del contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza). Benche' ci sia sempre tensione tra queste due caratteristiche, ad oggi la questione piu' studiata e' quella dell'efficienza.
 
 Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato la configurazione migliore tra un sistema di
@@ -121,16 +121,16 @@ sezione.
 \label{sec:esperimenti}
 
 
-Per gli esperimenti si \`e utilizzato la collezione sperimentale 
-chiamata OHSUMED\footnote{ \url{https://bit.ly/2wpOynZ}}, la collezione contiene circa 54711 documenti.
+Per gli esperimenti si \`e utilizzata la collezione sperimentale
+chiamata OHSUMED\footnote{ \url{https://bit.ly/2wpOynZ}}, che contiene circa 54711 documenti.
 Gli esperimenti effettivi sono iniziati solamente dopo aver stabilito quale
-e' la baseline dalla quale partiamo, in altre parole ci siamo chiesti quale
-sia la base di parteza dalla quale dobbiamo migliorare il nostro sistema 
+fosse la baseline dalla quale partire, in altre parole ci siamo chiesti quale
+fosse la base di partenza dalla quale  migliorare il nostro sistema
 di ricerca.  \par
 
-Affinch\`e Whoosh possa indicizzare una collezione di documenti, necessita la
-specificazione di uno schema, che include per ogni campo, nome del campo
-e tipo di quel campo. \par
+Affinch\`e Whoosh indicizzi una collezione di documenti, \`e necessario
+specificare uno schema, con diversi campi, che cambiano a seconda dei casi;
+per ogni campo si indica  nome e tipo. \par
 
 \begin{lstlisting}
 schema = Schema(docid      	= ID(stored=True),
@@ -144,17 +144,17 @@ schema = Schema(docid      	= ID(stored=True),
 \end{lstlisting}
 \begin{tablenotes}
       \small
-      \item \bf Figura: Schema necessario all'indicizzazione dei documenti. 
+      \item \bf Figura: Schema necessario all'indicizzazione dei documenti.
     \end{tablenotes}
 
 
-Definito lo schema abbiamo sfruttato la configurazione strettamente necessaria senza alcun tuning per avere 
-un sistema di reperimento "minimale". 
+Definito lo schema abbiamo sfruttato la configurazione strettamente necessaria senza alcun tuning per avere
+un sistema di reperimento "minimale".
 
-La configurazione baseline ideale, \`e stata scelta in base al Mean Average Precision (M.A.P.)\cite{WBC_map} variando il parametro che indica quale schema di 
-pesatura usare nel processo di reperimento tra cui TF\_IDF e BM25F .
+La configurazione baseline ideale \`e stata scelta in base al Mean Average Precision (M.A.P.),\cite{WBC_map} variando il parametro che indica quale schema di
+pesatura usare nel processo di reperimento, tra cui TF\_IDF e BM25F .
 
- Il processo e codice di indicizzazione sono  facilmente comprensibili visionando il file  \emph{indicizzazione\_batch\_baseline.py}. \par
+ Il processo e il codice di indicizzazione sono facilmente comprensibili visionando il file  \emph{indicizzazione\_batch\_baseline.py}. \par
 \lstset{
   language=bash,
   basicstyle=\ttfamily
@@ -162,11 +162,11 @@ pesatura usare nel processo di reperimento tra cui TF\_IDF e BM25F .
 
 Per eseguire l'indicizzazione  baseline \`e sufficiente lanciare il seguente script python con il comando:
 \begin{lstlisting}
-  python indicizzazione_batch_baseline.py \ 
+  python indicizzazione_batch_baseline.py \
   cartella_indice file_documenti.xml
 \end{lstlisting}
 
-Per eseguire il reperimento che poi produce il file treceval baseline basato sullo schema TF\_IDF \`e sufficiente lanciare 
+Per eseguire il reperimento che poi produce il file treceval baseline basato sullo schema TF\_IDF \`e sufficiente lanciare
 lo script python con il comando:
 
 \begin{lstlisting}
@@ -174,7 +174,7 @@ lo script python con il comando:
   file_query.xml 1 > reperimento_baseline.treceval
 \end{lstlisting}
 
-Per eseguire il reperimento che poi produce il file treceval baseline basato sullo schema BM25F \`e sufficiente lanciare 
+Per eseguire il reperimento che poi produce il file treceval baseline basato sullo schema BM25F \`e sufficiente lanciare
 lo script python con il comando:
 
 \begin{lstlisting}
@@ -183,8 +183,8 @@ lo script python con il comando:
 \end{lstlisting}
 
 \subsection{Risultati baseline con schema di pesatura TF IDF}
-Descrizione: "1 Campo" significa che il reperimento e' stato eseguito soltanto 
-valutando il campo title,   "2 Campi" titolo e abstract,  "3 Campi" titolo e abstract e terms.
+Descrizione: "1 Campo" significa che il reperimento e' stato eseguito soltanto
+valutando il campo title,   "2 Campi" title e abstract,  "3 Campi" title, abstract e terms.
 \begin{table}
 \centering
 \begin{tabular}{lll}
@@ -194,8 +194,8 @@ valutando il campo title,   "2 Campi" titolo e abstract,  "3 Campi" titolo e abs
  num\textit{ret all 37454 }        &  num\textit{ret all 57356 }        &  num\textit{ret all 58456 }         \\
  num\textit{rel all 670 }          &  num\textit{rel all 670 }          &  num\textit{rel all 670 }           \\
  num\textit{rel}ret all 305        &  num\textit{rel}ret all 380        &  num\textit{rel}ret all 382         \\
-map all 0.0833                     & map all 0.0591                     & map all 0.0829                     
-\end{tabular} 
+map all 0.0833                     & map all 0.0591                     & map all 0.0829
+\end{tabular}
 \begin{tablenotes}
       \small
       \item \bf Figura: Risultati treceval, nessuna manipolazione del testo, numero risultati restituiti per ogni query = 1000, pesatura TF IDF.
@@ -203,8 +203,8 @@ map all 0.0833                     & map all 0.0591                     & map al
 \end{table}
 
 \subsection{Risultati baseline con schema di pesatura BM25F}
-Descrizione: "1 Campo" significa che il reperimento e' stato eseguito soltanto 
-valutando il campo title,   "2 Campi" titolo e abstract,  "3 Campi" titolo e abstract e terms.
+Descrizione: "1 Campo" significa che il reperimento e' stato eseguito soltanto
+valutando il campo title,   "2 Campi" title e abstract,  "3 Campi" title, abstract e terms.
 \begin{table}
 \centering
 \begin{tabular}{lll}
@@ -214,11 +214,11 @@ valutando il campo title,   "2 Campi" titolo e abstract,  "3 Campi" titolo e abs
  num\textit{ret all 37454 }  &  num\textit{ret all 57356 }  &  num\textit{ret all 58456 }   \\
  num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
  num\textit{rel}ret all 307  &  num\textit{rel}ret all 387  &  num\textit{rel}ret all 383   \\
-map all 0.1073               & map all \bf 0.1289               & map all 0.1227               
-\end{tabular} 
+map all 0.1073               & map all \bf 0.1289               & map all 0.1227
+\end{tabular}
 \begin{tablenotes}
       \small
-      \item \bf Figura: Risultati treceval, nessuna manipolazione del testo, numero risultati restituiti per 
+      \item \bf Figura: Risultati treceval, nessuna manipolazione del testo, numero risultati restituiti per
 ogni query = 1000, pesatura BM25F.
     \end{tablenotes}
 \end{table}
@@ -228,11 +228,12 @@ Alla luce dei risultati si e' scelto come valori per i parametri baseline: \text
 
 \subsection{Primo tentativo: uso delle stopword}
 
-Le stopword\cite{WBC_stopword} sono parole che non portano informazione 
+Le stopword\cite{WBC_stopword} sono parole che non portano informazione
 significativa al contenuto informativo come congiunzioni, articoli, avverbi..\par
 
-Inizialmente si \`e pensato di utilizzare le stopword generali della lingua inglese per eliminare le
-parole che non portano informazione significativa. I risultati sono stati accettabili, ma siamo riusciti a migliorarli togliendo anche stopword cliniche, cio\`e  strettamente inerenti al contesto medico e abbiamo ottenuto i seguenti risultati:
+Inizialmente si \`e pensato di utilizzare le stopword generali della lingua inglese, per eliminare le parole che non
+portano informazione significativa e di conseguenza aumentare il parametro di interesse M.A.P. I risultati sono stati accettabili, ma siamo riusciti
+a migliorarli togliendo anche le stopword cliniche\cite{stopword_cliniche}, cio\`e  strettamente inerenti al contesto medico. Abbiamo ottenuto i seguenti risultati:
 \begin{table}
 \centering
 \begin{tabular}{lll}
@@ -242,11 +243,11 @@ parole che non portano informazione significativa. I risultati sono stati accett
  num\textit{ret all 54873 }  &  num\textit{ret all 612669 }  &  num\textit{ret all 61908 }   \\
  num\textit{rel all 670 }    &  num\textit{rel all 670 }    &  num\textit{rel all 670 }     \\
  num\textit{rel}ret all 477  &  num\textit{rel}ret all 570  &  num\textit{rel}ret all 538   \\
-map all 0.2045               & map all \bf 0.2752               & map all 0.1665               
-\end{tabular} 
+map all 0.2045               & map all \bf 0.2752               & map all 0.1665
+\end{tabular}
 \begin{tablenotes}
       \small
-      \item \bf Figura: Risultati treceval, rimozione delle stopword cliniche, numero risultati restituiti per 
+      \item \bf Figura: Risultati treceval, rimozione delle stopword cliniche, numero risultati restituiti per
 ogni query = 1000, pesatura BM25F.
     \end{tablenotes}
 \end{table}
@@ -254,9 +255,9 @@ ogni query = 1000, pesatura BM25F.
 
 
 %
-%Inizialmente si \`e pensato che utilizzare le stopword generali della lingua inglese fosse sufficiente per eliminare le 
+%Inizialmente si \`e pensato che utilizzare le stopword generali della lingua inglese fosse sufficiente per eliminare le
 %parole che non portano informazione, e di conseguenza aumentare il parametro di interesse M.A.P; i risultati
-%non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopword cliniche, cio\`e stopword utilizzate 
+%non sono stati molto soddisfacenti, abbiamo quindi optato per l'utilizzo di stopword cliniche, cio\`e stopword utilizzate
 %soltato in ambito clinico/medico \cite{stopword_cliniche}.
 
 \begin{thebibliography}{8}

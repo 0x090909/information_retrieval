@@ -64,9 +64,30 @@ def expq_cor(ix,query):
         expq += corr
     return " ".join(expq+no_check)
 
+<<<<<<< HEAD
 # -------------------------------------------------------------------------------------------------- #
 
 
+def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
+    ix = fst.open_index()
+=======
+>>>>>>> 488e033224840a100b1902c9139a26fc76eaa999
+
+# -------------------------------------------------------------------------------------------------- #
+
+
+
+def suggerimenti(ix,query):
+    qt_correction = dict([(x[1],[]) for x  in query.all_terms(phrases=True) if len(x[1]) > 3])
+    corrector = ix.searcher().corrector("abstract")
+    for x in qt_correction:
+        scores = []
+        for y in corrector.suggest(x, prefix=2, maxdist=5, limit=10):
+            qt_correction[x].append(y)
+        
+    return qt_correction
+
+# -------------------------------------------------------------------------------------------------- #
 def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     ix = fst.open_index()
 
@@ -101,60 +122,24 @@ def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     query = parser(campi,ix.schema, group=lgroup).parse(q)
     new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))             #query corretta se una lettera sbagliata
     results = ix.searcher(weighting=score).search(query,limit=None)[:1000]                      # risultati
-    respage = 20
-    reslen = len(results)
-    page = WhooshPage(results, page=ud.page, items_per_page=respage)
-    pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
-    pg = page.link_map("~3~","search?query="+str(ud.query)+"&page=$page")
-    for p in pg:
-        print pg[p]
-    ix.searcher().close()
-    return page, reslen, pg
-
-def adv_src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
-    ix = fst.open_index()
-
-    # ------------------------------------------------------------------------------------------------ #
-    if lo=="o":
-        lgroup = qparser.OrGroup
-    elif lo=="a":
-        lgroup = qparser.AndGroup
-
-    # ------------------------------------------------------------------------------------------------ #
-    if w=="tf":
-        score = scoring.TF_IDF()
-    elif w=="bm":
-        if opt:                                     # opt, se c'e', contiene il punto di massimo per i due parametri
-            score = scoring.BM25F(opt[0],opt[1])
-        else:
-            score = scoring.BM25F()
-
-    # ------------------------------------------------------------------------------------------------ #
-    if flds=="1":
-        campi = "title"
-        parser = qp
-    elif flds=="2":
-        campi = ["title", "abstract"]
-        parser = mp
-    elif flds=="3":
-        campi = ["title", "abstract","terms"]
-        parser = mp
-
-    # ------------------------------------------------------------------------------------------------- #
-    q = ud.query
-    query = parser(campi,ix.schema, group=lgroup).parse(q)
-    new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))             #query corretta se una lettera sbagliata
-    results = ix.searcher(weighting=score).search(query,limit=None)[:1000]                      # risultati
-    respage = 20
+    respage = 15
     reslen = len(results)
     page = WhooshPage(results, page=ud.page, items_per_page=respage)
     pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
     pg = page.link_map("~2~","search?query="+str(ud.query)+"&page=$page")
-    print pg
-    ix.searcher().close()
-    return page, reslen, pages
+    
+    #for p in pg:
+    #    print pg[p]
+    if reslen:
+        ix.searcher().close()
+        return page, reslen, pg
+    else:
+        qtc = suggerimenti(ix,query)
+        ix.searcher().close()
+        return qtc, 0, None
 
-
+def adv_src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
+    pass
 
 
 # -------------------------------------------------------------------------------------------------- #

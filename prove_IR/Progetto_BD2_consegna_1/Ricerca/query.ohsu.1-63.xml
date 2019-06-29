@@ -1,0 +1,505 @@
+<top>
+ <query>
+	<num>1</num>
+	<title>menopausal woman without hormone replacement therapy</title>
+	<desc>
+	  Are there adverse effects on lipids when progesterone is given with estrogen replacement therapy
+	</desc>
+ </query>
+
+<query>
+	<num>2</num>
+	<title>disseminated intravascular coagulation</title>
+	<desc>
+	  pathophysiology and treatment of disseminated intravascular coagulation
+	</desc>
+ </query>
+
+ <query>
+	<num>3</num>
+	<title>prolonged prothrombin time</title>
+	<desc>
+	  anticardiolipin and lupus anticoagulants, pathophysiology, epidemiology, complications
+	</desc>
+ </query>
+
+ <query>
+	<num>4</num>
+	<title>cancer and hypercalcemia</title>
+	<desc>
+	  effectiveness of etidronate in treating hypercalcemia of malignancy
+	</desc>
+ </query>
+
+ <query>
+	<num>5</num>
+	<title>postmenopausal</title>
+	<desc>
+	  does estrogen replacement therapy cause breast cancer
+	</desc>
+ </query>
+
+ <query>
+	<num>6</num>
+	<title>fever lymphadenopathy, neurologic changes and rash</title>
+	<desc>
+	  t-cell lymphoma associated with autoimmune symptoms
+	</desc>
+ </query>
+
+ <query>
+	<num>7</num>
+	<title>young wf with lactase deficiency</title>
+	<desc>
+	  lactase deficiency therapy options
+	</desc>
+ </query>
+
+ <query>
+	<num>8</num>
+	<title>35 y o male with aids and pancytopenia</title>
+	<desc>
+	  pancytopenia in aids, workup and etiology
+	</desc>
+ </query>
+
+ <query>
+	<num>9</num>
+	<title>29 yo female 3 months pregnant</title>
+	<desc>
+	  Rh isoimmunization, review topics
+	</desc>
+ </query>
+
+ <query>
+	<num>10</num>
+	<title>endocarditis</title>
+	<desc>
+	  endocarditis, duration of antimicrobial therapy
+	</desc>
+ </query>
+
+ <query>
+	<num>11</num>
+	<title>35 yo with advanced metastatic breast cancer</title>
+	<desc>
+	  chemotherapy advanced for advanced metastatic breast cancer
+	</desc>
+ </query>
+
+ <query>
+	<num>12</num>
+	<title>49 yo B male with hypotension, hypokalemia, and low aldosterone.</title>
+	<desc>
+	  isolated hypoaldosteronism, syndromes where hypoaldosteronism and hypokalemia occur concurrently
+	</desc>
+ </query>
+
+ <query>
+	<num>13</num>
+	<title>37 yr old man with sickle cell disease</title>
+	<desc>
+	  sickle cell disease, treatment  advice
+	</desc>
+ </query>
+
+ <query>
+	<num>14</num>
+	<title>24 y o female g1 p0 9 months pregnant with thrombocytopenia</title>
+	<desc>
+	  thrombocytopenia in pregnancy, etiology and management
+	</desc>
+ </query>
+
+ <query>
+	<num>15</num>
+	<title>45 yo wf , chronic lower extremity pain</title>
+	<desc>
+	  chronic pain management, review article, use of tricyclic antidepressants
+	</desc>
+ </query>
+
+ <query>
+	<num>16</num>
+	<title>67 yo wm with hemiballismus</title>
+	<desc>
+	  carotid endarterectomy, when to perform
+	</desc>
+ </query>
+
+ <query>
+	<num>17</num>
+	<title>adult respiratory distress syndrome</title>
+	<desc>
+	  review article on adult respiratory syndrome
+	</desc>
+ </query>
+
+ <query>
+	<num>18</num>
+	<title>42 YO WITH HEPATOCELLULAR CARCINOMA</title>
+	<desc>
+	  RISK FACTORS and TREATMENT for HEPATOCELLULAR CARCINOMA
+	</desc>
+ </query>
+
+ <query>
+	<num>19</num>
+	<title>FATIGUE</title>
+	<desc>
+	  FIBROMYALGIA/FIBROSITIS, DIAGNOSIS AND TREATMENT
+	</desc>
+ </query>
+
+ <query>
+	<num>20</num>
+	<title>DIABETIC GASTROPARESIS</title>
+	<desc>
+	  DIABETIC GASTROPARESIS, TREATMENT
+	</desc>
+ </query>
+
+ <query>
+	<num>21</num>
+	<title>55 yo male with back pain</title>
+	<desc>
+	  back pain, information on diagnosis and treatment
+	</desc>
+ </query>
+
+ <query>
+	<num>22</num>
+	<title>74 yo male with pericardial effusion. hx of distal esophageal squamous cell carcinoma treated with 5-fluorouracil,cisplatinum, and radiation therapy</title>
+	<desc>
+	  can radiation therapy cause a delayed pericardial effusion?
+	</desc>
+ </query>
+
+ <query>
+	<num>23</num>
+	<title>64 yo black male</title>
+	<desc>
+	  occult blood screening, need for routine screening
+	</desc>
+ </query>
+
+ <query>
+	<num>24</num>
+	<title>65 yo female with urinary retention</title>
+	<desc>
+	  urinary retention, differential diagnosis
+	</desc>
+ </query>
+
+ <query>
+	<num>25</num>
+	<title>35 year old with peripheral neuropathy and edema</title>
+	<desc>
+	  which peripheral neuropathies have associated edema
+	</desc>
+ </query>
+
+ <query>
+	<num>26</num>
+	<title>62 year old with stroke and systolic hypertension</title>
+	<desc>
+	  isolated systolic hypertension, shep study
+	</desc>
+ </query>
+
+ <query>
+	<num>27</num>
+	<title>75 year old with diabetes and hypertension with Q waves on EKG</title>
+	<desc>
+	  differential diagnosis of U waves
+	</desc>
+ </query>
+
+ <query>
+	<num>28</num>
+	<title>74 yo man with post-radiation pericardial effusion and near tamponade</title>
+	<desc>
+	  indications for and success of pericardial windows and pericardectomies
+	</desc>
+ </query>
+
+ <query>
+	<num>29</num>
+	<title>18 y o female with lupus nephritis and thrombotic thrombocytopenic purpura</title>
+	<desc>
+	  lupus nephritis, diagnosis and management
+	</desc>
+ </query>
+
+ <query>
+	<num>30</num>
+	<title>older male</title>
+	<desc>
+	  angiotensin converting enzyme inhibitors, review article
+	</desc>
+ </query>
+
+ <query>
+	<num>31</num>
+	<title>24 y. o. w. f. s/p DVT currently on coumadin</title>
+	<desc>
+	  course of anticoagulation with coumadin
+	</desc>
+ </query>
+
+ <query>
+	<num>32</num>
+	<title>22 yo with fever, leukocytosis, increased intracranial pressure, and central herniation</title>
+	<desc>
+	  cerebral edema secondary to infection, diagnosis and treatment
+	</desc>
+ </query>
+
+ <query>
+	<num>33</num>
+	<title>65 yo female with a breast mass</title>
+	<desc>
+	  diagnostic and therapeutic work up of breast mass
+	</desc>
+ </query>
+
+ <query>
+	<num>34</num>
+	<title>20 yo male with elevated liver function tests and possible neurofibromatosis</title>
+	<desc>
+	  hepatobiliary lesions associated with neurofibromatosis
+	</desc>
+ </query>
+
+ <query>
+	<num>35</num>
+	<title>26 y o female with bulimia</title>
+	<desc>
+	  evaluation for complications and management of bulimia
+	</desc>
+ </query>
+
+ <query>
+	<num>36</num>
+	<title>migraine</title>
+	<desc>
+	  treatment of migraine headaches with beta blockers and calcium channel blockers
+	</desc>
+ </query>
+
+ <query>
+	<num>37</num>
+	<title>30 y o with hypothermia</title>
+	<desc>
+	  prevention, risk factors, pathophysiology of hypothermia
+	</desc>
+ </query>
+
+ <query>
+	<num>38</num>
+	<title>66 yo man with 5 yr h/o progressive weakness</title>
+	<desc>
+	  chronic inflammatory demyelinating polyneuropathy, differential diagnosis and criteria
+	</desc>
+ </query>
+
+ <query>
+	<num>39</num>
+	<title>27 year old diabetic</title>
+	<desc>
+	  outpatient management of diabetes, standard management of diabetics and any new management techniques
+	</desc>
+ </query>
+
+ <query>
+	<num>40</num>
+	<title>70 y o female with left lower quadrant pain</title>
+	<desc>
+	  diverticulitis, differential diagnosis and management
+	</desc>
+ </query>
+
+ <query>
+	<num>41</num>
+	<title>27 yo with cystic fibrosis and renal failure</title>
+	<desc>
+	  cystic fibrosis and renal failure, effect of long term repeated use of aminoglycosides
+	</desc>
+ </query>
+
+ <query>
+	<num>42</num>
+	<title>43 y o pt with delirium, hypertension, tachycardia</title>
+	<desc>
+	  thyrotoxicosis, diagnosis and management
+	</desc>
+ </query>
+
+ <query>
+	<num>43</num>
+	<title>43 y o female with fevers, increased CPK</title>
+	<desc>
+	  neuroleptic malignant syndrome, differential diagnosis, treatment
+	</desc>
+ </query>
+
+ <query>
+	<num>44</num>
+	<title>carcinoid tumors of the liver and pancreas</title>
+	<desc>
+	  carcinoid tumors of the liver and pancreas, research, treatments
+	</desc>
+ </query>
+
+ <query>
+	<num>45</num>
+	<title>70 y o male with thyrotoxicosis</title>
+	<desc>
+	  radiation induced thyroiditis, differential diagnosis, management
+	</desc>
+ </query>
+
+ <query>
+	<num>46</num>
+	<title>30 y o with dehydration, hyperthermia</title>
+	<desc>
+	  heat exhaustion, management and pathophysiology
+	</desc>
+ </query>
+
+ <query>
+	<num>47</num>
+	<title>25 y o female with anorexia/bulimia</title>
+	<desc>
+	  complications and management of anorexia and bulimia
+	</desc>
+ </query>
+
+ <query>
+	<num>48</num>
+	<title>24 y o with HIV</title>
+	<desc>
+	  aids dementia, workup
+	</desc>
+ </query>
+
+ <query>
+	<num>49</num>
+	<title>patient s/p renal transplant with fever</title>
+	<desc>
+	  infections in renal transplant patients
+	</desc>
+ </query>
+
+ <query>
+	<num>50</num>
+	<title>50 year old with copd</title>
+	<desc>
+	  theophylline uses--chronic and acute asthma
+	</desc>
+ </query>
+
+ <query>
+	<num>51</num>
+	<title>lung cancer</title>
+	<desc>
+	  lung cancer, radiation therapy
+	</desc>
+ </query>
+
+ <query>
+	<num>52</num>
+	<title>60 year old with lung abscess</title>
+	<desc>
+	  surgery vs. percutaneous drainage for lung abscess
+	</desc>
+ </query>
+
+ <query>
+	<num>53</num>
+	<title>30 year old female with paroxysmal anaphylaxis</title>
+	<desc>
+	  Catamenorrheal Anaphylaxis
+	</desc>
+ </query>
+
+ <query>
+	<num>54</num>
+	<title>64 yo male with possible Guillain-Barre syndrome</title>
+	<desc>
+	  PLASMAPHERESIS AS THERAPEUTIC OPTION for Guillain- Barre syndrome
+	</desc>
+ </query>
+
+ <query>
+	<num>55</num>
+	<title>23 YO W DYSURIA</title>
+	<desc>
+	  Urinary Tract Infection, CRITERIA FOR TREATMENT AND ADMISSION
+	</desc>
+ </query>
+
+ <query>
+	<num>56</num>
+	<title>60 yo man with severe malabsorption</title>
+	<desc>
+	  infiltrative small bowel processes, information about small bowel lymphoma and heavy alpha chain disease
+	</desc>
+ </query>
+
+ <query>
+	<num>57</num>
+	<title>anemia</title>
+	<desc>
+	  iron deficiency anemia, which test is best
+	</desc>
+ </query>
+
+ <query>
+	<num>58</num>
+	<title>26 yo woman with mid-thoracic back pain</title>
+	<desc>
+	  scheurmann's disease, treatment
+	</desc>
+ </query>
+
+ <query>
+	<num>59</num>
+	<title>general health checkup</title>
+	<desc>
+	  sigmoidoscopy in preventive care, whether the recommended frequency of sigmoidoscopy is effective and sensitive in detecting cancer
+	</desc>
+ </query>
+
+ <query>
+	<num>60</num>
+	<title>86 yo asian f with back pain and hip pain</title>
+	<desc>
+	  how to best control pain and debilitation secondary to osteoporosis in never treated advanced disease
+	</desc>
+ </query>
+
+ <query>
+	<num>61</num>
+	<title>50 yo woman with breakthrough vaginal bleeding while on estrogen and progesterone therapy</title>
+	<desc>
+	  differential diagnosis of breakthrough vaginal bleeding while on estrogen and progesterone therapy
+	</desc>
+ </query>
+
+ <query>
+	<num>62</num>
+	<title>68 yo woman with anemia of chronic illness</title>
+	<desc>
+	  review of anemia of chronic illness
+	</desc>
+ </query>
+
+ <query>
+	<num>63</num>
+	<title>42 yo w/HIV and diarrhea</title>
+	<desc>
+	  HIV and the GI tract, recent reviews
+	</desc>
+ </query>
+</top>
