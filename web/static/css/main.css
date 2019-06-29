@@ -937,12 +937,26 @@ legend {
   fill: #666;
 }
 
-.s006 form .suggestion-wrap {
+.s006 form .adv-search {
   text-align: right;
   padding: 0 15px;
 }
 
-.s006 form .suggestion-wrap a {
+.s006 form .adv-search a {
+  position:relative;
+  font-size: 14px;
+  font-family: 'Helvetica', sans-serif;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0 15px;
+  line-height: 32px;
+  color: #fff;
+  border-radius: 16px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.suggestion-wrap span {
   position:relative;
   font-size: 14px;
   font-family: 'Helvetica', sans-serif;

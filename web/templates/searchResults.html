@@ -21,38 +21,52 @@ $def with (results, user_data, searcherlen, pages)
 							</div>
 						</form>
 					</div>
-
+					
 					<h2>
 						$searcherlen results found for: <span class="text-navy">"$user_data.query"</span>
 					</h2>
-					<small>Request time  (0.23 seconds)</small>
+					$if searcherlen:
+						<small>Request time  (0.23 seconds)</small>
+						$for article in results:
+							<div class="hr-line-dashed"></div>
+							<div class="search-result">
+							$ source = re.sub(r"\([^)]*\)\:", " ",re.sub(r"([0-9]{4}; )","" ,'"'+article['source']))
+							$ authors = re.sub(r" (([A-Z]{1}|[A-Z]{2})(\.|\;))","",' '+article['authors']+'"') if 'authors' in article else '"'
+							$ link = source + authors
+							$ link=link.replace(" ",'"+"').replace(";","")
+								<h3><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" target="_blank">$article['title']</a></h3>
+								<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" class="search-link" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/?term=${link[:50]+"..." if len(link)>50 else link}</a>
+								<p>
+									$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
+										$article.get("abstract")[:300] + '...'
+									$else:
+										$article.get('abstract')
+								</p>
+							</div>
 
-					$for article in results:
-						<div class="hr-line-dashed"></div>
-						<div class="search-result">
-						$ link = re.sub(r"([0-9]{4}; )","" ,'"'+article['source']+(' '+article['authors']+'"' if 'authors' in article else '"')).replace(" ",'"+"').replace(":",'"+"').replace(";","").replace(".","")
-							<h3><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" target="_blank">$article['title']</a></h3>
-							<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" class="search-link" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/?term=${link[:50]+"..." if len(link)>50 else link}</a>
-							<p>
-								$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
-									$article.get("abstract")[:300] + '...'
-								$else:
-									$article.get('abstract')
-							</p>
+
+						<div class="text-center">
+							<ul class="pagination pg-blue  justify-content-center">
+												<li class="page-item">	<a href="$pages['first_page']['href']" class="page-link">$:pages['first_page']['value']</a></li>
+												<li class="page-item">	<a href="$pages['previous_page']['href']" class="page-link">$:pages['previous_page']['value']</a></li>
+												$for range_page in pages['range_pages']:
+													<li class="page-item"><a href="$range_page['href']" class="$:range_page['type'] page-link">$:range_page['value']</a></li>
+
+												<li class="page-item"><a href="$pages['next_page']['href']" class="page-link">$:pages['next_page']['value']</a></li>
+												<li class="page-item"><a href="$pages['last_page']['href']" class="page-link">$:pages['last_page']['value']</a></li>
+						</ul>
 						</div>
-
-
-					<div class="text-center">
-						<ul class="pagination pg-blue  justify-content-center">
-											<li class="page-item">	<a href="$pages['first_page']['href']" class="page-link">$:pages['first_page']['value']</a></li>
-											<li class="page-item">	<a href="$pages['previous_page']['href']" class="page-link">$:pages['previous_page']['value']</a></li>
-											$for range_page in pages['range_pages']:
-												<li class="page-item"><a href="$range_page['href']" class="$:range_page['type'] page-link">$:range_page['value']</a></li>
-
-											<li class="page-item"><a href="$pages['next_page']['href']" class="page-link">$:pages['next_page']['value']</a></li>
-											<li class="page-item"><a href="$pages['last_page']['href']" class="page-link">$:pages['last_page']['value']</a></li>
-					</ul>
-					</div>
+                    $else:
+						$for word in results:
+							<div class="hr-line-dashed"></div>
+							<div class="search-result">
+							<h4>$('Suggerimenti per "'+word+'":' if results[word] else 'Non ci sono suggerimenti per la parola "'+word+'"')</h4>
+								<div class="suggestion-wrap">
+								$for suggestion in results[word]:
+									<span>$(suggestion.capitalize()) </span>
+								</div>
+							</div>
+						
 				</div>
 			</div>
 		</div>

@@ -36,8 +36,10 @@ class search:
 	def GET(self):
 		user_data = web.input()
 		out, searcherlen, pages = src(fst,user_data,lim=1000)
-		return render.searchResults(out, user_data, searcherlen, pages)
-
+		if searcherlen:
+			return render.searchResults(out, user_data, searcherlen, pages)
+		else:
+			return render.searchResults(out, user_data,0,None)
 class adv_search:
 	def GET(self):
 		return render.advanced()
