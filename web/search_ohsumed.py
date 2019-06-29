@@ -14,6 +14,33 @@ from whoosh.qparser import QueryParser as qp
 from whoosh.qparser import MultifieldParser as mp
 from whoosh.searching import Searcher
 from paginate_whoosh import WhooshPage
+import pprint, pickle
+
+
+def getDoc(docid):
+    docs = open("../indicizzazione/ohsumed.87.xml","r")
+    docs.seek(int(docid))
+    doc = docs.readline()
+    print(doc)
+
+    dom = parseString(doc)
+    #--- estrazione dei dati dal documento ---#
+    this_I = gettagdata(dom,'I')
+    this_U = gettagdata(dom,'U')
+    this_S = gettagdata(dom,'S')
+    this_M = gettagdata(dom,'M')
+    this_T = gettagdata(dom,'T')
+    this_P = gettagdata(dom,'P')
+    this_W = gettagdata(dom,'W')
+    this_A = gettagdata(dom,'A')
+    return (this_I,
+    this_U,
+    this_S,
+    this_M,
+    this_T,
+    this_P,
+    this_W,
+    this_A)
 
 # -------------------------------------------------------------------------------------------------- #
 def expq_cor(ix,query):
@@ -38,6 +65,8 @@ def expq_cor(ix,query):
     return " ".join(expq+no_check)
 
 # -------------------------------------------------------------------------------------------------- #
+
+
 def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     ix = fst.open_index()
 

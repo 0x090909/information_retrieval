@@ -6,7 +6,7 @@ from whoosh import scoring
 from whoosh.qparser import QueryParser
 from whoosh.filedb.filestore import FileStorage
 from paginate_whoosh import WhooshPage
-from search_ohsumed import src
+from search_ohsumed import src,getDoc
 
 render = web.template.render('templates',base="main_layout")
 
@@ -28,8 +28,8 @@ class index:
 class article:
 	def GET(self):
 		user_data = web.input()
-		#user_data.docid
-		return render.post(docid)
+		docid = user_data.docid
+		return render.post(getDoc(docid))
 
 class search:
 	def GET(self):

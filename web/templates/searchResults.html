@@ -26,8 +26,8 @@ $def with (results, user_data, searcherlen, pages)
 					$for article in results:
 						<div class="hr-line-dashed"></div>
 						<div class="search-result">
-							<h3><a href="#">$article['title']</a></h3>
-							<a href="https://aleste.com/$article['docid']" class="search-link">https://aleste.com/$article['docid']</a>
+							<h3><a href="./article?docid=$article['docid']">$article['title']</a></h3>
+							<a href="./article?id=$article['docid']" class="search-link">https://aleste.com/$article['docid']</a>
 							<p>
 								$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
 									$article.get("abstract")[:300] + '...'
