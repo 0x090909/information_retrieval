@@ -12,7 +12,7 @@ import re
 render = web.template.render('templates',base="main_layout",globals={'re':re})
 
 
-fst = FileStorage("../ohsumed_index_dir_stopwords_clinico")
+fst = FileStorage("./ohsumed_index_dir_stopwords_clinico")
 
 urls = (
 	'/','index',
