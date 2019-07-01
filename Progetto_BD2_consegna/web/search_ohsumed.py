@@ -20,58 +20,107 @@ def expq_cor(ix,query):
     check = []
     no_check = []
     for x  in query.all_terms(phrases=True):
-        if x[0]=="title":
-            if len(x[1])>5 and ix.searcher().idf("abstract",x[1])>11.9:
-                check.append(x[1])
+        if x[0]=="title":                                                   # Per non prendere doppioni se si usano piu' campi.
+            if len(x[1])>5 and ix.searcher().idf("abstract",x[1])>11.9:     # Controllo che la parola abbia almeno 5 lettere e non appaia nell'indice(almeno non nei campi abstract).
+                check.append(x[1])                                          # Forse sara' da correggere, aggiungo la parola alla lista check
             else:
-                no_check.append(x[1])
+                no_check.append(x[1])                                       # Altrimenti non viene controllata
     if "hiv" in no_check:
         no_check+=["aids"]
     corrector = ix.searcher().corrector("title")
     expq=[]
-    for x in check:
+    for x in check:                                                         # Per ogni parola in check
         corr = []
-        for y in corrector.suggest(x, prefix=4, maxdist=1,limit=1000):
-            if y[:-1]!=x and (y[:-1]!=x[:-1] or y==x):
+        for y in corrector.suggest(x, prefix=4, maxdist=1,limit=1000):      # Mantengo un prefisso di 4 lettere e ottengo la lista dei suggerimenti 
+            if y[:-1]!=x and (y[:-1]!=x[:-1] or y==x):                      # Accetto suggerimenti che cambiano solo una lettera all'interno della parola(o la parola stessa)
                 corr.append(y)
         expq += corr
-    return " ".join(expq+no_check)
+    return " ".join(expq+no_check)                                          # Ritorno la lista delle parole della query piu' gli eventuali suggerimenti
 
 
 # -------------------------------------------------------------------------------------------------- #
-
-
-
-def suggerimenti(ix,query):
+# Funzione per ottenere suggerimenti tra le parole della conllezione
+def suggerimenti(ix,query):                                                
     qt_correction = dict([(x[1],[]) for x  in query.all_terms(phrases=True) if len(x[1]) > 3])
     corrector = ix.searcher().corrector("abstract")
     for x in qt_correction:
         scores = []
         for y in corrector.suggest(x, prefix=2, maxdist=5, limit=10):
             qt_correction[x].append(y)
-        
     return qt_correction
 
 # -------------------------------------------------------------------------------------------------- #
-def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
+def src(indexdir,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
+    """
+    Questa funzione permette di effettuare il reperimento di risultati per query interattive dall'indice indicato in indexdir, 
+    utilizzando oggetti e funzioni del modulo whoosh.
+    
+    Parameters
+    ----------
+    indexdir : string
+    Una stringa che indica il percorso della cartella contenente l'indice su cui effettuare la ricerca.
+    
+    ud : string
+    Una stringa contenente la query del'utente.
+    
+    dsc : bool
+    Indica quale campo della query utilizzare, titolo o descrizione, di default usa la descrizione.
+    
+    flds : string
+    Indica il numero di campi, puo' assumere solo valori "1", "2" o "3".
+    
+    lim : int
+    Numero massimo di documenti reperiti per query deve essere un numero positivo.
+    
+    w : string
+    Schema di pesatura utilizzato, puo' assumere solo valori "bm" o "tf".
+    "bm" sta per BM25 mentre "tf" sta per TF_IDF (per ulteriori informazioni vedi whoosh.scorig)
+    
+    lo : string
+    Operatore logico utilizzato per le parole delle query puo' assumere valori "o" per OR o "a" per AND.
+    
+    opt : list
+    Dovrebbe contenere due valori di tipo numerico da assegnare ai parametri del BM25.
+    
+    resdir : string
+    Una stringa che indica il percorso della cartella dove salvare il file dei risultati.
+    Se striga vuota come da default i risultati vengono stampati con print.
+    
+    run : string
+    Una stringa opzionale, permette di aggiungere  parte del tag e del nome dei file dei risultati
+    
+    Returns
+    -------
+    None
+    
+    Notes
+    -----
+    Questa funzione e' stata fatta per effettuare ricerche in un indice della gia' citata collezione ohsumed, non e' garantito che funzioni per altri.
+    In particolare il file delle query deve essere organizzato allo stesso modo del file contenente le query sperimentali per la collezione ohsumed (il quale si dovrebbe 
+    trovare nella stessa cartella di questo programma) e i documenti dell'indice dovrebbero avere i campi 'identifier', 'title', 'abstract' e 'terms'.
+    """
+    fst = FileStorage(indexdir)
     ix = fst.open_index()
 
     # ------------------------------------------------------------------------------------------------ #
+    # Interpreta la scelta di quale operatore logico si usa per raggruppare le parole delle query
     if lo=="o":
         lgroup = qparser.OrGroup
     elif lo=="a":
         lgroup = qparser.AndGroup
 
     # ------------------------------------------------------------------------------------------------ #
+    # Interpreta la scelta dello schema di peastura
     if w=="tf":
         score = scoring.TF_IDF()
     elif w=="bm":
-        if opt:                                     # opt, se c'e', contiene il punto di massimo per i due parametri
+        if opt:                                     # opt dovrebbe contenere il punto che ottimizza un valore(come MAP) per i due parametri
             score = scoring.BM25F(opt[0],opt[1])
         else:
             score = scoring.BM25F()
 
     # ------------------------------------------------------------------------------------------------ #
+    # Interpeta il numero di campi dei documenti da utilizzare
     if flds=="1":
         campi = "title"
         parser = qp
@@ -85,25 +134,30 @@ def src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     # ------------------------------------------------------------------------------------------------- #
     q = ud.query
     query = parser(campi,ix.schema, group=lgroup).parse(q)
-    new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))             #query corretta se una lettera sbagliata
-    results = ix.searcher(weighting=score).search(query,limit=None)[:1000]                      # risultati
+    new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))     # Corregge la query se le parole hanno una lettera sbagliata
+    results = ix.searcher(weighting=score).search(query,limit=None)[:1000]          # Effettua la ricerca effettiva
+    
+    # Per ottenere la paginazione
     respage = 15
     reslen = len(results)
     page = WhooshPage(results, page=ud.page, items_per_page=respage)
     pages = range(1,max(2,reslen/respage+bool(reslen%respage)+1))
     pg = page.link_map("~2~","search?query="+str(ud.query)+"&page=$page")
-    
     #for p in pg:
     #    print pg[p]
-    if reslen:
+    
+    if reslen:                                                                      # Se si hanno dei risultati li restituisce 
         ix.searcher().close()
         return page, reslen, pg
-    else:
+    else:                                                                           # Altrimenti si cerca di suggerire parole simili a quelle cercate 
         qtc = suggerimenti(ix,query)
         ix.searcher().close()
         return qtc, 0, None
 
 def adv_src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
+    """
+        Possibilita' di creare una ricerca avanzata permettendo di cambiare altri parametri.
+    """
     pass
 
 
