@@ -3,7 +3,7 @@ In questa sottocartella sono presenti i programmi per effettuare l'indicizzazion
 ```bash
 	cd Benchmarking/
 ```
-Prima di poter eseguire i programmi per ottenere le misure di valutazione dei risultati è necessario decomprimere la cartella di trec_eval e compilare i file che ne hanno bisogno, per questo prima si eseguono i comandi
+Prima di poter eseguire i programmi per ottenere le misure di valutazione dei risultati si deve decomprimere la cartella di trec_eval e compilare i file che ne hanno bisogno, per questo si eseguono i comandi
 
 ```bash
 	gunzip trec_eval.8.1.tar.gz
@@ -12,7 +12,7 @@ Prima di poter eseguire i programmi per ottenere le misure di valutazione dei ri
 	make
 	cd ..
 ```
-Adesso, utilizzando il programma ```trec.sh``` si ottiene l'output di trec_eval per tutti i file dei risultati contenutti nella cartella ```/res```.
+Adesso utilizzando il programma ```trec.sh``` si ottiene l'output di trec_eval per tutti i file dei risultati contenuti nella cartella ```/res```.
 ```bash
 	./trec.sh
 ```
@@ -26,5 +26,5 @@ Infine per effettuare i test di Wilcoxon sulle coppie di risultati si usa il pro
 ```bash
 	python evaluation.py
 ```
-Da notare che questi test hanno ipotesi alternativa bilaterale, inqueanto la funzione utilizzata, contenuta nelmodulo scipy, non supporta alternativa unilaterale.
+Da notare che questi test hanno ipotesi alternativa bilaterale, in quanto la funzione utilizzata, contenuta nel modulo scipy(1.2.2), non supporta alternativa unilaterale.
 Per avere quindi l'ipotesi alternativa unilaterale è necessario utilizzare una versione di python successiva alla 3.5 e rimuovere dei commenti dal programma.

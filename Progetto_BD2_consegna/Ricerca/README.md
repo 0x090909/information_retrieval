@@ -10,7 +10,7 @@ A tal fine si  utilizza il comando:
 	python batch_searches.py
 ```
 
-Se si vuole effettuare una ricerca singola si può invece sfruttare il programma ```search_tk.py``` che permette con alcune modifice di cambiare altri  parametri oltre all'indice ed al numero di  campi.
+Se si vuole effettuare una ricerca singola si può invece sfruttare il programma ```search_tk.py``` che permette con alcune modifice di cambiare anche altri parametri oltre all'indice ed al numero di  campi.
 Un esempio di comando per effettuare la ricerca singola è il seguente:
 
 ```bash
