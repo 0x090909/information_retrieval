@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.8)  1 JUL 2019 17:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.8)  1 JUL 2019 17:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**modello_rev_2.tex
-(./modello_rev_2.tex
+**modello.tex
+(./modello.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (./llncs.cls
@@ -228,8 +228,8 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box56
 )
-(./modello_rev_2.aux)
-\openout1 = `modello_rev_2.aux'.
+No file modello.aux.
+\openout1 = `modello.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
@@ -245,7 +245,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
 LaTeX Info: Redefining \it@ocap on input line 15.
 LaTeX Info: Redefining \it@ccap on input line 15.
-
 
 File italian.ldf warning: 
 italian.ldf    With OT1 encoding guillemets are poorly faked
@@ -332,70 +331,98 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 38.
-
-Title too long for running head. Please supply
-a shorter form with \titlerunning prior to \maketitle
 Missing character: There is no Ã in font cmr9!
 Missing character: There is no ¨ in font cmr9!
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 48.
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 48.
- [1
+Missing character: There is no â in font cmr9!
+Missing character: There is no € in font cmr9!
+Missing character: There is no ™ in font cmr9!
+Missing character: There is no â in font cmr9!
+Missing character: There is no € in font cmr9!
+Missing character: There is no ™ in font cmr9!
+
+
+LaTeX Warning: Citation `WBC' on page 1 undefined on input line 58.
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \vbox (badness 6268) has occurred while \output is active []
 
- [3]
-[4] [5]
-<maps.pdf, id=29, 867.24pt x 578.16pt>
-File: maps.pdf Graphic file (type pdf)
-<use maps.pdf>
-Package pdftex.def Info: maps.pdf  used on input line 331.
-(pdftex.def)             Requested size: 347.12354pt x 231.41869pt.
- [6] [7 <./maps.pdf>]
-<aleste.jpg, id=78, 1206.5075pt x 1284.8pt>
+LaTeX Warning: Citation `WBC_map' on page 3 undefined on input line 154.
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+Overfull \hbox (5.67578pt too wide) in paragraph at lines 173--174
+[][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (5.67578pt too wide) in paragraph at lines 181--182
+[][][][][][][][][][][][] 
+ []
+
+[3]
+
+LaTeX Warning: Citation `WBC_stopword' on page 4 undefined on input line 231.
+
+
+LaTeX Warning: Citation `stopword_cliniche' on page 4 undefined on input line 2
+36.
+
+[4]
+<aleste.jpg, id=27, 1206.5075pt x 1284.8pt>
 File: aleste.jpg Graphic file (type jpg)
 <use aleste.jpg>
-Package pdftex.def Info: aleste.jpg  used on input line 402.
-(pdftex.def)             Requested size: 99.5786pt x 99.57097pt.
-<caterina.jpg, id=79, 724.7075pt x 708.6475pt>
+Package pdftex.def Info: aleste.jpg  used on input line 282.
+(pdftex.def)             Requested size: 85.34782pt x 85.35774pt.
+<caterina.jpg, id=28, 724.7075pt x 708.6475pt>
 File: caterina.jpg Graphic file (type jpg)
 <use caterina.jpg>
-Package pdftex.def Info: caterina.jpg  used on input line 404.
-(pdftex.def)             Requested size: 99.57848pt x 99.57762pt.
-<cristi.jpg, id=80, 245.91875pt x 245.91875pt>
+Package pdftex.def Info: caterina.jpg  used on input line 284.
+(pdftex.def)             Requested size: 85.35771pt x 85.35841pt.
+<cristi.jpg, id=29, 245.91875pt x 245.91875pt>
 File: cristi.jpg Graphic file (type jpg)
 <use cristi.jpg>
-Package pdftex.def Info: cristi.jpg  used on input line 406.
-(pdftex.def)             Requested size: 99.58528pt x 99.58528pt.
- [8 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
+Package pdftex.def Info: cristi.jpg  used on input line 286.
+(pdftex.def)             Requested size: 85.35612pt x 85.35612pt.
+ [5 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4190 strings out of 492982
- 58054 string characters out of 6134897
- 143769 words of memory out of 5000000
- 7698 multiletter control sequences out of 15000+600000
- 8147 words of font info for 29 fonts, out of 8000000 for 9000
+ 4324 strings out of 492982
+ 59722 string characters out of 6134897
+ 173638 words of memory out of 5000000
+ 7828 multiletter control sequences out of 15000+600000
+ 8315 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,32p,799b,941s stack positions out of 5000i,500n,10000p,200000b,80000s
-</us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on modello_rev_2.pdf (8 pages, 439187 bytes).
+ 41i,9n,49p,1149b,1487s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on modello.pdf (5 pages, 426003 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 71 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
