@@ -1,13 +1,13 @@
-$def with (results, user_data, searcherlen, pages)
+$def with (results, user_data, searcherlen, pages, time)
 <div class="container bootstrap snippet">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-content">
 				<nav class="navbar navbar-dark bg-primary">
-                <a class="navbar-brand mx-auto" href="/"> Ohsumed Search </a>
+                <a class="navbar-brand mx-auto" href="/"> <i class="fa fa-home"></i> Ohsumed Search </a>
                 </nav>
-				
+
 					<div class="search-form">
 						<form action="search" method="get">
 							<div class="input-group">
@@ -21,12 +21,12 @@ $def with (results, user_data, searcherlen, pages)
 							</div>
 						</form>
 					</div>
-					
+
 					<h2>
 						$searcherlen results found for: <span class="text-navy">"$user_data.query"</span>
 					</h2>
 					$if searcherlen:
-						<small>Request time  (0.23 seconds)</small>
+						<small>Request time  ($time seconds)</small>
 						$for article in results:
 							<div class="hr-line-dashed"></div>
 							<div class="search-result">
@@ -61,6 +61,8 @@ $def with (results, user_data, searcherlen, pages)
 						</div>
                     $else:
 						$for word in results:
+						<small>Request time  ($time seconds)</small>
+
 							<div class="hr-line-dashed"></div>
 							<div class="search-result">
 							<h4>$('Suggerimenti per "'+word+'":' if results[word] else 'Non ci sono suggerimenti per la parola "'+word+'"')</h4>
@@ -69,7 +71,7 @@ $def with (results, user_data, searcherlen, pages)
 									<span>$(suggestion.capitalize()) </span>
 								</div>
 							</div>
-						
+
 				</div>
 			</div>
 		</div>
