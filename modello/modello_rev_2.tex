@@ -136,6 +136,31 @@ significativa al contenuto informativo come congiunzioni, articoli, avverbi..\pa
 
 \section{Interfaccia web}
 
+Parte di questo progetto e' stata la creazione di un'interfaccia web 
+tramite cui un utente puo' interrogare l'indice della collezione.
+In particolare l'interfaccia e' rivolta ad uteti che crercano articoli 
+pertinenti ad un certo argomento, definito dalla query.
+Per il server web e' stato utilizzato un modulo di python dedicato allo scopo: web-py.
+Questo modulo permette di integrare facilmente funzioni di python in pagine HTML.
+
+Come funzione di reperimento si utilizza la stessa usata per gli esperimenti, 
+adattata in modo da accettare query interattive, inserite dagli utenti.
+
+Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
+suggerimenti per correggere eventualmente la query.
+Per lo stile delle pagine html si e' optato per l'utilizzo degli strumenti
+disponibili da bootstrap(https://getbootstrap.com/).
+E' anche risultato utile sfruttare un'altro modulo legato a whoosh(whoosh-paginate)
+che da' la possibilita' di ottenere facilmente la paginazione dei risultati.
+
+Inoltre, per come e' scritta la funzione di ricerca, non sarebbe difficile 
+implementare una funzionalita' di "ricerca avanzata" dando all'utente la possibilita'
+di cercare anche per autore o di scegliere l'opratore logico per collegare le parole
+della query.
+
+Dopo aver effettuato la ricerca, l'utente viene indirizzato alle pagine contenenti 
+i link dei risultati.
+Questi link poi rimandano alla pagina di pubmed dove c'e' l'articolo.
 
 \section{Esperimenti e Risultati}
 \label{sec:esperimenti}
