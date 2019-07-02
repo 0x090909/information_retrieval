@@ -9,7 +9,7 @@ Il progetto è anche corredato di un webserver che permette all’utente di inte
 Usare [git](https://git-scm.com/downloads) per clonare il progetto, nella cartella scelta.
 
 ```bash
-git clone https://github.com/mastershef/information_retrieval.git
+    git clone https://github.com/mastershef/information_retrieval.git
 ```
 
 ## Prerequisiti
@@ -18,7 +18,7 @@ Inoltre, sono stati utilizzati vari moduli: Whoosh (2.7.4), paginate-whoosh (0.3
 
 Per installare questi moduli basta utilizzare il coando:
 ```bash
- pip install whoosh paginate-whoosh web.py scipy
+    pip install whoosh paginate-whoosh web.py scipy
 ```
 
 ## Utilizzo
@@ -28,11 +28,11 @@ Le cinque cartelle sono descritte brevemente di seguito:
 * Ricerca: contiene i programmi per effettuare il reperimento e le  query sperimentali.
 * Benchmarking: contiene il pacchetto di trec_eval compresso, le cartelle in cui vengono salvati i risultati, i programmi per la valutazione delle run e  il file dei documenti rilevanti.
 * Analisi_frequenze: contiene i programmi utilizzati per cercare le stopword utilizzate nella terza prova degli esperimenti.
-* Web: 
+* Web: contiene i programmi per far funzionare il server web con le pagine relative al motore di ricerca.
 
 Per far funzionare i comandi riportati nei README delle sottocartelle  è necessario essere nella cartella principale della repository(il percorso dipende da dove è stata clonata):
 ```bash
-cd .../Progetto_BD2_consegna/
+    cd .../Progetto_BD2_consegna/
 ```
 
 ## Supporto
