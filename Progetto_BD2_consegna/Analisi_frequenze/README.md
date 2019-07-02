@@ -2,7 +2,7 @@
 In questa sottocartella sono presenti i programmi utilizzati allo scopo di ricavare delle possibili stopword dalle query sperimentali. 
 Per far funzionare i comandi presentati di seguito è necessario posizionarsi in questa cartella:
 ```bash
-	cd Analisi_frequenze
+    cd Analisi_frequenze
 ```
 Il programma ```frq_terms_rel_docs.py``` dà varie opzioni.
 Utilizzando l'opzione iq viene richiesto di inserire dei numeri interi da 1 a 63, questi corrispondono ciascuno ad una query sperimentale. 
