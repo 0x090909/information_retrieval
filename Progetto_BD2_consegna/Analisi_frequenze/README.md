@@ -84,7 +84,7 @@ Per esempio:
         .                                                       .                                                   .
         .                                                       .                                                   .
         .                                                       .                                                   .
-    ```
+```
 
 Infine, l'opzione 'fqt' permette di sapere in quali query sono presenti le parole inserite.
 Utilizzando l'ulteriore opzione -d(dettagli) esegue le funzioni di iq e tnn sulle query trovate
