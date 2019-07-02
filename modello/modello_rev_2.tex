@@ -44,7 +44,7 @@ volto al reperimento di documenti della collezione sperimentale \emph{OHSUMED} i
 Si \`e affrontato il problema della valutazione del sistema di ricerca studiando l'effetto dell'esclusione
 di diversi insiemi di stopword. Nella relazione verr\`a evidenziato come l'uso delle stopword migliori l'efficacia
 del sistema IR.
-Il progetto è anche corredato di un webserver che permette all'utente di interrogare il motore di ricerca
+Il progetto \`e anche corredato di un webserver che permette all'utente di interrogare il motore di ricerca
 in forma interattiva, attraverso un browser a scelta.
  \keywords{{\it
       Information Retrieval  \and IR \and statistica \and reperimento \and indicizzazione \and Whoosh \and Python \and webserver \and web \and interrogazione web  \and stopword}}
@@ -59,11 +59,11 @@ Lo scopo finale di un Sistema di Information Retrieval (IRS) \`e quello di reper
  importanti, utili o necessarie per la risoluzione del problema o lo svolgimento del compito};
   dunque i documenti sono il primo input del sistema, mentre il secondo \`e
   costitutito dalle interrogazioni; i documenti devono essere
-  indicizzati e nell'indice creato, si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza e' la proprieta' che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte e' detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Cio' che descrive i documenti e cio' che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale
+  indicizzati e nell'indice creato, si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale
   in entrambi i casi.
 L'indicizzazione \`e un trade-off tra il  miglioramento della rapprerentazione del
 contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza).
-Esistono diversi modi per risolvere questo problema, nel nostro caso abbiamo ricercato
+Esistono diversi modi per risolvere questo problema; nel nostro caso abbiamo ricercato
 la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
 
 
@@ -136,31 +136,31 @@ significativa al contenuto informativo come congiunzioni, articoli, avverbi..\pa
 
 \section{Interfaccia web}
 
-Parte di questo progetto e' stata la creazione di un'interfaccia web
+Parte di questo progetto \`e stata la creazione di un'interfaccia web
 tramite cui un utente puo' interrogare l'indice della collezione.
-In particolare l'interfaccia e' rivolta ad utenti che cercano articoli
+In particolare l'interfaccia \`e rivolta ad utenti che cercano articoli
 pertinenti ad un certo argomento, definito dalla query.
-Per il server web e' stato utilizzato un modulo di python dedicato allo scopo: web-py.
+Per il server web \`e stato utilizzato un modulo di python dedicato allo scopo: web-py.
 Questo modulo permette di integrare facilmente funzioni di python in pagine HTML.
 
-Come funzione di reperimento si utilizza la stessa usata per gli esperimenti,
+Come funzione di reperimento si \`e utilizzata la stessa usata per gli esperimenti,
 adattata in modo da accettare query interattive, inserite dagli utenti.
 
 Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
 suggerimenti per correggere eventualmente la query.
-Per lo stile delle pagine html si e' optato per l'utilizzo degli strumenti
+Per lo stile delle pagine html si \`e optato per l'utilizzo degli strumenti
 disponibili da bootstrap\footnote{\url{https://getbootstrap.com/}}.
-E' anche risultato utile sfruttare un altro modulo legato a whoosh (whoosh-paginate)
-che da' la possibilita' di ottenere facilmente la suddivisione dei risultati in pagine.
+\`E anche risultato utile sfruttare un altro modulo legato a whoosh (whoosh-paginate)
+che d\`a la possibilit\`a di ottenere facilmente la suddivisione dei risultati in pagine.
 
-Inoltre, per come e' scritta la funzione di ricerca, non sarebbe difficile
-implementare una funzionalita' di "ricerca avanzata" dando all'utente la possibilita'
+Inoltre, per come \`e scritta la funzione di ricerca, non sarebbe difficile
+implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a
 di cercare anche per autore o di scegliere l'operatore logico per collegare le parole
 della query.
 
 Dopo aver effettuato la ricerca, l'utente viene indirizzato alle pagine contenenti
 i link dei risultati.
-Questi link poi rimandano alla pagina di \emph{PubMed} dove c'e' l'articolo.
+Questi link poi rimandano alla pagina di \emph{PubMed} dove c'\`e l'articolo.
 
 \section{Esperimenti e Risultati}
 \label{sec:esperimenti}
@@ -183,7 +183,7 @@ Inoltre, per verificare se i valori di MAP ottenuti in run diverse si discostano
 Prima di iniziare gli esperimenti sono state fatte delle scelte riguardo certi aspetti dei metodi di reperimento che rimanessero costanti durante tutti gli esperimenti.
 Queste scelte sono state fatte in seguito ad alcune run preliminari.
 
-Per la funzione di reperimento e ranking come schema di pesatura si \`e deciso di utilizzare il BM25F, descritto nella sezione precedente, inquanto "state-of-the-art" dal punto di vista dei modelli per information retrieval su documenti strutturati, e come operatore logico per raggruppare le parole delle query si \`e deciso di utilizzare l'operatore OR, ovvero si cercano documenti in cui \`e presente almeno una parola della query.
+Come schema di pesatura, per la funzione di reperimento e ranking,  si \`e deciso di utilizzare il BM25F, descritto nella sezione precedente, inquanto "state-of-the-art" dal punto di vista dei modelli per information retrieval su documenti strutturati, e si \`e deciso di utilizzare l'operatore OR come operatore logico per raggruppare le parole delle query, ovvero si cercano documenti in cui \`e presente almeno una parola della query.
 
 Sempre a seguito delle run preliminari si \`e deciso di utilizzare il campo "desc" delle query anzich\`e il campo "title" inquanto d\`a risultati migliori, inoltre, si \`e notato che in alcune query sperimentali sono presenti parole scritte in modo errato e che quindi non risultano presenti nell'indice.
 Per questo dopo aver verificato, leggendo i documenti rilevanti per quelle query, quali fossero gli errori si \`e ritenuto opportuno effettuare una correzione al momento del reperimento.
@@ -192,7 +192,7 @@ A grandi linee, la correzione viene fatta su parole che non risultano presenti n
 Un'ultima scelta \`e stata fatta riguardo il numero massimo di documenti reperiti.
 Si \`e optato per 100 documenti poiche un numero maggiore non porta grandi miglioramenti dal punto di vista del MAP. \par
 
-\vskip 1in
+%\vskip 1in
 Affinch\`e Whoosh possa indicizzare una collezione di documenti, necessita la
 specificazione di uno schema che include, per ogni possibile campo dei documenti della collezine, il nome del campo ed il tipo del campo.
 
@@ -237,7 +237,7 @@ Si possono vedere i risultati ottenuti usando la configurazione "baseline" riass
 map all 0.2130               & map all \bf 0.2744               & map all 0.2155 \\ \hline
 \end{tabular}
 
-\caption{ Risultati treceval complessivi per tutte le query, nessuna manipolazione del testo, numero risultati restituiti per
+\caption{ Risultati trec\_eval complessivi per tutte le query, nessuna manipolazione del testo, numero risultati restituiti per
 ogni query = 100, pesatura BM25F.}
 \end{table}
 
@@ -270,9 +270,9 @@ Come si nota dalla tabella il valore baseline di \textit{M.A.P} \`e 0.2744.
 
 \subsection{Esperimenti}
 
-Gli esperimenti sono consistiti in tre prove in cui si cambia l'insieme di stopword usato nell'indicizzazione. In particolare ad ogni prova si utilizza un insieme di stopword con parole in pi\`u rispetto a quello delle prove precedenti.
+Gli esperimenti sono consistiti in tre prove in cui si \`e cambiato l'insieme di stopword usato nell'indicizzazione. In particolare ad ogni prova si \`e utilizzato un insieme di stopword con parole in pi\`u rispetto a quello delle prove precedenti.
 
-Come con la baseline, per ciascuna prova si effettua la ricerca per uno, due e tre campi.
+Come con la baseline, per ciascuna prova si \`e effettuata la ricerca per uno, due e tre campi.
 
 \subsubsection{Prima prova:}
 
@@ -291,7 +291,7 @@ Come si vede in Tabella 2, non sembra si sia ottenuto un miglioramento significa
 map all 0.2137               & map all \bf 0.2745               & map all 0.2152          \\ \hline
 \end{tabular}
 
-\caption{ Risultati treceval, rimozione delle stopword generali, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
+\caption{ Risultati trec\_eval, rimozione delle stopword generali, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 
 \subsubsection{Seconda prova:}
@@ -313,7 +313,7 @@ Con questa prova sono stati ottenuti risultati accettabili, infatti come si vede
 map all 0.2156               & map all \bf 0.2837               & map all 0.2166          \\ \hline
 \end{tabular}
 
-\caption{ Risultati treceval, rimozione delle stopword cliniche, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
+\caption{ Risultati trec\_eval, rimozione delle stopword cliniche, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 
 
@@ -346,7 +346,7 @@ Come si pu\`o notare dalla Tabella 4 si ha un aumento del MAP rispetto alla base
 map all 0.2720               & map all \bf 0.3508               & map all 0.2813          \\ \hline
 \end{tabular}
 
-\caption{ Risultati treceval, rimozione delle stopword cliniche migliorate, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
+\caption{ Risultati trec\_eval, rimozione delle stopword cliniche migliorate, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 \par
 

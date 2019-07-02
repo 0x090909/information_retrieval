@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.8)  1 JUL 2019 18:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  2 JUL 2019 22:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **modello_rev_2.tex
 (./modello_rev_2.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 4 language(s) loaded.
 (./llncs.cls
 Document Class: llncs 2018/03/10 v2.20 
  LaTeX document class for Lecture Notes in Computer Science
@@ -332,8 +332,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 38.
-Missing character: There is no Ã in font cmr9!
-Missing character: There is no ¨ in font cmr9!
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 50.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
@@ -343,65 +341,54 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (36.04402pt too wide) in paragraph at lines 149--155
-\OT1/cmr/m/n/10 op-ta-to per l'u-ti-liz-zo de-gli stru-men-ti di-spo-ni-bi-li d
-a boo-tstrap(https://getbootstrap.com/).
- []
-
-[3]
-Underfull \vbox (badness 4518) has occurred while \output is active []
-
- [4]
-[5]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
 <maps.pdf, id=29, 867.24pt x 578.16pt>
 File: maps.pdf Graphic file (type pdf)
 <use maps.pdf>
 Package pdftex.def Info: maps.pdf  used on input line 358.
 (pdftex.def)             Requested size: 347.12354pt x 231.41869pt.
-
-Underfull \vbox (badness 1552) has occurred while \output is active []
-
- [6]
-[7 <./maps.pdf>] [8]
-<aleste.jpg, id=81, 1206.5075pt x 1284.8pt>
+ [6] [7 <./maps.pdf>]
+<aleste.jpg, id=77, 1206.5075pt x 1284.8pt>
 File: aleste.jpg Graphic file (type jpg)
 <use aleste.jpg>
 Package pdftex.def Info: aleste.jpg  used on input line 429.
 (pdftex.def)             Requested size: 99.5786pt x 99.57097pt.
-<caterina.jpg, id=82, 724.7075pt x 708.6475pt>
+<caterina.jpg, id=78, 724.7075pt x 708.6475pt>
 File: caterina.jpg Graphic file (type jpg)
 <use caterina.jpg>
 Package pdftex.def Info: caterina.jpg  used on input line 431.
 (pdftex.def)             Requested size: 99.57848pt x 99.57762pt.
-<cristi.jpg, id=83, 245.91875pt x 245.91875pt>
+<cristi.jpg, id=79, 245.91875pt x 245.91875pt>
 File: cristi.jpg Graphic file (type jpg)
 <use cristi.jpg>
 Package pdftex.def Info: cristi.jpg  used on input line 433.
 (pdftex.def)             Requested size: 99.58528pt x 99.58528pt.
- [9 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>]
-(./modello_rev_2.aux) ) 
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8] [9 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
 Here is how much of TeX's memory you used:
- 4190 strings out of 492982
- 58054 string characters out of 6134897
- 143769 words of memory out of 5000000
- 7698 multiletter control sequences out of 15000+600000
+ 4191 strings out of 494912
+ 58062 string characters out of 6180266
+ 139869 words of memory out of 5000000
+ 7452 multiletter control sequences out of 15000+600000
  8147 words of font info for 29 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
+ 14 hyphenation exceptions out of 8191
  41i,9n,32p,799b,941s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmtt9.pfb>
-Output written on modello_rev_2.pdf (9 pages, 441582 bytes).
+<
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on modello_rev_2.pdf (9 pages, 442273 bytes).
 PDF statistics:
  126 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
