@@ -16,36 +16,13 @@ from whoosh.searching import Searcher
 from paginate_whoosh import WhooshPage
 
 # -------------------------------------------------------------------------------------------------- #
-def expq_cor(ix,query):
-    check = []
-    no_check = []
-    for x  in query.all_terms(phrases=True):
-        if x[0]=="title":                                                   # Per non prendere doppioni se si usano piu' campi.
-            if len(x[1])>5 and ix.searcher().idf("abstract",x[1])>11.9:     # Controllo che la parola abbia almeno 5 lettere e non appaia nell'indice(almeno non nei campi abstract).
-                check.append(x[1])                                          # Forse sara' da correggere, aggiungo la parola alla lista check
-            else:
-                no_check.append(x[1])                                       # Altrimenti non viene controllata
-    if "hiv" in no_check:
-        no_check+=["aids"]
-    corrector = ix.searcher().corrector("title")
-    expq=[]
-    for x in check:                                                         # Per ogni parola in check
-        corr = []
-        for y in corrector.suggest(x, prefix=4, maxdist=1,limit=1000):      # Mantengo un prefisso di 4 lettere e ottengo la lista dei suggerimenti 
-            if y[:-1]!=x and (y[:-1]!=x[:-1] or y==x):                      # Accetto suggerimenti che cambiano solo una lettera all'interno della parola(o la parola stessa)
-                corr.append(y)
-        expq += corr
-    return " ".join(expq+no_check)                                          # Ritorno la lista delle parole della query piu' gli eventuali suggerimenti
-
-
-# -------------------------------------------------------------------------------------------------- #
 # Funzione per ottenere suggerimenti tra le parole della conllezione
 def suggerimenti(ix,query):                                                
     qt_correction = dict([(x[1],[]) for x  in query.all_terms(phrases=True) if len(x[1]) > 3])
     corrector = ix.searcher().corrector("abstract")
     for x in qt_correction:
         scores = []
-        for y in corrector.suggest(x, prefix=2, maxdist=5, limit=10):
+        for y in corrector.suggest(x, prefix=1, maxdist=4, limit=10):
             qt_correction[x].append(y)
     return qt_correction
 
@@ -134,7 +111,6 @@ def src(indexdir,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     # ------------------------------------------------------------------------------------------------- #
     q = ud.query
     query = parser(campi,ix.schema, group=lgroup).parse(q)
-    new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))     # Corregge la query se le parole hanno una lettera sbagliata
     results = ix.searcher(weighting=score).search(query,limit=None)[:1000]          # Effettua la ricerca effettiva
     
     # Per ottenere la paginazione

@@ -215,7 +215,7 @@ def fqt(hit, num, title):
 
 # ---------------------------------------------------------------------------------------- #
 import json
-
+# rimuove gia' le stopword delle prove precedenti 
 json_stop_words = open("../Indicizzazione/stopWords_clinico.json","r")
 json_string = ""
 for line in json_stop_words:
