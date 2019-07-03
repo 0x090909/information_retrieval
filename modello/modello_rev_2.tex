@@ -61,16 +61,22 @@ Lo scopo finale di un Sistema di Information Retrieval (IRS) \`e quello di reper
  importanti, utili o necessarie per la risoluzione del problema o lo svolgimento del compito};
   dunque i documenti sono il primo input del sistema, mentre il secondo \`e
   costitutito dalle interrogazioni; i documenti devono essere
-  indicizzati e nell'indice creato si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. 
-  
-  Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. 
-  
-  Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che si deve tenere in considerazione per entrambi i casi.
+  indicizzati e nell'indice creato si andr\`a a effettuare la ricerca per reperire documenti
+  rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o
+  necessaria a soddisfare l'esigenza informativa dell'utente}.
+
+  Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti,
+  ma anche di riordinare secondo un certo ordine di rilevanza.
+
+  Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile,
+  infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che si deve tenere in
+  considerazione per entrambi i casi.
 %che deve essere uguale in entrambi i casi.
-  
+
 L'indicizzazione \`e un trade-off tra il  miglioramento della rapprerentazione del
-contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza), in questa relazione tratter\`a il problema dell'eficacia.
-Esistono diversi modi per risolvere questo problema; nel nostro caso abbiamo 
+contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza),
+in questa relazione tratter\`a il problema dell'efficacia.
+Esistono diversi modi per risolvere questo problema; nel nostro caso abbiamo
 cercato di migliorare l'efficacia con l'utilizzo di stopword.
 %ricercato la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
 
@@ -89,7 +95,7 @@ si traggono delle brevi conclusioni.
 % documentazione del progetto di un servizio di {IR} e dall'altra una
 % misura del grado in cui si sia riusciti a mettere in pratica i
 % contenuti della disciplina illustrati durante le lezioni.
-% 
+%
 % A tal scopo la relazione dovr\`a illustrare nelle sezioni successive:
 % \begin{itemize}
 % \item i metodi di indicizzazione,
@@ -104,7 +110,7 @@ si traggono delle brevi conclusioni.
 % tutto ci\`o e solo ci\`e che serve.  Chiedersi qual \`e il messaggio
 % che lo studente deve ``portarsi a casa'', esplicitarlo in questo
 % paragrafo e concentrarsi su quello nel resto della relazione.
-% 
+%
 % L'introduzione della relazione deve servire al lettore a capire se
 % vale la pena continuare a leggere il resto.  Si possono riassumere i
 % contenuti delle sezioni successive e metterne in evidenza i punti
@@ -115,7 +121,8 @@ si traggono delle brevi conclusioni.
 \section{Base di partenza}
 \label{sec:base-di-partenza}
 Un sistema IR si pu\`o basare su vari modelli e metodi di rappresentazione delle informazioni e di reperimento.
-Come gi\`a detto, in questa sezione si presenteranno quelli scelti per implementare il motore di ricerca utilizzato negli esperimenti.
+Come gi\`a detto, in questa sezione si presenteranno quelli scelti per implementare il motore di
+ricerca utilizzato negli esperimenti.
 
 \subsection{Indicizzazione}
 L'indice creato da whoosh rappresenta la collezione utilizzando un cos\`i detto \emph{inverted index} ovvero, una "matrice" in cui si associa ad ogni termine
@@ -129,7 +136,7 @@ Ogni elemento della lista \`e detto \emph{posting} e la parte del \emph{posting}
 
 In qesto progetto si tratta in particolare dell'eliminazione delle \emph{stopword}\cite{WBC_stopword}.
 
-Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare 
+Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare
 che eventualmente sulle query inviate al motore di ricerca.
 
 Le \emph{stopword} sono parole che non portano informazione significativa da sole e quindi non aiutano a capire se un documento \`e rilevante o meno.
@@ -137,7 +144,7 @@ Inoltre, solitamente si tratta di parole molto comuni nella collezione che quind
 
 Parole che di solito si identificano come \emph{stopword} nella lingua inglese sono per esempio: "the", "a", "an", "that" o "those".
 
-Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche \emph{stopword} a seconda del contesto. 
+Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche \emph{stopword} a seconda del contesto.
 Con questo si intende che delle parole possono diventare \emph{stopword} in certi contesti anche se in altri non lo sono, ad esempio nel manuale di
 MySQL parole come "mysql" e "table" risultano utilizzate cos\`i di frequente che non aiutano nella ricerca di un particolare argomento.
 
@@ -175,7 +182,7 @@ Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
 \section{Interfaccia web}
 
 Parte di questo progetto \`e stata la creazione di un'interfaccia web
-tramite cui un utente puo' interrogare l'indice della collezione.
+tramite cui un utente pu\`o interrogare l'indice della collezione.
 In particolare l'interfaccia \`e rivolta ad utenti che cercano articoli
 pertinenti ad un certo argomento, definito dalla query.
 
@@ -188,11 +195,11 @@ disponibili da bootstrap\footnote{\url{https://getbootstrap.com/}}.
 La funzione di reperimento utilizzata \`e essenzialmente la stessa usata per gli esperimenti,
 adattata in modo da accettare query interattive, inserite dagli utenti.
 
-Si \`e deciso di limitare il numero di risultati proposti a 1000 articoli inquanto si \`e pensato che, 
-anche se un articolo rilevante fosse in posizione dopo la millesima, non verrebbe visto dall'utente
-che probabilmente controlla solo le prime pagine.
+Si \`e deciso di limitare il numero di risultati proposti a 1000 articoli in quanto si \`e pensato che,
+se un articolo rilevante fosse in una posizione dopo la millesima, non verrebbe visto dall'utente,
+che tende a controllare solo le prime pagine.
 
-La pagina iniziale ha solo la barra per l'inserimento della query con un immagine suggestiva che fa da sfondo. 
+La pagina iniziale ha solo la barra per l'inserimento della query con un immagine suggestiva che fa da sfondo.
 \begin{figure}%
     \centering
     {{\includegraphics[width=1\linewidth]{index} }}%
@@ -203,7 +210,7 @@ Dopo aver effettuato il reperimento, l'utente viene indirizzato alle pagine cont
 i link dei risultati.
 Questi link poi rimandano alla pagina di \emph{PubMed}\footnote{\url{https://www.ncbi.nlm.nih.gov/pubmed/}} dove c'\`e l'articolo.
 
-Si pu\`o vederne un esempio in Figura 3.
+Se ne pu\`o vedere un esempio in Figura 3.
 
 \begin{figure}%
     \centering
@@ -224,8 +231,8 @@ Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
 suggerimenti per correggere eventualmente la query.
 
 Per come \`e scritta la funzione di reperimento, non sarebbe difficile
-implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a 
-di cercare anche per autore o di scegliere l'operatore logico per collegare le parole
+implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a
+di cercare per autore o di scegliere l'operatore logico per collegare le parole
 della query.
 
 \section{Esperimenti e Risultati}
@@ -234,7 +241,7 @@ della query.
 
 Per gli esperimenti si \`e utilizzata parte della gi\`a citata collezione sperimentale chiamata OHSUMED\footnote{ \url{https://bit.ly/2wpOynZ}}.
 
-Si tratta di una collezione di oltre 300'000 articoli provenienti dal database bibliografico MEDLINE pubblicati tra il 1987 ed il 1991, di questi documenti ne sono stati utilizzati 54'711.
+Si tratta di una collezione di oltre 300'000 articoli provenienti dal database bibliografico MEDLINE, pubblicati tra il 1987 ed il 1991; di questi documenti ne sono stati utilizzati 54'711.
 
 I programmi utilizzati per effettuare indicizzazione e reperimento sono stati scritti in python(versione 2.7), sfruttando oggetti e funzioni del modulo whoosh\footnote{ \url{https://whoosh.readthedocs.io/en/latest/index.html}}.
 
