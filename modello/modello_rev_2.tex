@@ -57,16 +57,22 @@ in forma interattiva, attraverso un browser a scelta.
 
 Lo scopo finale di un Sistema di Information Retrieval (IRS) \`e quello di reperire documenti
  rilevanti relativi a una certa esigenza informativa\footnote{insieme delle circostanze in cui una
- persona ha un problema da risolvere o un compito da svolgeree richiede informazioni
+ persona ha un problema da risolvere o un compito da svolgere richiede informazioni
  importanti, utili o necessarie per la risoluzione del problema o lo svolgimento del compito};
   dunque i documenti sono il primo input del sistema, mentre il secondo \`e
   costitutito dalle interrogazioni; i documenti devono essere
-  indicizzati e nell'indice creato, si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che deve essere uguale
-  in entrambi i casi.
+  indicizzati e nell'indice creato si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. 
+  
+  Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. 
+  
+  Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che si deve tenere in considerazione per entrambi i casi.
+%che deve essere uguale in entrambi i casi.
+  
 L'indicizzazione \`e un trade-off tra il  miglioramento della rapprerentazione del
-contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza).
-Esistono diversi modi per risolvere questo problema; nel nostro caso abbiamo ricercato
-la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
+contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza), in questa relazione tratter\`a il problema dell'eficacia.
+Esistono diversi modi per risolvere questo problema; nel nostro caso abbiamo 
+cercato di migliorare l'efficacia con l'utilizzo di stopword.
+%ricercato la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
 
 
 Il resto della relazione \`e organizzato come segue. Nella sezione 2, si descrivono
@@ -79,43 +85,73 @@ si traggono delle brevi conclusioni.
 
 
 
-L'obiettivo principale della relazione \`e da una parte la
-documentazione del progetto di un servizio di {IR} e dall'altra una
-misura del grado in cui si sia riusciti a mettere in pratica i
-contenuti della disciplina illustrati durante le lezioni.
-
-A tal scopo la relazione dovr\`a illustrare nelle sezioni successive:
-\begin{itemize}
-\item i metodi di indicizzazione,
-\item i modelli di reperimento,
-\item l'interfaccia basata su un \textit{browser} per il {WWW}
-\item i risultati della \emph{valutazione} condotta con la collezione
-  sperimentale OHSUMED.
-\end{itemize}
-Il lettore della relazione \`e lo studente medio di un corso di laurea
-in statistica al quale la relazione deve dare tutti gli strumenti per
-comprendere il contenuto.  Ci si metta nei suoi panni e si scriva
-tutto ci\`o e solo ci\`e che serve.  Chiedersi qual \`e il messaggio
-che lo studente deve ``portarsi a casa'', esplicitarlo in questo
-paragrafo e concentrarsi su quello nel resto della relazione.
-
-L'introduzione della relazione deve servire al lettore a capire se
-vale la pena continuare a leggere il resto.  Si possono riassumere i
-contenuti delle sezioni successive e metterne in evidenza i punti
-principali.  La relazione consiste di tre paragrafi principali dopo
-questa introduzione e prima della bibliografia, per la quale si
-suggerisce Bib\TeX\ se si scrive con \LaTeX.
+% L'obiettivo principale della relazione \`e da una parte la
+% documentazione del progetto di un servizio di {IR} e dall'altra una
+% misura del grado in cui si sia riusciti a mettere in pratica i
+% contenuti della disciplina illustrati durante le lezioni.
+% 
+% A tal scopo la relazione dovr\`a illustrare nelle sezioni successive:
+% \begin{itemize}
+% \item i metodi di indicizzazione,
+% \item i modelli di reperimento,
+% \item l'interfaccia basata su un \textit{browser} per il {WWW}
+% \item i risultati della \emph{valutazione} condotta con la collezione
+%   sperimentale OHSUMED.
+% \end{itemize}
+% Il lettore della relazione \`e lo studente medio di un corso di laurea
+% in statistica al quale la relazione deve dare tutti gli strumenti per
+% comprendere il contenuto.  Ci si metta nei suoi panni e si scriva
+% tutto ci\`o e solo ci\`e che serve.  Chiedersi qual \`e il messaggio
+% che lo studente deve ``portarsi a casa'', esplicitarlo in questo
+% paragrafo e concentrarsi su quello nel resto della relazione.
+% 
+% L'introduzione della relazione deve servire al lettore a capire se
+% vale la pena continuare a leggere il resto.  Si possono riassumere i
+% contenuti delle sezioni successive e metterne in evidenza i punti
+% principali.  La relazione consiste di tre paragrafi principali dopo
+% questa introduzione e prima della bibliografia, per la quale si
+% suggerisce Bib\TeX\ se si scrive con \LaTeX.
 
 \section{Base di partenza}
 \label{sec:base-di-partenza}
+Un sistema IR si puo' basare su vari modelli e metodi di rappresentazione delle informazioni e di reperimento.
+Come gia' detto, in questa sezione si presenteranno quelli scelti per implementare il motore di ricerca utilizzato negli esperimenti.
 
+\subsection{Indicizzazione}
+L'indice creato da whoosh rappresenta la collezione utilizzando un cos\`i detto \emph{inverted index} ovvero, una "matrice" in cui si associa ad ogni termine
+una lista dei dati rilevanti corrispondenti.
+
+I dati rilevanti possono essere, per esempio, i documenti in cui sono presenti i termini, con le rispettive frequenze.
+Ogni elemento della lista \`e detto \emph{posting} e la parte del \emph{posting} che fa riferimento ad uno specifico documento
+\`e detta \emph{pointer}.(pagine 129-130)
+
+\vskip 0.15in
+
+In qesto progetto si tratta in particolare dell'eliminazione delle \emph{stopword}\cite{WBC_stopword}.
+
+Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare 
+che eventualmente sulle query inviate al motore di ricerca.
+
+Le \emph{stopword} sono parole che non portano informazione significativa da sole e quindi non aiutano a capire se un documento \`e rilevante o meno.
+Inoltre, solitamente si tratta di parole molto comuni nella collezione che quindi risultano in un costo rilevante dal punto di vista dello spazio di memoria occupato.
+
+Parole che di solito si identificano come \emph{stopword} nella lingua inglese sono per esempio: "the", "a", "an", "that" o "those".
+
+Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche \emph{stopword} a seconda del contesto. 
+Con questo si intende che delle parole possono diventare \emph{stopword} in certi contesti anche se in altri non lo sono, ad esempio nel manuale di
+MySQL parole come "mysql" e "table" risultano utilizzate cos\`i di frequente che non aiutano nella ricerca di un particolare argomento.
+
+La costruzione di un insieme di \emph{stopword} deve essere fatta con cautela, infatti, la rimozione di troppe parole pu\`o peggiorare l'efficacia del motore di ricerca;
+per esempio alcune query valide potrebbero non dare alcun risultato.
+
+\begin{figure}%
+    \centering
+    {{\includegraphics[width=0.8\linewidth]{inverted_index} }}%
+    \caption{Indice inverso e eliminazione delle stopword, per dare un'idea.}%
+\end{figure}
+\subsection{Reperimento}
 Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
 "Best Match 25 Model with Extension to Multiple Weighted Fields" o in breve BM25F
-
-
-Le stopword\cite{WBC_stopword} sono parole che non portano informazione
-significativa al contenuto informativo come congiunzioni, articoli, avverbi..\par
-
 %
 %\section{Metodi proposti}
 %\label{sec:metodi-utilizzati}
@@ -162,10 +198,11 @@ La pagina iniziale ha solo la barra per l'inserimento della query con un immagin
     \caption{Pagina iniziale.}%
 \end{figure}
 % \vskip 3.5in
-Dopo aver effettuato la ricerca, l'utente viene indirizzato alle pagine contenenti
+Dopo aver effettuato il reperimento, l'utente viene indirizzato alle pagine contenenti
 i link dei risultati.
-Questi link poi rimandano alla pagina di \emph{PubMed} dove c'\`e l'articolo.
-Si pu\`o vederne un esempio in Figura 2.
+Questi link poi rimandano alla pagina di \emph{PubMed}\footnote{\url{https://www.ncbi.nlm.nih.gov/pubmed/}} dove c'\`e l'articolo.
+
+Si pu\`o vederne un esempio in Figura 3.
 
 \begin{figure}%
     \centering
@@ -185,7 +222,7 @@ che d\`a la possibilit\`a di ottenere facilmente la suddivisione dei risultati i
 Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
 suggerimenti per correggere eventualmente la query.
 
-Per come \`e scritta la funzione di ricerca, non sarebbe difficile
+Per come \`e scritta la funzione di reperimento, non sarebbe difficile
 implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a 
 di cercare anche per autore o di scegliere l'operatore logico per collegare le parole
 della query.
@@ -377,7 +414,7 @@ map all 0.2720               & map all \bf 0.3508               & map all 0.2813
 \caption{ Risultati trec\_eval, rimozione delle stopword cliniche migliorate, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
 
-La Figura 5 riassume i risultati delle tre prove e si pu\`o notare un netto miglioramento utilizzando le stopword migliorate.
+La Figura 6 riassume i risultati delle tre prove e si pu\`o notare un netto miglioramento utilizzando le stopword migliorate.
 
 
 \begin{figure}%

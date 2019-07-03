@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  3 JUL 2019 09:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  3 JUL 2019 16:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -341,53 +341,66 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-<index.png, id=20, 1686.3pt x 1003.75pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<inverted_index.png, id=15, 881.2925pt x 511.9125pt>
+File: inverted_index.png Graphic file (type png)
+<use inverted_index.png>
+Package pdftex.def Info: inverted_index.png  used on input line 149.
+(pdftex.def)             Requested size: 277.69987pt x 161.30016pt.
+ [2]
+<index.png, id=21, 1686.3pt x 1003.75pt>
 File: index.png Graphic file (type png)
 <use index.png>
-Package pdftex.def Info: index.png  used on input line 161.
+Package pdftex.def Info: index.png  used on input line 197.
 (pdftex.def)             Requested size: 347.12354pt x 206.61246pt.
-<risultati.png, id=21, 1686.3pt x 1003.75pt>
+ [3 <./inverted_index.png>]
+<risultati.png, id=25, 1686.3pt x 1003.75pt>
 File: risultati.png Graphic file (type png)
 <use risultati.png>
-Package pdftex.def Info: risultati.png  used on input line 172.
+Package pdftex.def Info: risultati.png  used on input line 209.
 (pdftex.def)             Requested size: 347.12354pt x 206.61246pt.
-<pagination.png, id=23, 1126.2075pt x 339.2675pt>
+<pagination.png, id=27, 1126.2075pt x 339.2675pt>
 File: pagination.png Graphic file (type png)
 <use pagination.png>
-Package pdftex.def Info: pagination.png  used on input line 181.
+Package pdftex.def Info: pagination.png  used on input line 218.
 (pdftex.def)             Requested size: 347.12354pt x 104.57132pt.
- [3 <./index.png>] [4 <./risultati.png> <./pagination.png>] [5] [6] [7]
-<maps.pdf, id=42, 867.24pt x 578.16pt>
+
+Underfull \vbox (badness 7397) has occurred while \output is active []
+
+ [4 <./index.png>] [5 <./risultati.png> <./pagination.png>]
+Overfull \hbox (1.655pt too wide) in paragraph at lines 238--239
+\OT1/cmr/m/n/10 scrit-ti in py-thon(versione 2.7), sfrut-tan-do og-get-ti e fun
+-zio-ni del mo-du-lo whoosh[]. 
+ []
+
+[6] [7] [8]
+<maps.pdf, id=46, 867.24pt x 578.16pt>
 File: maps.pdf Graphic file (type pdf)
 <use maps.pdf>
-Package pdftex.def Info: maps.pdf  used on input line 385.
+Package pdftex.def Info: maps.pdf  used on input line 422.
 (pdftex.def)             Requested size: 277.69987pt x 185.12965pt.
- [8]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [9 <./maps.pdf>]
-<aleste.jpg, id=90, 1206.5075pt x 1284.8pt>
+ [9] [10 <./maps.pdf>]
+<aleste.jpg, id=94, 1206.5075pt x 1284.8pt>
 File: aleste.jpg Graphic file (type jpg)
 <use aleste.jpg>
-Package pdftex.def Info: aleste.jpg  used on input line 456.
+Package pdftex.def Info: aleste.jpg  used on input line 493.
 (pdftex.def)             Requested size: 99.5786pt x 99.57097pt.
-<caterina.jpg, id=91, 724.7075pt x 708.6475pt>
+<caterina.jpg, id=95, 724.7075pt x 708.6475pt>
 File: caterina.jpg Graphic file (type jpg)
 <use caterina.jpg>
-Package pdftex.def Info: caterina.jpg  used on input line 458.
+Package pdftex.def Info: caterina.jpg  used on input line 495.
 (pdftex.def)             Requested size: 99.57848pt x 99.57762pt.
-<cristi.jpg, id=92, 245.91875pt x 245.91875pt>
+<cristi.jpg, id=96, 245.91875pt x 245.91875pt>
 File: cristi.jpg Graphic file (type jpg)
 <use cristi.jpg>
-Package pdftex.def Info: cristi.jpg  used on input line 460.
+Package pdftex.def Info: cristi.jpg  used on input line 497.
 (pdftex.def)             Requested size: 99.58528pt x 99.58528pt.
- [10 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
+ [11 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
 Here is how much of TeX's memory you used:
- 4205 strings out of 494912
- 58294 string characters out of 6180266
- 139869 words of memory out of 5000000
- 7464 multiletter control sequences out of 15000+600000
+ 4210 strings out of 494912
+ 58403 string characters out of 6180266
+ 138869 words of memory out of 5000000
+ 7468 multiletter control sequences out of 15000+600000
  8147 words of font info for 29 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,9n,32p,799b,941s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -403,10 +416,10 @@ sfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on modello_rev_2.pdf (10 pages, 2124897 bytes).
+Output written on modello_rev_2.pdf (11 pages, 2344171 bytes).
 PDF statistics:
- 135 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 139 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
