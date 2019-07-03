@@ -16,13 +16,11 @@ from whoosh.searching import Searcher
 from paginate_whoosh import WhooshPage
 
 # -------------------------------------------------------------------------------------------------- #
-# Le parole vengono eventualmente corrette di al massimo una lettera perche' altrimenti si rischia di 
-# utilizzare parole che c'entrano poco con la parola originale 
 def expq_cor(ix,query):
     check = []
     no_check = []
     for x  in query.all_terms(phrases=True):
-        if x[0]=="title":                                                   # Per non prendere doppioni se si usano piu' campi.
+        if x[0] == "title":                                                 # Per non prendere doppioni se si usano piu' campi.
             if len(x[1])>3 and ix.searcher().idf("abstract",x[1])>11.9:     # Controllo che la parola abbia almeno 5 lettere e non appaia nell'indice(almeno non nei campi abstract).
                 check.append(x[1])                                          # Forse sara' da correggere, aggiungo la parola alla lista check
             else:
@@ -37,8 +35,8 @@ def expq_cor(ix,query):
     expq=[]
     for x in check:                                                         # Per ogni parola in check
         corr = []
-        for y in corrector.suggest(x, prefix=1, maxdist=3,limit=10):       # Mantengo un prefisso di 4 lettere e ottengo la lista dei suggerimenti 
-            if y[:-1]!=x and (y[:-1]!=x[:-1] or y==x):                      # Accetto suggerimenti che cambiano solo una lettera all'interno della parola(o la parola stessa)
+        for y in corrector.suggest(x, prefix=3, maxdist=2,limit=5):         # Mantengo un prefisso di 3 lettere e ottengo la lista dei suggerimenti 
+            if y[:-1]!=x and (y[:-1]!=x[:-1] or y==x):                      # Accetto suggerimenti che cambiano lettere all'interno della parola(o la parola stessa)
                 corr.append(y)
         expq += corr
     return " ".join(expq+no_check)                                          # Ritorno la lista delle parole della query piu' gli eventuali suggerimenti
@@ -141,10 +139,6 @@ def src(indexdir,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
     query = parser(campi,ix.schema, group=lgroup).parse(q)
     new_query = parser(campi,ix.schema, group=lgroup).parse(expq_cor(ix,query))     # Corregge la query se le parole hanno una lettera sbagliata
     results = ix.searcher(weighting=score).search(new_query,limit=None)[:1000]          # Effettua la ricerca effettiva
-    if not query:
-        print "ciao"
-    else:
-        print "mondo"
     # Per ottenere la paginazione
     respage = 15
     reslen = len(results)
@@ -162,12 +156,11 @@ def src(indexdir,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
         ix.searcher().close()
         return qtc, 0, None
 
-def adv_src(fst,ud,stype="b",flds="2",lim=100,w="bm",lo="o",opt=[]):
-    """
-        Possibilita' di creare una ricerca avanzata permettendo di cambiare altri parametri.
-    """
-    pass
-
+    # Si potrebbe creare una ricerca avanzata permettendo di cambiare altri parametri.
+    # Per esempio, si puo' utilizzare il parametro lo per cambiare operatore logico oppure fare una ricerca sul campo authors come: 
+    # query = qp("authors",ix.schema, group=lgroup).parse(q)
+    # res_aut = ix.searcher(weighting=score).search(query,limit=None)
+    # e poi intersecare i risultati in res_aut con quelli in results
 
 # -------------------------------------------------------------------------------------------------- #
 if __name__ == "__main__":

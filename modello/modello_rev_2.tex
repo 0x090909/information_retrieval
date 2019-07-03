@@ -1,7 +1,9 @@
 % samplepaper.tex: springer.com
 % modificato da MM 06/05/2018
 %
+
 \documentclass[runningheads]{llncs}
+%\usepackage[a4paper, total={5in, 8.1in}]{geometry}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage{subfigure}
@@ -132,35 +134,61 @@ significativa al contenuto informativo come congiunzioni, articoli, avverbi..\pa
 %\emph{Nessuno}.  In una delle ultime lezioni si vedr\`a come
 %implementare delle proprie funzioni di reperimento e schemi di
 %pesatura.
-
-
+%\vskip 3.5in
 \section{Interfaccia web}
 
 Parte di questo progetto \`e stata la creazione di un'interfaccia web
 tramite cui un utente puo' interrogare l'indice della collezione.
 In particolare l'interfaccia \`e rivolta ad utenti che cercano articoli
 pertinenti ad un certo argomento, definito dalla query.
+
 Per il server web \`e stato utilizzato un modulo di python dedicato allo scopo: web-py.
 Questo modulo permette di integrare facilmente funzioni di python in pagine HTML.
 
-Come funzione di reperimento si \`e utilizzata la stessa usata per gli esperimenti,
-adattata in modo da accettare query interattive, inserite dagli utenti.
-
-Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
-suggerimenti per correggere eventualmente la query.
 Per lo stile delle pagine html si \`e optato per l'utilizzo degli strumenti
 disponibili da bootstrap\footnote{\url{https://getbootstrap.com/}}.
-\`E anche risultato utile sfruttare un altro modulo legato a whoosh (whoosh-paginate)
-che d\`a la possibilit\`a di ottenere facilmente la suddivisione dei risultati in pagine.
 
-Inoltre, per come \`e scritta la funzione di ricerca, non sarebbe difficile
-implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a
-di cercare anche per autore o di scegliere l'operatore logico per collegare le parole
-della query.
+La funzione di reperimento utilizzata \`e essenzialmente la stessa usata per gli esperimenti,
+adattata in modo da accettare query interattive, inserite dagli utenti.
 
+Si \`e deciso di limitare il numero di risultati proposti a 1000 articoli inquanto si \`e pensato che, 
+anche se un articolo rilevante fosse in posizione dopo la millesima, non verrebbe visto dall'utente
+che probabilmente controlla solo le prime pagine.
+
+La pagina iniziale ha solo la barra per l'inserimento della query con un immagine suggestiva che fa da sfondo. 
+\begin{figure}%
+    \centering
+    {{\includegraphics[width=1\linewidth]{index} }}%
+    \caption{Pagina iniziale.}%
+\end{figure}
+% \vskip 3.5in
 Dopo aver effettuato la ricerca, l'utente viene indirizzato alle pagine contenenti
 i link dei risultati.
 Questi link poi rimandano alla pagina di \emph{PubMed} dove c'\`e l'articolo.
+Si pu\`o vederne un esempio in Figura 2.
+
+\begin{figure}%
+    \centering
+    {{\includegraphics[width=1\linewidth]{risultati} }}%
+    \caption{Pagina dei risultati.}%
+\end{figure}
+
+\`E risultato utile sfruttare un modulo legato a whoosh (paginate-whoosh\footnote{\url{https://getbootstrap.com/}})
+che d\`a la possibilit\`a di ottenere facilmente la suddivisione dei risultati in pagine.
+
+\begin{figure}%
+    \centering
+    {{\includegraphics[width=1\linewidth]{pagination} }}%
+    \caption{Pulsanti per navigare tra le pagine di risultati.}%
+\end{figure}
+
+Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
+suggerimenti per correggere eventualmente la query.
+
+Per come \`e scritta la funzione di ricerca, non sarebbe difficile
+implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a 
+di cercare anche per autore o di scegliere l'operatore logico per collegare le parole
+della query.
 
 \section{Esperimenti e Risultati}
 \label{sec:esperimenti}
@@ -266,7 +294,7 @@ Come si nota dalla tabella il valore baseline di \textit{M.A.P} \`e 0.2744.
 
 
 
-
+% \vskip 3.5in
 
 \subsection{Esperimenti}
 
@@ -348,14 +376,13 @@ map all 0.2720               & map all \bf 0.3508               & map all 0.2813
 
 \caption{ Risultati trec\_eval, rimozione delle stopword cliniche migliorate, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
 \end{table}
-\par
 
-La Figura 2 riassume i risultati delle tre prove e si pu\`o notare un netto miglioramento utilizzando le stopword migliorate.
+La Figura 5 riassume i risultati delle tre prove e si pu\`o notare un netto miglioramento utilizzando le stopword migliorate.
 
 
 \begin{figure}%
     \centering
-    {{\includegraphics[width=1\linewidth]{maps} }}%
+    {{\includegraphics[width=0.8\linewidth]{maps} }}%
     \caption{Variazione del MAP campbiando il numero di campi per i tre insiemi di stopword, la linea orizzontale indica la baseline di 0.2744.}%
 \end{figure}
 

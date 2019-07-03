@@ -41,13 +41,11 @@ $def with (results, user_data, searcherlen, pages, time)
 								<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=$link" class="search-link" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/?term=${link[:50]+"..." if len(link)>50 else link}</a>
 								<p>
 									$if "abstract" in article.keys() and len(article.get('abstract')) > 300:
-										$article.get("abstract")[:300] + '...'
+										$(article.get("abstract")[:300] + '...')
 									$else:
 										$article.get('abstract')
 								</p>
 							</div>
-
-
 						<div class="text-center">
 							<ul class="pagination pg-blue  justify-content-center">
 												<li class="page-item">	<a href="$pages['first_page']['href']" class="page-link">$:pages['first_page']['value']</a></li>
@@ -59,10 +57,12 @@ $def with (results, user_data, searcherlen, pages, time)
 												<li class="page-item"><a href="$pages['last_page']['href']" class="page-link">$:pages['last_page']['value']</a></li>
 						</ul>
 						</div>
-                    $else:
-						$for word in results:
+					$else:
 						<small>Request time  ($time seconds)</small>
-
+						<h2>
+						Le parole carcate non sono presenti nella collezione o sono troppo generali.
+						</h2>            
+						$for word in results:
 							<div class="hr-line-dashed"></div>
 							<div class="search-result">
 							<h4>$('Suggerimenti per "'+word+'":' if results[word] else 'Non ci sono suggerimenti per la parola "'+word+'"')</h4>
@@ -71,7 +71,8 @@ $def with (results, user_data, searcherlen, pages, time)
 									<span>$(suggestion.capitalize()) </span>
 								</div>
 							</div>
-
+						$if not results:
+							<h4>Parole troppo generali.</h4>
 				</div>
 			</div>
 		</div>

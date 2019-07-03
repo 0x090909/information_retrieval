@@ -36,7 +36,8 @@ class search:
 	def GET(self):
 		user_data = web.input()
 		search_time = uniform(0.0002,0.02)
-		out, searcherlen, pages = src("./ohsumed_index_dir_stopwords_clinico",user_data,lim=1000)
+		out, searcherlen, pages = src("./index_stop",user_data,lim=1000)
+		print out
 		if searcherlen:
 			return render.searchResults(out, user_data, searcherlen, pages,search_time)
 		else:
