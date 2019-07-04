@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  4 JUL 2019 18:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  4 JUL 2019 18:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -421,13 +421,13 @@ File: maps.pdf Graphic file (type pdf)
 Package pdftex.def Info: maps.pdf  used on input line 457.
 (pdftex.def)             Requested size: 277.69987pt x 185.12965pt.
  [9 <./maps.pdf>] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 531--532
-[]\OT1/cmr/m/n/9 S.E. Ro-berts-on, (1977) "THE PRO-BA-BI-LI-TY RAN-KING PRIN-CI
+Underfull \hbox (badness 10000) in paragraph at lines 530--531
+[]\OT1/cmr/m/n/9 S.E. Ro-berts-on, (1997) "THE PRO-BA-BI-LI-TY RAN-KING PRIN-CI
 -
  []
 
 
-Underfull \hbox (badness 4403) in paragraph at lines 531--532
+Underfull \hbox (badness 4403) in paragraph at lines 530--531
 \OT1/cmr/m/n/9 PLE IN IR", Jour-nal of Do-cu-men-ta-tion, Vol. 33 Is-sue: 4, pp
 .294-304,
  []
@@ -435,17 +435,17 @@ Underfull \hbox (badness 4403) in paragraph at lines 531--532
 <aleste.jpg, id=95, 1206.5075pt x 1284.8pt>
 File: aleste.jpg Graphic file (type jpg)
 <use aleste.jpg>
-Package pdftex.def Info: aleste.jpg  used on input line 537.
+Package pdftex.def Info: aleste.jpg  used on input line 536.
 (pdftex.def)             Requested size: 99.5786pt x 99.57097pt.
 <caterina.jpg, id=96, 724.7075pt x 708.6475pt>
 File: caterina.jpg Graphic file (type jpg)
 <use caterina.jpg>
-Package pdftex.def Info: caterina.jpg  used on input line 539.
+Package pdftex.def Info: caterina.jpg  used on input line 538.
 (pdftex.def)             Requested size: 99.57848pt x 99.57762pt.
 <cristi.jpg, id=97, 245.91875pt x 245.91875pt>
 File: cristi.jpg Graphic file (type jpg)
 <use cristi.jpg>
-Package pdftex.def Info: cristi.jpg  used on input line 541.
+Package pdftex.def Info: cristi.jpg  used on input line 540.
 (pdftex.def)             Requested size: 99.58528pt x 99.58528pt.
 [11 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
 Here is how much of TeX's memory you used:
