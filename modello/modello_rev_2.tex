@@ -5,6 +5,7 @@
 \documentclass[runningheads]{llncs}
 %\usepackage[a4paper, total={5in, 8.1in}]{geometry}
 \usepackage[italian]{babel}
+\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{listings}
@@ -16,7 +17,7 @@
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
 \begin{document}
 %
-\title{Sistema IR per collezione di articoli medici uilizzando diversi insiemi di stopword}
+\title{Sistema IR per collezione di articoli medici utilizzando diversi insiemi di stopword}
 %
 \titlerunning{Sistema IR per collezione OHSUMED}
 % If the paper title is too long for the running head, you can set
@@ -60,24 +61,19 @@ Lo scopo finale di un Sistema di Information Retrieval (IRS) \`e quello di reper
  persona ha un problema da risolvere o un compito da svolgere richiede informazioni
  importanti, utili o necessarie per la risoluzione del problema o lo svolgimento del compito};
   dunque i documenti sono il primo input del sistema, mentre il secondo \`e
-  costitutito dalle interrogazioni; i documenti devono essere
-  indicizzati e nell'indice creato si andr\`a a effettuare la ricerca per reperire documenti
-  rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o
-  necessaria a soddisfare l'esigenza informativa dell'utente}.
-
-  Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti,
-  ma anche di riordinare secondo un certo ordine di rilevanza.
-
-  Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile,
-  infatti nei programmi di indicizzaizone e di reperimento si usa uno schema, che si deve tenere in
-  considerazione per entrambi i casi.
+  costituito dalle interrogazioni; i documenti devono essere
+  indicizzati e nell'indice creato si andr\`a a effettuare la ricerca per reperire documenti rilevanti\footnote{la rilevanza \`e la propriet\`a che rende l'informazione importante, utile o necessaria a soddisfare l'esigenza informativa dell'utente}. 
+  
+  Questa seconda parte \`e detta reperimento e non si occupa solo di ricercare tra i documenti, ma anche di riordinare secondo un certo ordine di rilevanza. 
+  
+  Ci\`o che descrive i documenti e ci\`o che descrive le interrogazioni deve essere confrontabile, infatti nei programmi di indicizzazione e di reperimento si usa uno schema, che si deve tenere in considerazione per entrambi i casi.
 %che deve essere uguale in entrambi i casi.
-
-L'indicizzazione \`e un trade-off tra il  miglioramento della rapprerentazione del
-contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza),
-in questa relazione tratter\`a il problema dell'efficacia.
-Esistono diversi modi per risolvere questo problema; nel nostro caso abbiamo
-cercato di migliorare l'efficacia con l'utilizzo di stopword.
+  
+L'indicizzazione \`e un trade-off tra il  miglioramento della rappresentazione del
+contenuto informativo dei documenti (efficacia) e la gestione degli indici (efficienza), in questa relazione si tratter\`a il problema dell'efficacia.
+Esistono diversi modi per risolvere questo problema; nel nostro caso 
+ci concentriamo sull'utilizzo di stopword.
+%abbiamo cercato di migliorare l'efficacia con l'utilizzo di stopword.
 %ricercato la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
 
 
@@ -95,7 +91,7 @@ si traggono delle brevi conclusioni.
 % documentazione del progetto di un servizio di {IR} e dall'altra una
 % misura del grado in cui si sia riusciti a mettere in pratica i
 % contenuti della disciplina illustrati durante le lezioni.
-%
+% 
 % A tal scopo la relazione dovr\`a illustrare nelle sezioni successive:
 % \begin{itemize}
 % \item i metodi di indicizzazione,
@@ -110,7 +106,7 @@ si traggono delle brevi conclusioni.
 % tutto ci\`o e solo ci\`e che serve.  Chiedersi qual \`e il messaggio
 % che lo studente deve ``portarsi a casa'', esplicitarlo in questo
 % paragrafo e concentrarsi su quello nel resto della relazione.
-%
+% 
 % L'introduzione della relazione deve servire al lettore a capire se
 % vale la pena continuare a leggere il resto.  Si possono riassumere i
 % contenuti delle sezioni successive e metterne in evidenza i punti
@@ -121,22 +117,21 @@ si traggono delle brevi conclusioni.
 \section{Base di partenza}
 \label{sec:base-di-partenza}
 Un sistema IR si pu\`o basare su vari modelli e metodi di rappresentazione delle informazioni e di reperimento.
-Come gi\`a detto, in questa sezione si presenteranno quelli scelti per implementare il motore di
-ricerca utilizzato negli esperimenti.
+Come gi\`a detto, in questa sezione si presenteranno quelli scelti per implementare il motore di ricerca utilizzato negli esperimenti.
 
 \subsection{Indicizzazione}
-L'indice creato da whoosh rappresenta la collezione utilizzando un cos\`i detto \emph{inverted index} ovvero, una "matrice" in cui si associa ad ogni termine
+L'indice creato da whoosh rappresenta la collezione utilizzando un cos\`i detto \emph{inverted index}\cite{WBC_ii} ovvero, una "matrice" in cui si associa ad ogni termine
 una lista dei dati rilevanti corrispondenti.
 
 I dati rilevanti possono essere, per esempio, i documenti in cui sono presenti i termini, con le rispettive frequenze.
 Ogni elemento della lista \`e detto \emph{posting} e la parte del \emph{posting} che fa riferimento ad uno specifico documento
-\`e detta \emph{pointer}.(pagine 129-130)
+\`e detta \emph{pointer}.
 
 \vskip 0.15in
 
 In qesto progetto si tratta in particolare dell'eliminazione delle \emph{stopword}\cite{WBC_stopword}.
 
-Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare
+Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare 
 che eventualmente sulle query inviate al motore di ricerca.
 
 Le \emph{stopword} sono parole che non portano informazione significativa da sole e quindi non aiutano a capire se un documento \`e rilevante o meno.
@@ -144,7 +139,7 @@ Inoltre, solitamente si tratta di parole molto comuni nella collezione che quind
 
 Parole che di solito si identificano come \emph{stopword} nella lingua inglese sono per esempio: "the", "a", "an", "that" o "those".
 
-Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche \emph{stopword} a seconda del contesto.
+Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche \emph{stopword} a seconda del contesto. 
 Con questo si intende che delle parole possono diventare \emph{stopword} in certi contesti anche se in altri non lo sono, ad esempio nel manuale di
 MySQL parole come "mysql" e "table" risultano utilizzate cos\`i di frequente che non aiutano nella ricerca di un particolare argomento.
 
@@ -154,10 +149,28 @@ per esempio alcune query valide potrebbero non dare alcun risultato.
 \begin{figure}%
     \centering
     {{\includegraphics[width=0.8\linewidth]{inverted_index} }}%
-    \caption{Indice inverso e eliminazione delle stopword, rappresentati in modo schematico.}%
+    \caption{\emph{Inverted index} e eliminazione delle \emph{stopword}, rappresentati in modo schematico.}%
 \end{figure}
 
 \subsection{Reperimento}
+Come modello di reperimento si \`e utilizzato il modello probabilistico, paradigma dominante nell'implementazione di sistemi IR.
+
+Questo modello si basa sul Probability Ranking Principle(PRP)\cite{PRP} ovvero:
+
+\blockquote{"Se un Sistema IR risponde a ciascuna interrogazione con una lista di documenti ordinati in
+modo non crescente per probabilit\`a di rilevanza all'esigenza informativa dell'utente che ha espresso l'interrogazione,
+e posto che le probabilit\`a siano state stimate nel modo migliore possibile sulla base dei dati a disposizione, allora
+l'efficacia complessiva del sistema \`e la maggiore possibile sulla base di quei dati."}
+
+Dato un documento, il motore di ricerca deve decidere se tale documento \`e rilevante o meno alla query posta.
+Dato un modo per calcolare la probabilit\`a che un documento sia rilevante e la probabilit\`a che non lo sia 
+si possono confrontare queste due quantit\`a per risolvere questo problema di decisione.
+
+In pratica, per decidere se il documento D \`e rilevante si vogliono confrontare P\{R$|$D\} e P\{NR$|$D\}, dove R indica rilevante e NR indica non rilevante.
+Per vedere nel dettaglio come calcolare le due probabilit\`a vedere il riferimento, qui riportiamo solo il risultato sul loro rapporto:
+
+
+Nel contesto del modello probabilistico, 
 Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
 "Best Match 25 Model with Extension to Multiple Weighted Fields" o in breve BM25F
 %
@@ -195,11 +208,10 @@ disponibili da bootstrap\footnote{\url{https://getbootstrap.com/}}.
 La funzione di reperimento utilizzata \`e essenzialmente la stessa usata per gli esperimenti,
 adattata in modo da accettare query interattive, inserite dagli utenti.
 
-Si \`e deciso di limitare il numero di risultati proposti a 1000 articoli in quanto si \`e pensato che,
-se un articolo rilevante fosse in una posizione dopo la millesima, non verrebbe visto dall'utente,
+Si \`e deciso di limitare il numero di risultati proposti a 1000 articoli in quanto si \`e pensato che, se un articolo rilevante fosse in una posizione dopo la millesima, non verrebbe visto dall'utente
 che tende a controllare solo le prime pagine.
 
-La pagina iniziale ha solo la barra per l'inserimento della query con un immagine suggestiva che fa da sfondo.
+La pagina iniziale ha solo la barra per l'inserimento della query con un immagine suggestiva che fa da sfondo. 
 \begin{figure}%
     \centering
     {{\includegraphics[width=1\linewidth]{index} }}%
@@ -231,7 +243,7 @@ Nel caso in cui non vengano trovati risultati si forniscono all'utente dei
 suggerimenti per correggere eventualmente la query.
 
 Per come \`e scritta la funzione di reperimento, non sarebbe difficile
-implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a
+implementare una funzionalit\`a di "ricerca avanzata" dando all'utente la possibilit\`a 
 di cercare per autore o di scegliere l'operatore logico per collegare le parole
 della query.
 
@@ -241,7 +253,7 @@ della query.
 
 Per gli esperimenti si \`e utilizzata parte della gi\`a citata collezione sperimentale chiamata OHSUMED\footnote{ \url{https://bit.ly/2wpOynZ}}.
 
-Si tratta di una collezione di oltre 300'000 articoli provenienti dal database bibliografico MEDLINE, pubblicati tra il 1987 ed il 1991; di questi documenti ne sono stati utilizzati 54'711.
+Si tratta di una collezione di oltre 300'000 articoli provenienti dal database bibliografico MEDLINE pubblicati tra il 1987 ed il 1991; di questi documenti ne sono stati utilizzati 54'711.
 
 I programmi utilizzati per effettuare indicizzazione e reperimento sono stati scritti in python(versione 2.7), sfruttando oggetti e funzioni del modulo whoosh\footnote{ \url{https://whoosh.readthedocs.io/en/latest/index.html}}.
 
@@ -256,18 +268,18 @@ Inoltre, per verificare se i valori di MAP ottenuti in run diverse si discostano
 Prima di iniziare gli esperimenti sono state fatte delle scelte riguardo certi aspetti dei metodi di reperimento che rimanessero costanti durante tutti gli esperimenti.
 Queste scelte sono state fatte in seguito ad alcune run preliminari.
 
-Come schema di pesatura, per la funzione di reperimento e ranking,  si \`e deciso di utilizzare il BM25F, descritto nella sezione precedente, inquanto "state-of-the-art" dal punto di vista dei modelli per information retrieval su documenti strutturati, e si \`e deciso di utilizzare l'operatore OR come operatore logico per raggruppare le parole delle query, ovvero si cercano documenti in cui \`e presente almeno una parola della query.
+Come schema di pesatura, per la funzione di reperimento e ranking,  si \`e deciso di utilizzare il BM25F, descritto nella sezione precedente, in quanto "state-of-the-art" dal punto di vista dei modelli per information retrieval su documenti strutturati, e si \`e deciso di utilizzare l'operatore OR come operatore logico per raggruppare le parole delle query, ovvero si cercano documenti in cui \`e presente almeno una parola della query.
 
-Sempre a seguito delle run preliminari si \`e deciso di utilizzare il campo "desc" delle query anzich\`e il campo "title" inquanto d\`a risultati migliori, inoltre, si \`e notato che in alcune query sperimentali sono presenti parole scritte in modo errato e che quindi non risultano presenti nell'indice.
+Sempre a seguito delle run preliminari si \`e deciso di utilizzare il campo "desc" delle query anzich\'e il campo "title" in quanto d\`a risultati migliori, inoltre, si \`e notato che in alcune query sperimentali sono presenti parole scritte in modo errato e che quindi non risultano presenti nell'indice.
 Per questo dopo aver verificato, leggendo i documenti rilevanti per quelle query, quali fossero gli errori si \`e ritenuto opportuno effettuare una correzione al momento del reperimento.
 A grandi linee, la correzione viene fatta su parole che non risultano presenti nell'indice cercando in quest'ultimo delle parole alternative che si discostano di al pi\`u una lettera dalla parola originale; queste parole vengono quindi aggiunte alla query di partenza e si procede con la ricerca.
 
 Un'ultima scelta \`e stata fatta riguardo il numero massimo di documenti reperiti.
-Si \`e optato per 100 documenti poiche un numero maggiore non porta grandi miglioramenti dal punto di vista del MAP. \par
+Si \`e optato per 100 documenti poich\'e un numero maggiore non porta grandi miglioramenti dal punto di vista del MAP. \par
 
 %\vskip 1in
-Affinch\`e Whoosh possa indicizzare una collezione di documenti, necessita la
-specificazione di uno schema che include, per ogni possibile campo dei documenti della collezine, il nome del campo ed il tipo del campo.
+Affinch\'e Whoosh possa indicizzare una collezione di documenti, necessita la
+specificazione di uno schema che include, per ogni possibile campo dei documenti della collezione, il nome del campo ed il tipo del campo.
 
 Lo schema di base per la collezione qui utilizzata \`e il seguente:
 \par
@@ -396,7 +408,7 @@ Nell'ultima prova sono state aggiunte altre parole alla lista delle stopword. La
 
 Nella prima \`e stata ricavata la frequenza con cui le parole delle query appaiono nei rispettivi documenti rilevanti. Dopo di ci\`o le parole con frequenza prossima allo 0 sono state prese in considerazione come possibili stopword.
 
-Nella seconda fase sono state prese le query che, basandosi sui risultati della seconda prova, hanno avuto un MAP relativamente basso(inferiore a 0.2). Sono state quindi prese alcune parolo di queste query come altre possibili stopword anche basandosi sulla loro frequenza nei documenti rilevanti.
+Nella seconda fase sono state prese le query che, basandosi sui risultati della seconda prova, hanno avuto un MAP relativamente basso(inferiore a 0.2). Sono state quindi prese alcune parole di queste query come altre possibili stopword anche basandosi sulla loro frequenza nei documenti rilevanti.
 
 Per alcune parole la scelta se includerle nell'insieme di stopword \`e stata resa difficile dal fatto che, essendo presenti in pi\`u di una query la loro rimozione poteva significare il miglioramento di un MAP ed il peggioramento di un altro.
 
@@ -428,7 +440,7 @@ La Figura 6 riassume i risultati delle tre prove e si pu\`o notare un netto migl
 \begin{figure}%
     \centering
     {{\includegraphics[width=0.8\linewidth]{maps} }}%
-    \caption{Variazione del MAP campbiando il numero di campi per i tre insiemi di stopword, la linea orizzontale indica la baseline di 0.2744.}%
+    \caption{Variazione del MAP cambiando il numero di campi per i tre insiemi di stopword, la linea orizzontale indica la baseline di 0.2744.}%
 \end{figure}
 
 
@@ -489,10 +501,16 @@ siano peggiori.
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 250-252
 
 \bibitem{WBC_stopword}
-W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 90
+W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 90-91
 
 \bibitem{WBC_map}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 313
+
+\bibitem{WBC_ii}
+W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 129-130
+
+\bibitem{PRP}
+S.E. ROBERTSON, (1977) "THE PROBABILITY RANKING PRINCIPLE IN IR", Journal of Documentation, Vol. 33 Issue: 4, pp.294-304, https://doi.org/10.1108/eb026647
 
 \end{thebibliography}
 

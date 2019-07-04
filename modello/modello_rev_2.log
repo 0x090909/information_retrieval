@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  3 JUL 2019 16:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  4 JUL 2019 08:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -155,13 +155,33 @@ File: babel.def 2018/02/14 3.18 Babel common definitions
 Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count121
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2018/02/11 v5.2c context-sensitive quotations (JAW)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks18
 )
+\csq@reset=\count122
+\csq@gtype=\count123
+\csq@glevel=\count124
+\csq@qlevel=\count125
+\csq@maxlvl=\count126
+\csq@tshold=\count127
+\csq@ltx@everypar=\toks19
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2018/02/11 v5.2c csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
@@ -187,10 +207,10 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \subfigbottomskip=\skip47
 \subfigcapmargin=\dimen129
 \subfiglabelskip=\skip48
-\c@subfigure=\count122
-\c@lofdepth=\count123
-\c@subtable=\count124
-\c@lotdepth=\count125
+\c@subfigure=\count128
+\c@lofdepth=\count129
+\c@subtable=\count130
+\c@lotdepth=\count131
 
 ****************************************
 * Local config file subfigure.cfg used *
@@ -200,23 +220,23 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \subfig@bottom=\skip50
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count126
+\lst@mode=\count132
 \lst@gtempboxa=\box54
-\lst@token=\toks19
-\lst@length=\count127
+\lst@token=\toks20
+\lst@length=\count133
 \lst@currlwidth=\dimen130
-\lst@column=\count128
-\lst@pos=\count129
+\lst@column=\count134
+\lst@pos=\count135
 \lst@lostspace=\dimen131
 \lst@width=\dimen132
-\lst@newlines=\count130
-\lst@lineno=\count131
+\lst@newlines=\count136
+\lst@lineno=\count137
 \lst@maxwidth=\dimen133
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count132
-\lst@skipnumbers=\count133
+\c@lstnumber=\count138
+\lst@skipnumbers=\count139
 \lst@framebox=\box55
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
@@ -228,23 +248,28 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box56
 )
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'italian'.
+
 (./modello_rev_2.aux)
 \openout1 = `modello_rev_2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Info: Redefining \it@ocap on input line 17.
-LaTeX Info: Redefining \it@ccap on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Info: Redefining \it@ocap on input line 18.
+LaTeX Info: Redefining \it@ccap on input line 18.
 
 
 File italian.ldf warning: 
@@ -252,21 +277,21 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 17.
+italian.ldf    on input line 18.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count134
+\scratchcounter=\count140
 \scratchdimen=\dimen134
 \scratchbox=\box57
-\nofMPsegments=\count135
-\nofMParguments=\count136
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count137
+\nofMPsegments=\count141
+\nofMParguments=\count142
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count143
 \MPscratchDim=\dimen135
-\MPnumerator=\count138
-\makeMPintoPDFobject=\count139
-\everyMPtoPDFconversion=\toks21
+\MPnumerator=\count144
+\makeMPintoPDFobject=\count145
+\everyMPtoPDFconversion=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -323,108 +348,121 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count140
+\c@lstlisting=\count146
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 40.
+(Font)              <7> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 40.
+(Font)              <5> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 40.
+(Font)              <9> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 40.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 52.
+(Font)              <6> on input line 41.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 53.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 <inverted_index.png, id=15, 881.2925pt x 511.9125pt>
 File: inverted_index.png Graphic file (type png)
 <use inverted_index.png>
-Package pdftex.def Info: inverted_index.png  used on input line 149.
+Package pdftex.def Info: inverted_index.png  used on input line 151.
 (pdftex.def)             Requested size: 277.69987pt x 161.30016pt.
 
-Underfull \hbox (badness 1158) in paragraph at lines 150--150
-[]\OT1/cmr/bx/n/9 Figura1. \OT1/cmr/m/n/9 In-di-ce in-ver-so e eli-mi-na-zio-ne
- del-le sto-p-word, rap-pre-sen-ta-ti in mo-do
+Underfull \hbox (badness 1024) in paragraph at lines 152--152
+[]\OT1/cmr/bx/n/9 Figura1. \OT1/cmr/m/it/9 In-ver-ted in-dex \OT1/cmr/m/n/9 e e
+li-mi-na-zio-ne del-le \OT1/cmr/m/it/9 sto-p-word\OT1/cmr/m/n/9 , rap-pre-sen-t
+a-ti in mo-do
  []
 
-[2] [3 <./inverted_index.png>]
-<index.png, id=24, 1686.3pt x 1003.75pt>
+[2]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 169.
+ [3 <./inverted_index.png>]
+<index.png, id=25, 1686.3pt x 1003.75pt>
 File: index.png Graphic file (type png)
 <use index.png>
-Package pdftex.def Info: index.png  used on input line 198.
+Package pdftex.def Info: index.png  used on input line 217.
 (pdftex.def)             Requested size: 347.12354pt x 206.61246pt.
-<risultati.png, id=25, 1686.3pt x 1003.75pt>
+<risultati.png, id=26, 1686.3pt x 1003.75pt>
 File: risultati.png Graphic file (type png)
 <use risultati.png>
-Package pdftex.def Info: risultati.png  used on input line 210.
+Package pdftex.def Info: risultati.png  used on input line 229.
 (pdftex.def)             Requested size: 347.12354pt x 206.61246pt.
-<pagination.png, id=27, 1126.2075pt x 339.2675pt>
+<pagination.png, id=28, 1126.2075pt x 339.2675pt>
 File: pagination.png Graphic file (type png)
 <use pagination.png>
-Package pdftex.def Info: pagination.png  used on input line 219.
+Package pdftex.def Info: pagination.png  used on input line 238.
 (pdftex.def)             Requested size: 347.12354pt x 104.57132pt.
-
-Underfull \vbox (badness 7397) has occurred while \output is active []
-
  [4 <./index.png>] [5 <./risultati.png> <./pagination.png>]
-Overfull \hbox (1.655pt too wide) in paragraph at lines 239--240
+Overfull \hbox (1.655pt too wide) in paragraph at lines 258--259
 \OT1/cmr/m/n/10 scrit-ti in py-thon(versione 2.7), sfrut-tan-do og-get-ti e fun
 -zio-ni del mo-du-lo whoosh[]. 
  []
 
 [6] [7] [8]
-<maps.pdf, id=46, 867.24pt x 578.16pt>
+<maps.pdf, id=47, 867.24pt x 578.16pt>
 File: maps.pdf Graphic file (type pdf)
 <use maps.pdf>
-Package pdftex.def Info: maps.pdf  used on input line 423.
+Package pdftex.def Info: maps.pdf  used on input line 442.
 (pdftex.def)             Requested size: 277.69987pt x 185.12965pt.
  [9] [10 <./maps.pdf>]
-<aleste.jpg, id=94, 1206.5075pt x 1284.8pt>
+Underfull \hbox (badness 10000) in paragraph at lines 513--514
+[]\OT1/cmr/m/n/9 S.E. RO-BERTS-ON, (1977) "THE PRO-BA-BI-LI-TY RAN-KING PRIN-CI
+-
+ []
+
+
+Underfull \hbox (badness 4403) in paragraph at lines 513--514
+\OT1/cmr/m/n/9 PLE IN IR", Jour-nal of Do-cu-men-ta-tion, Vol. 33 Is-sue: 4, pp
+.294-304,
+ []
+
+<aleste.jpg, id=95, 1206.5075pt x 1284.8pt>
 File: aleste.jpg Graphic file (type jpg)
 <use aleste.jpg>
-Package pdftex.def Info: aleste.jpg  used on input line 494.
+Package pdftex.def Info: aleste.jpg  used on input line 519.
 (pdftex.def)             Requested size: 99.5786pt x 99.57097pt.
-<caterina.jpg, id=95, 724.7075pt x 708.6475pt>
+<caterina.jpg, id=96, 724.7075pt x 708.6475pt>
 File: caterina.jpg Graphic file (type jpg)
 <use caterina.jpg>
-Package pdftex.def Info: caterina.jpg  used on input line 496.
+Package pdftex.def Info: caterina.jpg  used on input line 521.
 (pdftex.def)             Requested size: 99.57848pt x 99.57762pt.
-<cristi.jpg, id=96, 245.91875pt x 245.91875pt>
+<cristi.jpg, id=97, 245.91875pt x 245.91875pt>
 File: cristi.jpg Graphic file (type jpg)
 <use cristi.jpg>
-Package pdftex.def Info: cristi.jpg  used on input line 498.
+Package pdftex.def Info: cristi.jpg  used on input line 523.
 (pdftex.def)             Requested size: 99.58528pt x 99.58528pt.
- [11 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
+[11 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
 Here is how much of TeX's memory you used:
- 4210 strings out of 494912
- 58403 string characters out of 6180266
- 138869 words of memory out of 5000000
- 7468 multiletter control sequences out of 15000+600000
+ 4760 strings out of 494912
+ 67264 string characters out of 6180266
+ 157449 words of memory out of 5000000
+ 8010 multiletter control sequences out of 15000+600000
  8147 words of font info for 29 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,9n,32p,799b,941s stack positions out of 5000i,500n,10000p,200000b,80000s
-</u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on modello_rev_2.pdf (11 pages, 2344192 bytes).
+ 41i,9n,32p,799b,944s stack positions out of 5000i,500n,10000p,200000b,80000s
+</us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on modello_rev_2.pdf (11 pages, 2353592 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 143 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
