@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  4 JUL 2019 08:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.19)  4 JUL 2019 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -382,24 +382,34 @@ a-ti in mo-do
 [2]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 169.
+
+Underfull \vbox (badness 2426) has occurred while \output is active []
+
  [3 <./inverted_index.png>]
 <index.png, id=25, 1686.3pt x 1003.75pt>
 File: index.png Graphic file (type png)
 <use index.png>
-Package pdftex.def Info: index.png  used on input line 217.
+Package pdftex.def Info: index.png  used on input line 221.
 (pdftex.def)             Requested size: 347.12354pt x 206.61246pt.
-<risultati.png, id=26, 1686.3pt x 1003.75pt>
+
+Underfull \vbox (badness 3503) has occurred while \output is active []
+
+ [4 <./index.png>]
+<risultati.png, id=29, 1686.3pt x 1003.75pt>
 File: risultati.png Graphic file (type png)
 <use risultati.png>
-Package pdftex.def Info: risultati.png  used on input line 229.
+Package pdftex.def Info: risultati.png  used on input line 234.
 (pdftex.def)             Requested size: 347.12354pt x 206.61246pt.
-<pagination.png, id=28, 1126.2075pt x 339.2675pt>
+<pagination.png, id=31, 1126.2075pt x 339.2675pt>
 File: pagination.png Graphic file (type png)
 <use pagination.png>
-Package pdftex.def Info: pagination.png  used on input line 238.
+Package pdftex.def Info: pagination.png  used on input line 243.
 (pdftex.def)             Requested size: 347.12354pt x 104.57132pt.
- [4 <./index.png>] [5 <./risultati.png> <./pagination.png>]
-Overfull \hbox (1.655pt too wide) in paragraph at lines 258--259
+
+Underfull \vbox (badness 1107) has occurred while \output is active []
+
+ [5 <./risultati.png> <./pagination.png>]
+Overfull \hbox (1.655pt too wide) in paragraph at lines 263--264
 \OT1/cmr/m/n/10 scrit-ti in py-thon(versione 2.7), sfrut-tan-do og-get-ti e fun
 -zio-ni del mo-du-lo whoosh[]. 
  []
@@ -408,16 +418,16 @@ Overfull \hbox (1.655pt too wide) in paragraph at lines 258--259
 <maps.pdf, id=47, 867.24pt x 578.16pt>
 File: maps.pdf Graphic file (type pdf)
 <use maps.pdf>
-Package pdftex.def Info: maps.pdf  used on input line 442.
+Package pdftex.def Info: maps.pdf  used on input line 457.
 (pdftex.def)             Requested size: 277.69987pt x 185.12965pt.
- [9] [10 <./maps.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 513--514
-[]\OT1/cmr/m/n/9 S.E. RO-BERTS-ON, (1977) "THE PRO-BA-BI-LI-TY RAN-KING PRIN-CI
+ [9 <./maps.pdf>] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 531--532
+[]\OT1/cmr/m/n/9 S.E. Ro-berts-on, (1977) "THE PRO-BA-BI-LI-TY RAN-KING PRIN-CI
 -
  []
 
 
-Underfull \hbox (badness 4403) in paragraph at lines 513--514
+Underfull \hbox (badness 4403) in paragraph at lines 531--532
 \OT1/cmr/m/n/9 PLE IN IR", Jour-nal of Do-cu-men-ta-tion, Vol. 33 Is-sue: 4, pp
 .294-304,
  []
@@ -425,17 +435,17 @@ Underfull \hbox (badness 4403) in paragraph at lines 513--514
 <aleste.jpg, id=95, 1206.5075pt x 1284.8pt>
 File: aleste.jpg Graphic file (type jpg)
 <use aleste.jpg>
-Package pdftex.def Info: aleste.jpg  used on input line 519.
+Package pdftex.def Info: aleste.jpg  used on input line 537.
 (pdftex.def)             Requested size: 99.5786pt x 99.57097pt.
 <caterina.jpg, id=96, 724.7075pt x 708.6475pt>
 File: caterina.jpg Graphic file (type jpg)
 <use caterina.jpg>
-Package pdftex.def Info: caterina.jpg  used on input line 521.
+Package pdftex.def Info: caterina.jpg  used on input line 539.
 (pdftex.def)             Requested size: 99.57848pt x 99.57762pt.
 <cristi.jpg, id=97, 245.91875pt x 245.91875pt>
 File: cristi.jpg Graphic file (type jpg)
 <use cristi.jpg>
-Package pdftex.def Info: cristi.jpg  used on input line 523.
+Package pdftex.def Info: cristi.jpg  used on input line 541.
 (pdftex.def)             Requested size: 99.58528pt x 99.58528pt.
 [11 <./aleste.jpg> <./caterina.jpg> <./cristi.jpg>] (./modello_rev_2.aux) ) 
 Here is how much of TeX's memory you used:
@@ -445,7 +455,7 @@ Here is how much of TeX's memory you used:
  8010 multiletter control sequences out of 15000+600000
  8147 words of font info for 29 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,9n,32p,799b,944s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,9n,32p,799b,954s stack positions out of 5000i,500n,10000p,200000b,80000s
 </us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texl
@@ -459,7 +469,7 @@ fonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on modello_rev_2.pdf (11 pages, 2353592 bytes).
+Output written on modello_rev_2.pdf (11 pages, 2354475 bytes).
 PDF statistics:
  143 PDF objects out of 1000 (max. 8388607)
  72 compressed objects within 1 object stream

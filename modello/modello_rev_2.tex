@@ -3,7 +3,7 @@
 %
 
 \documentclass[runningheads]{llncs}
-%\usepackage[a4paper, total={5in, 8.1in}]{geometry}
+%\usepackage[a4paper, total={5in, 8.5in}]{geometry}
 \usepackage[italian]{babel}
 \usepackage{csquotes}
 \usepackage{graphicx}
@@ -173,6 +173,9 @@ Per vedere nel dettaglio come calcolare le due probabilit\`a vedere il riferimen
 Nel contesto del modello probabilistico, 
 Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
 "Best Match 25 Model with Extension to Multiple Weighted Fields" o in breve BM25F
+
+\vskip 1.5in
+%
 %
 %\section{Metodi proposti}
 %\label{sec:metodi-utilizzati}
@@ -212,12 +215,14 @@ Si \`e deciso di limitare il numero di risultati proposti a 1000 articoli in qua
 che tende a controllare solo le prime pagine.
 
 La pagina iniziale ha solo la barra per l'inserimento della query con un immagine suggestiva che fa da sfondo. 
+
 \begin{figure}%
     \centering
     {{\includegraphics[width=1\linewidth]{index} }}%
     \caption{Pagina iniziale.}%
 \end{figure}
 % \vskip 3.5in
+
 Dopo aver effettuato il reperimento, l'utente viene indirizzato alle pagine contenenti
 i link dei risultati.
 Questi link poi rimandano alla pagina di \emph{PubMed}\footnote{\url{https://www.ncbi.nlm.nih.gov/pubmed/}} dove c'\`e l'articolo.
@@ -260,22 +265,22 @@ I programmi utilizzati per effettuare indicizzazione e reperimento sono stati sc
 Per la valutazione dei risultati ottenuti nei vari esperimenti si \`e invece utilizzato lo strumento standard trec\_eval\footnote{ \url{https://trec.nist.gov/trec\_eval/}}.
 Questo programma permette di ottenere alcune misure della qualit\`a di un sistema di information retrieval se si conoscono i documenti rilevanti per le query sperimentali utilizzate.
 
-Come misura da usare nel confronto tra risultati di diverse run si \`e scelta la Mean Average Precision(MAP)\cite{WBC_map} , quantit\`a calcolabile sia a livello di singola query che a livello complessivo su un insieme di query.
-Inoltre, per verificare se i valori di MAP ottenuti in run diverse si discostano in modo statisticamente significativo gli uni dagli altri si effettuano test di Wilcoxon\cite{} su coppie di risultati. \par
+Come misura da usare nel confronto tra risultati di diverse run si \`e scelta la Mean Average Precision(\textit{MAP})\cite{WBC_map} , quantit\`a calcolabile sia a livello di singola query che a livello complessivo su un insieme di query.
+Inoltre, per verificare se i valori di \textit{MAP} ottenuti in run diverse si discostano in modo statisticamente significativo gli uni dagli altri si effettuano test di Wilcoxon\cite{} su coppie di risultati. \par
 
 \subsection{Scelte iniziali}
 
 Prima di iniziare gli esperimenti sono state fatte delle scelte riguardo certi aspetti dei metodi di reperimento che rimanessero costanti durante tutti gli esperimenti.
 Queste scelte sono state fatte in seguito ad alcune run preliminari.
 
-Come schema di pesatura, per la funzione di reperimento e ranking,  si \`e deciso di utilizzare il BM25F, descritto nella sezione precedente, in quanto "state-of-the-art" dal punto di vista dei modelli per information retrieval su documenti strutturati, e si \`e deciso di utilizzare l'operatore OR come operatore logico per raggruppare le parole delle query, ovvero si cercano documenti in cui \`e presente almeno una parola della query.
+Come schema di pesatura, per la funzione di reperimento e ranking,  si \`e deciso di utilizzare il BM25F, descritto nella sezione precedente, anche perch\`e si pu\`o considereare "state-of-the-art" dal punto di vista dei modelli per information retrieval su documenti strutturati, e si \`e deciso di utilizzare l'operatore OR come operatore logico per raggruppare le parole delle query, ovvero si cercano documenti in cui \`e presente almeno una parola della query.
 
-Sempre a seguito delle run preliminari si \`e deciso di utilizzare il campo "desc" delle query anzich\'e il campo "title" in quanto d\`a risultati migliori, inoltre, si \`e notato che in alcune query sperimentali sono presenti parole scritte in modo errato e che quindi non risultano presenti nell'indice.
+Sempre a seguito delle run preliminari si \`e deciso di utilizzare il campo "desc" delle query anzich\'e il campo "title" in quanto d\`a risultati migliori; inoltre, si \`e notato che in alcune query sperimentali sono presenti parole scritte in modo errato e che quindi non risultano presenti nell'indice.
 Per questo dopo aver verificato, leggendo i documenti rilevanti per quelle query, quali fossero gli errori si \`e ritenuto opportuno effettuare una correzione al momento del reperimento.
 A grandi linee, la correzione viene fatta su parole che non risultano presenti nell'indice cercando in quest'ultimo delle parole alternative che si discostano di al pi\`u una lettera dalla parola originale; queste parole vengono quindi aggiunte alla query di partenza e si procede con la ricerca.
 
 Un'ultima scelta \`e stata fatta riguardo il numero massimo di documenti reperiti.
-Si \`e optato per 100 documenti poich\'e un numero maggiore non porta grandi miglioramenti dal punto di vista del MAP. \par
+Si \`e optato per 100 documenti poich\'e un numero maggiore non porta grandi miglioramenti dal punto di vista del \textit{MAP}. \par
 
 %\vskip 1in
 Affinch\'e Whoosh possa indicizzare una collezione di documenti, necessita la
@@ -285,6 +290,7 @@ Lo schema di base per la collezione qui utilizzata \`e il seguente:
 \par
 
 \begin{figure}
+\vspace{-5mm}
 \begin{lstlisting}
 schema = Schema(docid      	= ID(stored=True),
 		title      	= TEXT(stored=True),
@@ -296,6 +302,7 @@ schema = Schema(docid      	= ID(stored=True),
 		source 		= TEXT(stored=True))
 \end{lstlisting}
       \caption{Schema necessario all'indicizzazione dei documenti. "stored=True" indica che il campo viene salvato ed \`e quindi successivamente accessibile. }
+      \vspace{-10mm}
 \end{figure}
 
 
@@ -303,7 +310,7 @@ schema = Schema(docid      	= ID(stored=True),
 %\vskip 1in
 
 \subsection{Baseline}
-I valori di MAP scelti come baseline sono quelli ottenuti effettuando ricerche su un indice con lo schema di base, riportato sopra, senza l'utilizzo di una lista di stopword e cercando in due campi dei documenti: "title" e "abstract".
+I valori di \textit{MAP} scelti come baseline sono quelli ottenuti effettuando ricerche su un indice con lo schema di base, riportato sopra, senza l'utilizzo di una lista di stopword e cercando in due campi dei documenti: "title" e "abstract".
 Cercando su un campo ("title") o tre campi ("title", "abstract" e "terms") risulta solo in un peggioramento dei risultati.
 
 Si possono vedere i risultati ottenuti usando la configurazione "baseline" riassunti in Tabella 1.
@@ -311,6 +318,7 @@ Si possono vedere i risultati ottenuti usando la configurazione "baseline" riass
 
 
 \begin{table}
+\vspace{-3mm}
 \centering
 \begin{tabular}{lll}
 \hline
@@ -324,9 +332,10 @@ map all 0.2130               & map all \bf 0.2744               & map all 0.2155
 
 \caption{ Risultati trec\_eval complessivi per tutte le query, nessuna manipolazione del testo, numero risultati restituiti per
 ogni query = 100, pesatura BM25F.}
+\vspace{-7mm}
 \end{table}
 
-Come si nota dalla tabella il valore baseline di \textit{M.A.P} \`e 0.2744.
+Come si nota dalla tabella il valore baseline di \textit{MAP} \`e 0.2744.
 \par
 
 %
@@ -351,7 +360,7 @@ Come si nota dalla tabella il valore baseline di \textit{M.A.P} \`e 0.2744.
 
 
 
-% \vskip 3.5in
+\vskip 1.5in
 
 \subsection{Esperimenti}
 
@@ -363,8 +372,9 @@ Come con la baseline, per ciascuna prova si \`e effettuata la ricerca per uno, d
 
 Per la prima prova sono state utilizzate le stopword generali della lingua inglese. Queste comprendono termini come "the", "that", "is"; sono poi state aggiunte anche le lettere dell'alfabeto ed i numeri.
 
-Come si vede in Tabella 2, non sembra si sia ottenuto un miglioramento significativo rispetto alla baseline. Il MAP ottenuto utilizzando due campi "migliora" solo dello 0.0001.
+Come si vede in Tabella 2, non sembra si sia ottenuto un miglioramento significativo rispetto alla baseline. Il \textit{MAP} ottenuto utilizzando due campi "migliora" solo dello 0.0001.
 \begin{table}
+\vspace{-3mm}
 \centering
 \begin{tabular}{lll}
 \hline
@@ -377,6 +387,7 @@ map all 0.2137               & map all \bf 0.2745               & map all 0.2152
 \end{tabular}
 
 \caption{ Risultati trec\_eval, rimozione delle stopword generali, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
+\vspace{-7mm}
 \end{table}
 
 \subsubsection{Seconda prova:}
@@ -385,8 +396,9 @@ Nella seconda prova si \`e allora cercato di migliorare i risultati aggiungendo 
 
 Per questo abbiamo utilizzato un insieme di stopword denominate stopword\_cliniche che oltre ad avere le stopword generali ha anche parole come "medical", "condition" o "family"\footnote{ \url{https://github.com/kavgan/clinical-concepts/blob/master/clinical-stopwords.txt}}.
 
-Con questa prova sono stati ottenuti risultati accettabili, infatti come si vede in Tabella 3, l'aumento del MAP rispetto alla baseline \`e stato quasi dello 0.01:
+Con questa prova sono stati ottenuti risultati accettabili, infatti come si vede in Tabella 3, l'aumento del \textit{MAP} rispetto alla baseline \`e stato quasi dello 0.01:
 \begin{table}
+\vspace{-3mm}
 \centering
 \begin{tabular}{lll}
 \hline
@@ -399,6 +411,7 @@ map all 0.2156               & map all \bf 0.2837               & map all 0.2166
 \end{tabular}
 
 \caption{ Risultati trec\_eval, rimozione delle stopword cliniche, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
+\vspace{-7mm}
 \end{table}
 
 
@@ -408,9 +421,9 @@ Nell'ultima prova sono state aggiunte altre parole alla lista delle stopword. La
 
 Nella prima \`e stata ricavata la frequenza con cui le parole delle query appaiono nei rispettivi documenti rilevanti. Dopo di ci\`o le parole con frequenza prossima allo 0 sono state prese in considerazione come possibili stopword.
 
-Nella seconda fase sono state prese le query che, basandosi sui risultati della seconda prova, hanno avuto un MAP relativamente basso(inferiore a 0.2). Sono state quindi prese alcune parole di queste query come altre possibili stopword anche basandosi sulla loro frequenza nei documenti rilevanti.
+Nella seconda fase sono state prese le query che, basandosi sui risultati della seconda prova, hanno avuto un \textit{MAP} relativamente basso(inferiore a 0.2). Sono state quindi prese alcune parole di queste query come altre possibili stopword anche basandosi sulla loro frequenza nei documenti rilevanti.
 
-Per alcune parole la scelta se includerle nell'insieme di stopword \`e stata resa difficile dal fatto che, essendo presenti in pi\`u di una query la loro rimozione poteva significare il miglioramento di un MAP ed il peggioramento di un altro.
+Per alcune parole la scelta se includerle nell'insieme di stopword \`e stata resa difficile dal fatto che, essendo presenti in pi\`u di una query la loro rimozione poteva significare il miglioramento di un \textit{MAP} ed il peggioramento di un altro.
 
 Per questo, prima di arrivare all'insieme finale sono stati fatti alcuni tentativi.
 
@@ -418,8 +431,9 @@ Per questo, prima di arrivare all'insieme finale sono stati fatti alcuni tentati
 
 
 
-Come si pu\`o notare dalla Tabella 4 si ha un aumento del MAP rispetto alla baseline decisamente superiore alle prove precedenti, con circa lo 0.075 in pi\`u.
+Come si pu\`o notare dalla Tabella 4 si ha un aumento del \textit{MAP} rispetto alla baseline decisamente superiore alle prove precedenti, con circa lo 0.075 in pi\`u.
 \begin{table}
+\vspace{-3mm}
 \centering
 \begin{tabular}{lll}
 \hline
@@ -432,6 +446,7 @@ map all 0.2720               & map all \bf 0.3508               & map all 0.2813
 \end{tabular}
 
 \caption{ Risultati trec\_eval, rimozione delle stopword cliniche migliorate, numero risultati restituiti per ogni query = 100, pesatura BM25F.}
+\vspace{-7mm}
 \end{table}
 
 La Figura 6 riassume i risultati delle tre prove e si pu\`o notare un netto miglioramento utilizzando le stopword migliorate.
@@ -440,23 +455,24 @@ La Figura 6 riassume i risultati delle tre prove e si pu\`o notare un netto migl
 \begin{figure}%
     \centering
     {{\includegraphics[width=0.8\linewidth]{maps} }}%
-    \caption{Variazione del MAP cambiando il numero di campi per i tre insiemi di stopword, la linea orizzontale indica la baseline di 0.2744.}%
+    \caption{Variazione del \textit{MAP} cambiando il numero di campi per i tre insiemi di stopword, la linea orizzontale indica la baseline di 0.2744.}%
+    \vspace{-10mm}
 \end{figure}
 
 
 \subsection{Test di significativit\`a :}
-Per avere conferma che le differenze tra i MAP ottenuti nelle varie prove e nella baseline
+Per avere conferma che le differenze tra i \textit{MAP} ottenuti nelle varie prove e nella baseline
 siano significativamente diversi si \`e ritenuto opportuno effettuare dei test.
 Tra i test che si utilizzano comunemente a questo scopo si \`e scelto di utilizzare il
 test di Wilcoxon che a differenza dell'alternativo t-test risulta avere pi\`u
 potenza statistica in caso di non normalit\`a dei dati.
 
-I test sono stati fatti tra i MAP delle prove utilizzando due campi in quanto hanno
+I test sono stati fatti tra i \textit{MAP} delle prove utilizzando due campi in quanto hanno
 dato generalmente risultati migliori.
 
 L'ipotesi alternativa \`e unilaterale ed equivale a dire che, tra le due prove
-confrontate, la seconda prova ha MAP maggiore della prima.
-Per contro l'ipotesi nulla \`e che la prima prova ha MAP maggiore o uguale alla seconda.
+confrontate, la seconda prova ha \textit{MAP} maggiore della prima.
+Per contro l'ipotesi nulla \`e che la prima prova ha \textit{MAP} maggiore o uguale alla seconda.
 
 \begin{table}
 \centering
@@ -471,15 +487,17 @@ Per contro l'ipotesi nulla \`e che la prima prova ha MAP maggiore o uguale alla 
  STOP2 contro STOP3     &  290.0    &  $3.5437\mathrm{e}{-6}$   \\ \hline
 \end{tabular}
 
-\caption{ Statistiche test e livelli di significativit\`a osservati per i test sulla differenza dei MAP.
+\caption{ Statistiche test e livelli di significativit\`a osservati per i test sulla differenza dei \textit{MAP}.
 STOP1 indica le stopword generali, STOP2 indica le stopword cliniche e STOP3 indica le stopword cliniche migliorate.}
+\vspace{-5mm}
 \end{table}
 
 Come si vede in Tabella 5 i miglioramenti portati dalle stopword delle prime due prove hanno p-value che permettono di rifiutare l'ipotesi nulla solo in caso si prenda come soglia il livello di significativit\`a dello 0.05.
 Invece, con la terza prova il p-value risulta molto pi\`u basso portando a rifiutare l'ipotesi nulla in maniera pi\`u convincente.
 
 
-\section{Conclusione}
+\section{Considerazioni finali}
+%\section{Conclusione}
 
 Come si \`e visto dai risultati delle prove, l'utilizzo di stopword inerenti al contesto
 della collezione, porta a reperire pi\`u documenti rilevanti nelle prime posizioni.
@@ -510,7 +528,7 @@ W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Informati
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 129-130
 
 \bibitem{PRP}
-S.E. ROBERTSON, (1977) "THE PROBABILITY RANKING PRINCIPLE IN IR", Journal of Documentation, Vol. 33 Issue: 4, pp.294-304, https://doi.org/10.1108/eb026647
+S.E. Robertson, (1977) "THE PROBABILITY RANKING PRINCIPLE IN IR", Journal of Documentation, Vol. 33 Issue: 4, pp.294-304, https://doi.org/10.1108/eb026647
 
 \end{thebibliography}
 
