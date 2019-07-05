@@ -127,8 +127,6 @@ I dati rilevanti possono essere, per esempio, i documenti in cui sono presenti i
 Ogni elemento della lista \`e detto \emph{posting} e la parte del \emph{posting} che fa riferimento ad uno specifico documento
 \`e detta \emph{pointer}.
 
-\vskip 0.15in
-
 In qesto progetto si tratta in particolare dell'eliminazione delle \emph{stopword}\cite{WBC_stopword}.
 
 Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare 
@@ -163,18 +161,14 @@ e posto che le probabilit\`a siano state stimate nel modo migliore possibile sul
 l'efficacia complessiva del sistema \`e la maggiore possibile sulla base di quei dati."}
 
 Dato un documento, il motore di ricerca deve decidere se tale documento \`e rilevante o meno alla query posta.
-Dato un modo per calcolare la probabilit\`a che un documento sia rilevante e la probabilit\`a che non lo sia 
-si possono confrontare queste due quantit\`a per risolvere il problema di decisione.
+Assumendo di avere un modo per calcolare la probabilit\`a che un documento sia rilevante e la probabilit\`a che non lo sia,
+si possono usare queste due quantit\`a per risolvere il problema di decisione.
 
-In pratica, per decidere se il documento D \`e rilevante si vogliono confrontare P\{R$|$D\} e P\{NR$|$D\}, dove R indica rilevante e NR indica non rilevante.
-Il confronto si pu\`o fare con il loro rapporto e si pu\`o dimostrare, tramite teorema di Bayes, che ci\`o equivale a verificare che $\frac{P\{D$|$R\}}{P\{D$|$NR\}}>c$ la parte sinistra di questa disequazione si chiama rapporto di verosimiglianza.
-Per stimare  questa quati
-Per vedere nel dettaglio come calcolare le due probabilit\`a vedere il riferimento, qui riportiamo solo il risultato sul loro rapporto:
+%In pratica, per decidere se il documento D \`e rilevante si vogliono confrontare P\{R$|$D\} e P\{NR$|$D\}, dove R indica rilevante e NR indica non rilevante.
 
-
-Nel contesto del modello probabilistico, 
-Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
-"Best Match 25 Model with Extension to Multiple Weighted Fields" o in breve BM25F
+Nel contesto del modello probabilistico, lo schema di pesatura comunemente utilizzato nella funzione che assegna l'ordine ai documenti \`e il cos\`i detto BM25\cite{WBC} (Best Matching 25).
+Nel nostro caso, avendo documenti strutturati, risulta preferibile una variante denominata BM25F (Best Match 25 Model with Extension to Multiple Weighted Fields) 
+che combina efficacemente informazioni da campi diversi.
 
 
 
