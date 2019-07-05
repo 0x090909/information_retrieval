@@ -3,7 +3,6 @@
 %
 
 \documentclass[runningheads]{llncs}
-%\usepackage[a4paper, total={5in, 8.5in}]{geometry}
 \usepackage[italian]{babel}
 \usepackage{csquotes}
 \usepackage{graphicx}
@@ -75,7 +74,7 @@ Esistono diversi modi per risolvere questo problema; nel nostro caso
 ci concentriamo sull'utilizzo di stopword.
 %abbiamo cercato di migliorare l'efficacia con l'utilizzo di stopword.
 %ricercato la configurazione migliore tra un sistema di reperimento con o senza uso di stopword.
-
+\vspace{\baselineskip}
 
 Il resto della relazione \`e organizzato come segue. Nella sezione 2, si descrivono
 alcuni dei metodi standard, i pi\`u didattici, su cui si basano gli esperimenti.
@@ -127,6 +126,8 @@ I dati rilevanti possono essere, per esempio, i documenti in cui sono presenti i
 Ogni elemento della lista \`e detto \emph{posting} e la parte del \emph{posting} che fa riferimento ad uno specifico documento
 \`e detta \emph{pointer}.
 
+\vspace{\baselineskip}
+
 In qesto progetto si tratta in particolare dell'eliminazione delle \emph{stopword}\cite{WBC_stopword}.
 
 Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare 
@@ -160,21 +161,63 @@ modo non crescente per probabilit\`a di rilevanza all'esigenza informativa dell'
 e posto che le probabilit\`a siano state stimate nel modo migliore possibile sulla base dei dati a disposizione, allora
 l'efficacia complessiva del sistema \`e la maggiore possibile sulla base di quei dati."}
 
-Dato un documento, il motore di ricerca deve decidere se tale documento \`e rilevante o meno alla query posta.
-Assumendo di avere un modo per calcolare la probabilit\`a che un documento sia rilevante e la probabilit\`a che non lo sia,
-si possono usare queste due quantit\`a per risolvere il problema di decisione.
+In questo modello i documenti sono rappresentati come vettori in cui ogni elemento, relativo ad un termine, assume valore 1 o 0 
+a seconda che il termine corrispondente sia presente nel documento o meno.
+Inoltre si fa l'assunzione che la presenza di un termine sia indipendente dalla presenza degli altri termini.
+Per questo si parla anche di \emph{binary independence model}.
 
-%In pratica, per decidere se il documento D \`e rilevante si vogliono confrontare P\{R$|$D\} e P\{NR$|$D\}, dove R indica rilevante e NR indica non rilevante.
+%Dato un documento, il motore di ricerca deve decidere se tale documento \`e rilevante o meno alla query posta.
+%Assumendo di avere un modo per calcolare la probabilit\`a che un documento sia rilevante e la probabilit\`a che non lo sia,
+%si possono usare queste due quantit\`a per risolvere il problema di decisione.
 
-Nel contesto del modello probabilistico, lo schema di pesatura comunemente utilizzato nella funzione che assegna l'ordine ai documenti \`e il cosiddetto BM25\cite{WBC} (Best Matching 25).
-Nel nostro caso, avendo documenti strutturati, risulta preferibile una variante denominata BM25F (Best Match 25 Model with Extension to Multiple Weighted Fields) 
-che combina efficacemente informazioni da campi diversi.
+Nel contesto del modello probabilistico, lo schema di pesatura comunemente utilizzato nella funzione che assegna l'ordine ai documenti a seconda del grado di rilevanza \`e il cosiddetto BM25\cite{WBC} (Best Matching 25).
+
+\vspace{1in}
+
+La formula della funzione di scoring per il BM25 \`e:
+
+\begin{figure}
+  \centering
+  \scalebox{1.5}{$\sum_{i\in Q}[log(\frac{(r_{i}+0.5)/(R-r_{i}+0.5)}{(n_{i}-r_{i}+0.5)/(N-n_{i}-R+r_{i}+0.5)})\cdot \frac{(k_{1}+1)f_{i}}{K+f_{i}}\cdot\frac{(k_{2}+1)qf_{i}}{k_{2}+qf_{i}}]$}
+  \end{figure}
+
+Sommatoria su tutti i termini contenuti nella query Q; dove $r_{i}$ \`e il numero di documenti rilevanti contenenti il termine \emph{i}, $n_{i}$ \`e il numero di documenti contenenti il termine \emph{i}, N \`e il numero totale di documenti nella collezione R \`e il numero di documenti rilevanti per la query, $f_{i}$ \`e la frequenza del termine \emph{i} nel documento, $qf_{i}$ \`e la frequenza del termine \emph{i} nella query e $k_{1}$ , $k_{2}$, e K sono parametri i cui valori sono assegnati empiricamente.
+
+Si ha inoltre la condizione che $r_{i}$ e R sono posti a 0 nel caso non ci sia informazione rilevante, i termini 0.5 e 1 servono per evitare complicazioni in questi casi.
+\vspace{\baselineskip}
 
 
 
-\vskip 1.5in
+Nella prima parte:
+\begin{figure}
+\vspace{-10mm}
+  \centering
+\scalebox{1.5}{$log(\frac{(r_{i}+0.5)/(R-r_{i}+0.5)}{(n_{i}-r_{i}+0.5)/(N-n_{i}-R+r_{i}+0.5)})$},
+\vspace{-10mm}
+  \end{figure} 
+  
+il numeratore \`e il rapporto tra il numero di documenti rilevanti in cui il termine \emph{i} appare ed il numero di documenti rilevanti in cui non appare.
+In pratica si tratta di un rapporto di verosimiglianza che dice quanto il termine \emph{i} \`e "rilevante".
 
+Il denominatore \`e lo stesso rapporto solo che per i documenti non rilevanti, quindi indica quanto il termine \`e "non rilevante".
 
+Nella seconda parte:
+\begin{figure}
+\vspace{-10mm}
+  \centering
+\scalebox{1.5}{$\frac{(k_{1}+1)f_{i}}{K+f_{i}}\cdot\frac{(k_{2}+1)qf_{i}}{k_{2}+qf_{i}}$},
+\vspace{-10mm}
+  \end{figure} 
+  
+$k_{1}$ e $k_{2}$ servono per dare pi\`u o meno peso alla frequenza del termine \emph{i} nel documento e nella query rispettivamente.
+
+Infine K serve per normalizzare la frequenza del termine nel documento per la lunghezza del documento stesso.
+
+\vspace{\baselineskip}
+
+Nel nostro caso, avendo documenti strutturati, risulta preferibile una variante del BM25 denominata BM25F (Best Match 25 Model with Extension to Multiple Weighted Fields) che combina efficacemente informazioni da campi diversi.
+
+\vspace{3in}
 
 %
 %
@@ -267,7 +310,7 @@ Per la valutazione dei risultati ottenuti nei vari esperimenti si \`e invece uti
 Questo programma permette di ottenere alcune misure della qualit\`a di un sistema di information retrieval se si conoscono i documenti rilevanti per le query sperimentali utilizzate.
 
 Come misura da usare nel confronto tra risultati di diverse run si \`e scelta la Mean Average Precision(\textit{MAP})\cite{WBC_map} , quantit\`a calcolabile sia a livello di singola query che a livello complessivo su un insieme di query.
-Inoltre, per verificare se i valori di \textit{MAP} ottenuti in run diverse si discostano in modo statisticamente significativo gli uni dagli altri si effettuano test di Wilcoxon\cite{} su coppie di risultati. \par
+Inoltre, per verificare se i valori di \textit{MAP} ottenuti in run diverse si discostano in modo statisticamente significativo gli uni dagli altri si effettuano test di Wilcoxon\cite{WBC_Will} su coppie di risultati. \par
 
 \subsection{Scelte iniziali}
 
@@ -462,6 +505,7 @@ La Figura 6 riassume i risultati delle tre prove e si pu\`o notare un netto migl
 
 
 \subsection{Test di significativit\`a :}
+\vspace{-5mm}
 Per avere conferma che le differenze tra i \textit{MAP} ottenuti nelle varie prove e nella baseline
 siano significativamente diversi si \`e ritenuto opportuno effettuare dei test.
 Tra i test che si utilizzano comunemente a questo scopo si \`e scelto di utilizzare il
@@ -499,7 +543,7 @@ Invece, con la terza prova il p-value risulta molto pi\`u basso portando a rifiu
 
 \section{Considerazioni finali}
 %\section{Conclusione}
-
+\vspace{-5mm}
 Come si \`e visto dai risultati delle prove, l'utilizzo di stopword inerenti al contesto
 della collezione, porta a reperire pi\`u documenti rilevanti nelle prime posizioni.
 Bisogna, per\`o, tenere in considerazione che nella terza prova, quella che ha dato
@@ -524,6 +568,9 @@ W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Informati
 
 \bibitem{WBC_map}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 313
+
+\bibitem{WBC_Will}
+W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 325-330
 
 \bibitem{WBC_ii}
 W. Bruce Croft and Donald Metzler and Trevor Strohman. Search Engines: Information Retrieval in Practice. Addison Wesley, (2009), pp. 129-130

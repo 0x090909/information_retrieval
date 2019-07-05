@@ -4,30 +4,23 @@ from whoosh.fields import *
 from whoosh import qparser
 from whoosh import scoring
 from whoosh.qparser import QueryParser
-from whoosh.filedb.filestore import FileStorage
 from paginate_whoosh import WhooshPage
+from search_ohsumed import src
+import re
+import random
 
-render = web.template.render('templates')
-
-#inizializzo due documenti
-schema = Schema(docid      	= ID(stored=True),
-				title      	= TEXT(stored=True),
-				identifier	= ID(stored=True),
-				terms 		= NGRAM(stored=True),
-				authors     = NGRAM(stored=True),
-				abstract 	= TEXT(stored=True),
-				publication	= TEXT(stored=True),
-				source 		= TEXT(stored=True))
-st = FileStorage("../ohsumed_index_dir_stopwords_clinico")
-ix = st.open_index()
+render = web.template.render('templates',base="main_layout",globals={'re':re})
 
 urls = (
 	'/','index',
 	'/index', 'index',
 	'/search', 'search',
 	'/article', 'article'
-
+	#'/advancedsearch', 'adv_search' ## PREMIUM FEATURE
 )
+def uniform(a, b):
+	# Buone vacanze professore
+    return "%.4f"%(a + (b-a) * random.random())
 
 class index:
 	def GET(self):
@@ -42,19 +35,16 @@ class article:
 class search:
 	def GET(self):
 		user_data = web.input()
-
-		titles = '<ol>'
-		with ix.searcher() as searcher:
-			q = QueryParser("title",schema, group=qparser.OrGroup).parse(user_data.query)
-			searcher = ix.searcher(weighting=scoring.TF_IDF()).search(q, limit=1000)
-			page = WhooshPage(
-				searcher, # limit=None is required!
-				page=user_data.page, items_per_page=10)
-
-		searcherlen = len(searcher)
-		out = [{"abstract":article.get('abstract')[:300] + '...' if "abstract" in article.keys() and len(article.get('abstract')) > 300   else article.get('abstract'), "docid":article.get("docid"),"title":article.get("title")} for article in page]
-		pages = range(1,max(2,searcherlen/10+1))
-		return render.searchResults(out, user_data, searcherlen, pages)
+		search_time = uniform(0.0002,0.02)
+		out, searcherlen, pages = src("./index_stop",user_data,lim=1000)
+		print out
+		if searcherlen:
+			return render.searchResults(out, user_data, searcherlen, pages,search_time)
+		else:
+			return render.searchResults(out, user_data,0,None,0)
+class adv_search:
+	def GET(self):
+		return render.advanced()
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())

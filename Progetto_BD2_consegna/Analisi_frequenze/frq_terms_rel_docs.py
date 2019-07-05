@@ -270,11 +270,11 @@ else:                                                   # altrimenti procedi
     if sys.argv[4] == "iq":                                                         # identificatore query
         # Prendo in input le query che mi interessano
         # Si prevede di avere una lista degli identificatori delle query
-        hits = raw_input("Comma-separated query (tra 1 e 63 compresi, press enter to end): ")
+        hits = raw_input("Inserisci indici query separati da virgole (tra 1 e 63 compresi, premi invio per concludere): ")
         while hits != "":
             q=hits.split(",")
             iq(q, reldocs, title, maxres)
-            hits = raw_input("\nComma-separated query (tra 1 e 63 compresi, press enter to end): ")
+            hits = raw_input("\nInserisci indici query separati da virgole (tra 1 e 63 compresi, premi invio per concludere): ")
     
     
     elif sys.argv[4] == "tnn":                                                      # tot not null
@@ -284,7 +284,7 @@ else:                                                   # altrimenti procedi
     
     elif sys.argv[4] == "fqt":                                                      # find query term
         # Se si usa l'opzione -d allora si richiamano anche le funzioni iq() e tnn() per le query ottenute da fqt()
-        hits = raw_input("Comma-separated terms (press enter to end): ")
+        hits = raw_input("Inerisci termini separati da virgole (premi invio per concludere): ")
         while hits != "":
             hits = hits.split(",")
             for hit in hits:
@@ -296,7 +296,7 @@ else:                                                   # altrimenti procedi
                             tnn(i, reldocs, title, maxres)
                             print "\n"
                     else:
-                        print "\nNo details avaiable."
+                        print "\nNon ci sono dettagli disponibili."
                     print "#"*200
             
             if len(sys.argv) > 5 and sys.argv[5] == "-d" and len(hits)>1:
@@ -307,9 +307,9 @@ else:                                                   # altrimenti procedi
                         tnn(i, reldocs, title, maxres)
                         print "\n"
                 else:
-                    print "\nNo details avaiable."
+                    print "\nNon ci sono dettagli disponibili."
             
-            hits = raw_input("\nComma-separated terms (press enter to end): ")    
+            hits = raw_input("\nInerisci termini separati da virgole (premi invio per concludere): ")    
     infile.close()
     ix.searcher().close()
 
