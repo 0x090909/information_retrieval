@@ -15,7 +15,7 @@ urls = (
 	'/','index',
 	'/index', 'index',
 	'/search', 'search',
-	'/article', 'article'
+	#'/article', 'article'
 	#'/advancedsearch', 'adv_search' ## PREMIUM FEATURE
 )
 def uniform(a, b):
