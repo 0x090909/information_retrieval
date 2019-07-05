@@ -164,9 +164,10 @@ l'efficacia complessiva del sistema \`e la maggiore possibile sulla base di quei
 
 Dato un documento, il motore di ricerca deve decidere se tale documento \`e rilevante o meno alla query posta.
 Dato un modo per calcolare la probabilit\`a che un documento sia rilevante e la probabilit\`a che non lo sia 
-si possono confrontare queste due quantit\`a per risolvere questo problema di decisione.
+si possono confrontare queste due quantit\`a per risolvere il problema di decisione.
 
 In pratica, per decidere se il documento D \`e rilevante si vogliono confrontare P\{R$|$D\} e P\{NR$|$D\}, dove R indica rilevante e NR indica non rilevante.
+Il confronto si pu\`o fare con il loro rapporto e si pu\`o dimostrare, tramite teorema di Bayes, che ci\`o equivale a verificare che $\frac{P\{D$|$R\}}{P\{D$|$NR\}}$
 Per vedere nel dettaglio come calcolare le due probabilit\`a vedere il riferimento, qui riportiamo solo il risultato sul loro rapporto:
 
 
@@ -174,7 +175,12 @@ Nel contesto del modello probabilistico,
 Un metodo utilizzato per tutti gli esperimenti \`e il cos\`i detto
 "Best Match 25 Model with Extension to Multiple Weighted Fields" o in breve BM25F
 
+
+
 \vskip 1.5in
+
+
+
 %
 %
 %\section{Metodi proposti}
