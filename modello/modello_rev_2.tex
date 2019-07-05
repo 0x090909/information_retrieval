@@ -132,16 +132,16 @@ In qesto progetto si tratta in particolare dell'eliminazione delle \emph{stopwor
 Questa \`e una procedura di elaborazione del testo, se utilizzata si deve fare sia sui documenti da indicizzare 
 che eventualmente sulle query inviate al motore di ricerca.
 
-Le \emph{stopword} sono parole che non portano informazione significativa da sole e quindi non aiutano a capire se un documento \`e rilevante o meno.
+Le stopword sono parole che non portano informazione significativa da sole e quindi non aiutano a capire se un documento \`e rilevante o meno.
 Inoltre, solitamente si tratta di parole molto comuni nella collezione che quindi risultano in un costo rilevante dal punto di vista dello spazio di memoria occupato.
 
-Parole che di solito si identificano come \emph{stopword} nella lingua inglese sono per esempio: "the", "a", "an", "that" o "those".
+Parole che di solito si identificano come stopword nella lingua inglese sono per esempio: "the", "a", "an", "that" o "those".
 
-Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche \emph{stopword} a seconda del contesto. 
-Con questo si intende che delle parole possono diventare \emph{stopword} in certi contesti anche se in altri non lo sono, ad esempio nel manuale di
+Oltre a queste parole, che non hanno significato a se stante, si possono identificare anche stopword a seconda del contesto. 
+Con questo si intende che delle parole possono diventare stopword in certi contesti anche se in altri non lo sono, ad esempio nel manuale di
 MySQL parole come "mysql" e "table" risultano utilizzate cos\`i di frequente che non aiutano nella ricerca di un particolare argomento.
 
-La costruzione di un insieme di \emph{stopword} deve essere fatta con cautela, infatti, la rimozione di troppe parole pu\`o peggiorare l'efficacia del motore di ricerca;
+La costruzione di un insieme di stopword deve essere fatta con cautela, infatti, la rimozione di troppe parole pu\`o peggiorare l'efficacia del motore di ricerca;
 per esempio alcune query valide potrebbero non dare alcun risultato.
 
 \begin{figure}%
